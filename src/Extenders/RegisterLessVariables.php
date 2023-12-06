@@ -1,6 +1,6 @@
 <?php
 
-namespace Dem13n\Discussion\Cards\Extenders;
+namespace Walsgit\Discussion\Cards\Extenders;
 
 use Flarum\Extend\ExtenderInterface;
 use Flarum\Extension\Extension;
@@ -19,7 +19,7 @@ class RegisterLessVariables implements ExtenderInterface
             $assets->css(function (SourceCollector $sources) {
                 $sources->addString(function () {
                     $settings = app(SettingsRepositoryInterface::class);
-                    $ext_settings = json_decode($settings->get('dem13n_discussion_cards'), true);
+                    $ext_settings = json_decode($settings->get('walsgit_discussion_cards'), true);
 
                     $vars = [
                         'desktop-card-width' => Arr::get($ext_settings, 'desktopCardWidth', '49') . '%',

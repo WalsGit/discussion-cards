@@ -1,6 +1,6 @@
 <?php
 
-namespace Dem13n\Discussion\Cards\Api\Controllers;
+namespace Walsgit\Discussion\Cards\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractDeleteController;
 use Flarum\Foundation\Paths;
@@ -26,7 +26,7 @@ class DeleteImageController extends AbstractDeleteController
     {
         $request->getAttribute('actor')->assertAdmin();
 
-        $path = $this->settings->get($key = "dem13n_discussion_cards_default_image_path");
+        $path = $this->settings->get($key = "walsgit_discussion_cards_default_image_path");
 
         $this->settings->set($key, null);
 

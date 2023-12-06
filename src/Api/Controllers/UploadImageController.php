@@ -1,6 +1,6 @@
 <?php
 
-namespace Dem13n\Discussion\Cards\Api\Controllers;
+namespace Walsgit\Discussion\Cards\Api\Controllers;
 
 use Flarum\Api\Controller\ShowForumController;
 use Flarum\Foundation\Paths;
@@ -29,7 +29,7 @@ class UploadImageController extends ShowForumController
     {
         $request->getAttribute('actor')->assertAdmin();
 
-        $file = Arr::get($request->getUploadedFiles(), 'dem13n_discussion_cards_default_image');
+        $file = Arr::get($request->getUploadedFiles(), 'walsgit_discussion_cards_default_image');
 
         $tmpFile = tempnam($this->paths->storage . '/tmp', 'card_image');
         $file->moveTo($tmpFile);
@@ -47,7 +47,7 @@ class UploadImageController extends ShowForumController
             'target' => new Filesystem(new Local($this->paths->public . '/assets')),
         ]);
 
-        if (($path = $this->settings->get($key = "dem13n_discussion_cards_default_image_path")) && $mount->has($file = "target://$path")) {
+        if (($path = $this->settings->get($key = "walsgit_discussion_cards_default_image_path")) && $mount->has($file = "target://$path")) {
             $mount->delete($file);
         }
 

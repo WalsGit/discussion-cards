@@ -1,13 +1,13 @@
 {
-    "name": "dem13n/discussion-cards",
-    "description": "Output of discussions in form of cards",
+    "name": "walsgit/discussion-cards",
+    "description": "Adds default images to tags and outputs discussions in form of cards",
     "type": "flarum-extension",
-    "keywords": ["discussion"],
+    "keywords": ["discussion","tags"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Dem13n",
-            "email": "idem13n@gmail.com"
+            "name": "Wa!id",
+            "email": "walid@walaxy.ovh"
         }
     ],
     "require": {
@@ -16,16 +16,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Dem13n\\Discussion\\Cards\\": "src/"
+            "Walsgit\\Discussion\\Cards\\": "src/"
         }
     },
     "extra": {
         "flarum-extension": {
-            "title": "Discussion Сards",
+            "title": "Discussion Cards",
             "category": "discussion",
             "icon": {
                 "name": "fas fa-border-all",
-                "backgroundColor": "#2B6205",
+                "backgroundColor": "#008e97",
                 "color": "#fff"
             }
         }

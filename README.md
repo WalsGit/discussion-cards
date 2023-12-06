@@ -9,13 +9,13 @@ A [Flarum](http://flarum.org) extension. Allows you to display discussions in th
 ### Installation
 
 ```sh
-composer require dem13n/discussion-cards
+composer require walsgit/discussion-cards
 ```
 
 ### Updating
 
 ```sh
-composer update dem13n/discussion-cards
+composer update walsgit/discussion-cards
 php flarum cache:clear
 ```
 
