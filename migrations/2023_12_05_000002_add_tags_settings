@@ -26,6 +26,6 @@ return [
             ->update(['walsgit_dc_settings' => json_encode($settings)]);
     },
     'down' => function (Builder $schema) {
-        // N/C
+        // no need as entire column should be removed via the previous migration (2023_12_05_000001...)
     },
 ];
