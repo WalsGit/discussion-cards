@@ -18,5 +18,5 @@ $settings = [
 ];
 
 return Migration::addColumns('tags', [
-    'walsgit_dc_settings' => ['text', 'nullable' => , 'default' => json_encode($settings)]
+    'walsgit_dc_settings' => ['text', 'nullable' => true, 'default' => json_encode($settings)]
 ]);
