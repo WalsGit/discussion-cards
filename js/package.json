@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@dem13n/discussion/cards",
+  "name": "@walsgit/discussion/cards",
   "dependencies": {
     "flarum-webpack-config": "1.0.0",
     "webpack": "^4.43.0",
