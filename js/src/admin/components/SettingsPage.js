@@ -1,6 +1,7 @@
 import ExtensionPage from 'flarum/components/ExtensionPage';
 import TagsSettings from './TagsSettings';
 import Button from 'flarum/components/Button';
+import Settings from './Settings';
 
 export default class SettingsPage extends ExtensionPage {
   content() {
