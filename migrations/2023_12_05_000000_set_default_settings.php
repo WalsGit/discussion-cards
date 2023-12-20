@@ -19,5 +19,5 @@ $settings = [
 
 return Migration::addSettings([
     'walsgit_discussion_cards' => json_encode($settings),
-    //'walsgit_discussion_cards_default_image_path' => null
+    'walsgit_discussion_cards_default_image_path' => null
 ]);
