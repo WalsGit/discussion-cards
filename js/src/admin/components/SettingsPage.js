@@ -5,7 +5,7 @@ import Settings from './Settings';
 
 export default class SettingsPage extends ExtensionPage {
   content() {
-    const page = m.route.param().page || 'health'; // remplacer Health par settings
+    const page = m.route.param().page || 'settings';
     
     return (
       <div className="ExtensionPage-settings walsgit-discussion-cards">
