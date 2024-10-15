@@ -9,7 +9,7 @@ import Button from 'flarum/common/components/Button';
 import CardItem from './components/CardItem';
 import ListItem from './components/ListItem';
 
-app.initializers.add('dem13n/discussion/cards', () => {
+app.initializers.add('walsgit/discussion/cards', () => {
 
   extend(DiscussionListState.prototype, 'requestParams', function (params) {
     if (app.current.matches(IndexPage)) {
@@ -18,7 +18,7 @@ app.initializers.add('dem13n/discussion/cards', () => {
   });
 
   override(DiscussionList.prototype, 'view', function (original) {
-    const settings = JSON.parse(app.forum.attribute('dem13nDiscussionCards'));
+    const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
     const state = this.attrs.state;
     const params = state.getParams();
     let loading;

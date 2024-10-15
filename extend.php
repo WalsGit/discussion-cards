@@ -1,11 +1,11 @@
 <?php
 
-namespace Dem13n\Discussion\Cards;
+namespace Walsgit\Discussion\Cards;
 
 use Flarum\Extend;
 use Flarum\Api\Controller\ListDiscussionsController;
-use Dem13n\Discussion\Cards\Api\Controllers\UploadImageController;
-use Dem13n\Discussion\Cards\Api\Controllers\DeleteImageController;
+use Walsgit\Discussion\Cards\Api\Controllers\UploadImageController;
+use Walsgit\Discussion\Cards\Api\Controllers\DeleteImageController;
 
 return [
     (new Extend\Frontend('forum'))
@@ -24,10 +24,10 @@ return [
     new Extenders\RegisterLessVariables(),
 
     (new Extend\Settings())
-        ->serializeToForum('dem13nDiscussionCards', 'dem13n_discussion_cards')
-        ->serializeToForum('dem13nDiscussionCardsDefaultImage', 'dem13n_discussion_cards_default_image_path'),
+        ->serializeToForum('walsgitDiscussionCards', 'walsgit_discussion_cards')
+        ->serializeToForum('walsgitDiscussionCardsDefaultImage', 'walsgit_discussion_cards_default_image_path'),
 
     (new Extend\Routes('api'))
-        ->post('/dem13n_discussion_cards_default_image', 'dem13n_discussion_cards_default_image', UploadImageController::class)
-        ->delete('/dem13n_discussion_cards_default_image', 'dem13n_discussion_cards_default_image.delete', DeleteImageController::class)
+        ->post('/walsgit_discussion_cards_default_image', 'walsgit_discussion_cards_default_image', UploadImageController::class)
+        ->delete('/walsgit_discussion_cards_default_image', 'walsgit_discussion_cards_default_image.delete', DeleteImageController::class)
 ];

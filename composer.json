@@ -1,13 +1,13 @@
 {
-    "name": "dem13n/discussion-cards",
+    "name": "walsgit/discussion-cards",
     "description": "Output of discussions in form of cards",
     "type": "flarum-extension",
     "keywords": ["discussion"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Dem13n",
-            "email": "idem13n@gmail.com"
+            "name": "Wa!id",
+            "homepage": "https://discuss.flarum.org/u/Walid"
         }
     ],
     "require": {
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dem13n\\Discussion\\Cards\\": "src/"
+            "Walsgit\\Discussion\\Cards\\": "src/"
         }
     },
     "extra": {
@@ -25,7 +25,7 @@
             "category": "discussion",
             "icon": {
                 "name": "fas fa-border-all",
-                "backgroundColor": "#2B6205",
+                "backgroundColor": "#008e97",
                 "color": "#fff"
             }
         }

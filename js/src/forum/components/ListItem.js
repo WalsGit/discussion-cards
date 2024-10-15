@@ -20,7 +20,7 @@ export default class listItem extends Component {
 
   view() {
     const discussion = this.attrs.discussion;
-    const settings = JSON.parse(app.forum.attribute('dem13nDiscussionCards'));
+    const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
     const isRead = settings.markCards === 1 && (!discussion.isRead() && app.session.user) ? 'Unread' : '';
     const attrs = {};
     attrs.className = "wrapImg" + (settings.cardFooter === 1 ? " After" : '');
@@ -99,7 +99,7 @@ export default class listItem extends Component {
                         {m(LastReplies, {discussion: discussion})}
                       </div>
                       <div className="Repcount">
-                        {app.translator.trans('dem13n.forum.replies', {count: discussion.replyCount() || '0'})}
+                        {app.translator.trans('walsgit.forum.replies', {count: discussion.replyCount() || '0'})}
                       </div>
                     </div>
                     <div className="Arrow">

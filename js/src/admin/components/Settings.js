@@ -14,7 +14,7 @@ export default class Settings extends ExtensionPage {
 
   oninit(vnode) {
     super.oninit(vnode);
-    this.settings = JSON.parse(app.data.settings.dem13n_discussion_cards || null);
+    this.settings = JSON.parse(app.data.settings.walsgit_discussion_cards || null);
   }
 
   content() {
@@ -25,14 +25,14 @@ export default class Settings extends ExtensionPage {
             style: {color: 'red', fontWeight: 'bold'}
           },
           icon('fas fa-exclamation-triangle', {style: {fontSize: '24px', marginRight: '10px'}}),
-          app.translator.trans('dem13n.admin.settings.settings_error'))
+          app.translator.trans('walsgit.admin.settings.settings_error'))
       ]);
     }
 
     const settings = this.settings;
-    app.forum.data.attributes.dem13n_discussion_cards_default_imageUrl =
+    app.forum.data.attributes.walsgit_discussion_cards_default_imageUrl =
       app.forum.attribute("baseUrl") + "/assets/" +
-      app.data.settings.dem13n_discussion_cards_default_image_path;
+      app.data.settings.walsgit_discussion_cards_default_image_path;
 
     return [
       m('.ExtensionPage-settings', [
@@ -41,8 +41,8 @@ export default class Settings extends ExtensionPage {
             onsubmit: this.onsubmit.bind(this),
           }, [
             m('.Form-group', [
-              m('label', app.translator.trans('dem13n.admin.settings.default_img')),
-              m(UploadImageButton, {name: "dem13n_discussion_cards_default_image"}),
+              m('label', app.translator.trans('walsgit.admin.settings.default_img')),
+              m(UploadImageButton, {name: "walsgit_discussion_cards_default_image"}),
             ]),
             m('.Form-group', [
               m(Switch, {
@@ -50,7 +50,7 @@ export default class Settings extends ExtensionPage {
                   onchange: () => {
                     settings.previewText ^= true
                   },
-                }, app.translator.trans('dem13n.admin.settings.preview_text')
+                }, app.translator.trans('walsgit.admin.settings.preview_text')
               ),
             ]),
             m('.Form-group', [
@@ -60,7 +60,7 @@ export default class Settings extends ExtensionPage {
                     settings.cardBadges ^= true
                   },
                 },
-                app.translator.trans('dem13n.admin.settings.badges')
+                app.translator.trans('walsgit.admin.settings.badges')
               ),
             ]),
             m('.Form-group', [
@@ -69,7 +69,7 @@ export default class Settings extends ExtensionPage {
                   onchange: () => {
                     settings.cardFooter ^= true
                   },
-                }, app.translator.trans('dem13n.admin.settings.actor_info')
+                }, app.translator.trans('walsgit.admin.settings.actor_info')
               ),
             ]),
             m('.Form-group', [
@@ -78,7 +78,7 @@ export default class Settings extends ExtensionPage {
                   onchange: () => {
                     settings.Replies ^= true
                   },
-                }, app.translator.trans('dem13n.admin.settings.show_replies')
+                }, app.translator.trans('walsgit.admin.settings.show_replies')
               ),
             ]),
             m('.Form-group', [
@@ -87,7 +87,7 @@ export default class Settings extends ExtensionPage {
                   onchange: () => {
                     settings.onIndexPage ^= true
                   },
-                }, app.translator.trans('dem13n.admin.settings.output_on_index_page')
+                }, app.translator.trans('walsgit.admin.settings.output_on_index_page')
               ),
             ]),
             m('.Form-group', [
@@ -96,7 +96,7 @@ export default class Settings extends ExtensionPage {
                   onchange: () => {
                     settings.Views ^= true
                   },
-                }, app.translator.trans('dem13n.admin.settings.show_views')
+                }, app.translator.trans('walsgit.admin.settings.show_views')
               ),
             ]),
             m('.Form-group', [
@@ -105,11 +105,11 @@ export default class Settings extends ExtensionPage {
                   onchange: () => {
                     settings.markCards ^= true
                   },
-                }, app.translator.trans('dem13n.admin.settings.mark_cards')
+                }, app.translator.trans('walsgit.admin.settings.mark_cards')
               ),
             ]),
             m('.Form-group', [
-              m('label', app.translator.trans('dem13n.admin.settings.desktop_card_width', {percent: settings.desktopCardWidth || 49})),
+              m('label', app.translator.trans('walsgit.admin.settings.desktop_card_width', {percent: settings.desktopCardWidth || 49})),
               m('input', {
                 type: 'range',
                 min: 1,
@@ -123,7 +123,7 @@ export default class Settings extends ExtensionPage {
               }),
             ]),
             m('.Form-group', [
-              m('label', app.translator.trans('dem13n.admin.settings.tablet_card_width', {percent: settings.tabletCardWidth || 49})),
+              m('label', app.translator.trans('walsgit.admin.settings.tablet_card_width', {percent: settings.tabletCardWidth || 49})),
               m('input', {
                 type: 'range',
                 min: 1,
@@ -137,7 +137,7 @@ export default class Settings extends ExtensionPage {
               }),
             ]),
             m('.Form-group', [
-              m('label', app.translator.trans('dem13n.admin.settings.small_cards')),
+              m('label', app.translator.trans('walsgit.admin.settings.small_cards')),
               m('input.FormControl', {
                 type: 'number',
                 min: 0,
@@ -148,7 +148,7 @@ export default class Settings extends ExtensionPage {
               }),
             ]),
             m('.Form-group', [
-              m('label', app.translator.trans('dem13n.admin.settings.choose_tags')),
+              m('label', app.translator.trans('walsgit.admin.settings.choose_tags')),
               m(SwitchTagList, {tags: settings.allowedTags}),
               m(Button, {
                   type: 'submit',
@@ -170,7 +170,7 @@ export default class Settings extends ExtensionPage {
     if (this.loading) return;
     this.loading = true;
     saveSettings({
-      dem13n_discussion_cards: JSON.stringify(this.settings),
+      walsgit_discussion_cards: JSON.stringify(this.settings),
     });
 
     app.modal.show(LoadingModal);
