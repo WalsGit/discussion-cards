@@ -1,18 +1,38 @@
-walsgit:
+walsgit_discussion_cards:
   forum:
     replies: "Replies: {count}"
   admin:
     settings:
-      settings_error: Clear cache, disable that extension, click Uninstall button (on the right), confirm deleting data, then enable extension
-      default_img: Default image
-      choose_tags: Choose tags
-      badges: Show badges
-      actor_info: Show author
-      small_cards: Number of primary cards
-      preview_text: Show short text
-      show_replies: Show replies
-      show_views: Show views (when the extension "Flarumite Simple Discussion Views" installed)
-      output_on_index_page: Output on index page
-      desktop_card_width: "Width of primary cards on desktop screens: {percent}%"
-      tablet_card_width: "Width of primary cards on tablets: {percent}%"
-      mark_cards: Mark cards with unread discussions
+      general:
+        where_title: 'Where?'
+        where_info: 'Set where you want to use discussion cards.'
+        allowedTags_label: 'Select tags'
+        allowedTags_help: 'Discussion cards will be activated and shown for the selected tags pages.'
+        onIndexPage_label: 'Activate cards on the Index Page'
+        onIndexPage_help: 'If activated, the <em>all discussions</em> page will show cards.'
+        primaryCardOptions_title: 'Primary Card options'
+        primaryCardOptions_info: 'Set if and how you want to use primary cards (bigger cards at the top of each page using discussion cards).'
+        primaryCards_label: 'Number of primary cards'
+        primaryCards_help: 'Number of bigger cards shown at the top of each page using discussion cards.'
+        desktopCardWidth_label: 'Primary cards width on desktop'
+        desktopCardWidth_help: 'Set the width (in %) of the primary cards on desktop.'
+        tabletCardWidth_label: 'Primary cards width on tablets'
+        tabletCardWidth_help: 'Set the width (in %) of the primary cards on tablets.'
+        cardOptions_title: 'Card options'
+        cardOptions_info: 'Set what data/infos should be shown on the cards.'
+        defaultImage_title: 'Default image'
+        defaultImage_info: "Here you can change the default image used on cards wheen no image is found in the discussion's first message."
+        previewText_label: 'Preview text'
+        previewText_help: "If activated, shows the start of the first message as a preview on the card."
+        showAuthor_label: 'Show author'
+        showAuthor_help: "If activated, shows the author of the discussion on the cards' footer."
+        showReplies_label: 'Show number of replies'
+        showReplies_help: 'If activated, shows the number of replies (on the left side of the cards, just above the card footer).'
+        showBadges_label: 'Show badges'
+        showBadges_help: "If activated, shows badges at the top right corner of the cards."
+        markReadCards_label: 'Differentiate cards of read/unread discussions'
+        markReadCards_help: 'If activated, unread discussions will have a black & white card (image & tags), whereas read discussions will be in full color.'
+        otherOptions_title: 'Options requiring other extensions'
+        otherOptions_info: 'The following options will require other extensions to be installed and activated for them to work. <strong>IMPORTANT: please read <u>all</u> the info for each individual option and do the required steps before activating it</strong>.'
+        showViews_label: 'Show views'
+        showViews_help: '<u>Must</u> have the <strong>Flarumite Simple Discussion Views</strong> extension installed and activated. If option enabled, shows the number of views on the cards.'

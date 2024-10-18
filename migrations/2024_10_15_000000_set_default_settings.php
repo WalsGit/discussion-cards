@@ -2,21 +2,19 @@
 
 use Flarum\Database\Migration;
 
-$settings = [
-    'previewText' => 0,
-    'cardBadges' => 0,
-    'cardFooter' => 0,
-    'Views' => 0,
-    'markCards' => 0,
-    'Replies' => 0,
-    'onIndexPage' => 0,
-    'smallCards' => 10,
-    'desktopCardWidth' => 49,
-    'tabletCardWidth' => 49,
-    'allowedTags' => []
-];
+$allowedTags = [];
 
 return Migration::addSettings([
-    'walsgit_discussion_cards' => json_encode($settings),
-    'walsgit_discussion_cards_default_image_path' => null
+    'walsgit_discussion_cards_default_image_path' => null,
+    'walsgit_discussion_cards_allowedTags' => json_encode($allowedTags),
+    'walsgit_discussion_cards_onIndexPage' => 0,
+    'walsgit_discussion_cards_primaryCards' => 4,
+    'walsgit_discussion_cards_desktopCardWidth' => 49,
+    'walsgit_discussion_cards_tabletCardWidth' => 49,
+    'walsgit_discussion_cards_previewText' => 0,
+    'walsgit_discussion_cards_showAuthor' => 0,
+    'walsgit_discussion_cards_showReplies' => 0,
+    'walsgit_discussion_cards_showBadges' => 0,
+    'walsgit_discussion_cards_showReadCards' => 0,
+    'walsgit_discussion_cards_showViews' => 0,
 ]);
