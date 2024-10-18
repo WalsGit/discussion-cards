@@ -90,10 +90,16 @@ var cardItem = /*#__PURE__*/function (_Component) {
   };
   _proto.view = function view() {
     var discussion = this.discussion;
-    var settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
-    var isRead = settings.markCards === 1 && !discussion.isRead() && app.session.user ? 'Unread' : '';
+    // const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
+    var settings = {};
+    for (var key in app.forum.data.attributes) {
+      if (key.startsWith("walsgitDiscussionCards")) {
+        settings[key.replace("walsgitDiscussionCards", "")] = app.forum.data.attributes[key];
+      }
+    }
+    var isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? "Unread" : "";
     var attrs = {};
-    attrs.className = "wrapImg" + (settings.cardFooter === 1 ? " After" : '');
+    attrs.className = "wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : "");
     var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost());
     var media = image ? m("img", {
       src: image,
@@ -108,29 +114,29 @@ var cardItem = /*#__PURE__*/function (_Component) {
       "data-id": discussion.id(),
       className: "CardsListItem Card " + isRead + (discussion.isHidden() ? " Hidden" : "")
     }, flarum_forum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_9___default().controls(discussion, this).toArray().length ? m((flarum_common_components_Dropdown__WEBPACK_IMPORTED_MODULE_8___default()), {
-      icon: 'fas fa-ellipsis-v',
-      className: 'DiscussionListItem-controls',
-      buttonClassName: 'Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right'
-    }, flarum_forum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_9___default().controls(discussion, this).toArray()) : '', m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
+      icon: "fas fa-ellipsis-v",
+      className: "DiscussionListItem-controls",
+      buttonClassName: "Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right"
+    }, flarum_forum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_9___default().controls(discussion, this).toArray()) : "", m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
       href: app.route.discussion(discussion, 0),
       className: "cardLink"
-    }, settings.cardBadges === 1 ? (0,_utils_craftBadges__WEBPACK_IMPORTED_MODULE_2__["default"])(discussion.badges().toArray()) : '', m("div", attrs, settings.Views === 1 && !isNaN(discussion.views()) ? m("div", {
+    }, Number(settings.ShowBadges) === 1 ? (0,_utils_craftBadges__WEBPACK_IMPORTED_MODULE_2__["default"])(discussion.badges().toArray()) : "", m("div", attrs, Number(settings.ShowViews) === 1 && !isNaN(discussion.views()) ? m("div", {
       className: "imageLabel discussionViews"
-    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-eye', {
-      className: 'labelIcon'
-    }), discussion.views()) : '', media, settings.cardFooter === 1 ? m("div", {
+    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()("fas fa-eye", {
+      className: "labelIcon"
+    }), discussion.views()) : "", media, Number(settings.ShowAuthor) === 1 ? m("div", {
       className: "cardFoot"
     }, m("div", {
       className: "Author"
     }, flarum_common_helpers_username__WEBPACK_IMPORTED_MODULE_7___default()(discussion.user())), m("div", {
       className: "Date"
-    }, flarum_common_utils_humanTime__WEBPACK_IMPORTED_MODULE_5___default()(discussion.createdAt()))) : ''), m("div", {
+    }, flarum_common_utils_humanTime__WEBPACK_IMPORTED_MODULE_5___default()(discussion.createdAt()))) : ""), m("div", {
       className: "cardTags"
     }, (0,_utils_craftTags__WEBPACK_IMPORTED_MODULE_4__["default"])(discussion.tags())), m("div", {
       className: "cardTitle"
-    }, m("h2", null, discussion.title())), settings.previewText === 1 && discussion.firstPost() ? m("div", {
+    }, m("h2", null, discussion.title())), Number(settings.PreviewText) === 1 && discussion.firstPost() ? m("div", {
       className: "previewPost"
-    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : '', settings.Replies === 1 ? m("div", {
+    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : "", Number(settings.ShowReplies) === 1 ? m("div", {
       className: "cardSpacer"
     }, m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
       className: "Replies",
@@ -143,11 +149,11 @@ var cardItem = /*#__PURE__*/function (_Component) {
       discussion: discussion
     })), m("div", {
       className: "Repcount"
-    }, app.translator.trans('walsgit.forum.replies', {
-      count: discussion.replyCount() || '0'
+    }, app.translator.trans("walsgit_discussion_cards.forum.replies", {
+      count: discussion.replyCount() || "0"
     }))), m("div", {
       className: "Arrow"
-    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-angle-right')))) : ''));
+    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()("fas fa-angle-right")))) : ""));
   };
   return cardItem;
 }((flarum_common_Component__WEBPACK_IMPORTED_MODULE_1___default()));
@@ -275,10 +281,16 @@ var listItem = /*#__PURE__*/function (_Component) {
   };
   _proto.view = function view() {
     var discussion = this.attrs.discussion;
-    var settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
-    var isRead = settings.markCards === 1 && !discussion.isRead() && app.session.user ? 'Unread' : '';
+    //const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
+    var settings = {};
+    for (var key in app.forum.data.attributes) {
+      if (key.startsWith('walsgitDiscussionCards')) {
+        settings[key.replace('walsgitDiscussionCards', '')] = app.forum.data.attributes[key];
+      }
+    }
+    var isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? 'Unread' : '';
     var attrs = {};
-    attrs.className = "wrapImg" + (settings.cardFooter === 1 ? " After" : '');
+    attrs.className = "wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : '');
     var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost());
     var media = image ? m("img", {
       src: image,
@@ -299,15 +311,15 @@ var listItem = /*#__PURE__*/function (_Component) {
     }, flarum_forum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_9___default().controls(discussion, this).toArray()) : '', m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
       href: app.route.discussion(discussion, 0),
       className: "cardLink"
-    }, settings.cardBadges === 1 ? (0,_utils_craftBadges__WEBPACK_IMPORTED_MODULE_2__["default"])(discussion.badges().toArray()) : '', m("div", {
+    }, Number(settings.ShowBadges) === 1 ? (0,_utils_craftBadges__WEBPACK_IMPORTED_MODULE_2__["default"])(discussion.badges().toArray()) : '', m("div", {
       className: "cardGrid"
     }, m("div", {
       className: "rowSpan-3 colSpan"
-    }, m("div", attrs, settings.Views === 1 && !isNaN(discussion.views()) ? m("div", {
+    }, m("div", attrs, Number(settings.ShowViews) === 1 && !isNaN(discussion.views()) ? m("div", {
       className: "imageLabel discussionViews"
     }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-eye', {
       className: 'labelIcon'
-    }), discussion.views()) : '', media, settings.cardFooter === 1 ? m("div", {
+    }), discussion.views()) : '', media, Number(settings.ShowAuthor) === 1 ? m("div", {
       className: "cardFoot"
     }, m("div", {
       className: "Author"
@@ -324,9 +336,9 @@ var listItem = /*#__PURE__*/function (_Component) {
       className: "title"
     }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80))), m("div", {
       className: "cardTags"
-    }, (0,_utils_craftTags__WEBPACK_IMPORTED_MODULE_4__["default"])(discussion.tags()))), settings.previewText === 1 && discussion.firstPost() ? m("div", {
+    }, (0,_utils_craftTags__WEBPACK_IMPORTED_MODULE_4__["default"])(discussion.tags()))), Number(settings.PreviewText) === 1 && discussion.firstPost() ? m("div", {
       className: "previewPost"
-    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : '', app.screen() === 'phone' && settings.Replies === 1 ? m("div", {
+    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : '', app.screen() === 'phone' && Number(settings.ShowReplies) === 1 ? m("div", {
       className: "cardSpacer"
     }, m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
       className: "Replies",
@@ -339,11 +351,11 @@ var listItem = /*#__PURE__*/function (_Component) {
       discussion: discussion
     })), m("div", {
       className: "Repcount"
-    }, app.translator.trans('walsgit.forum.replies', {
+    }, app.translator.trans('walsgit_discussion_cards.forum.replies', {
       count: discussion.replyCount() || '0'
     }))), m("div", {
       className: "Arrow"
-    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-angle-right')))) : settings.Replies === 1 ? m("div", {
+    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-angle-right')))) : Number(settings.ShowReplies) === 1 ? m("div", {
       className: "imageLabel discussionReplyCount"
     }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-comment', {
       className: 'labelIcon'
@@ -433,7 +445,13 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
     }
   });
   (0,flarum_extend__WEBPACK_IMPORTED_MODULE_1__.override)((flarum_forum_components_DiscussionList__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'view', function (original) {
-    var settings = JSON.parse(flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('walsgitDiscussionCards'));
+    //const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
+    var settings = {};
+    for (var key in (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum).data.attributes) {
+      if (key.startsWith('walsgitDiscussionCards')) {
+        settings[key.replace('walsgitDiscussionCards', '')] = (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum).data.attributes[key];
+      }
+    }
     var state = this.attrs.state;
     var params = state.getParams();
     var loading;
@@ -453,14 +471,14 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
         text: text
       }));
     }
-    if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.allowedTags.length && settings.allowedTags.includes(params.tags) || !params.tags && settings.onIndexPage === 1)) {
+    if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.AllowedTags.length && settings.AllowedTags.includes(params.tags) || !params.tags && Number(settings.OnIndexPage) === 1)) {
       return m("div", {
         className: 'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')
       }, m("div", {
         "class": "DiscussionList-discussions flexCard"
       }, state.getPages().map(function (pg, o) {
         return pg.items.map(function (discussion, i) {
-          return i < settings.smallCards && o === 0 ? m(_components_CardItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          return i < Number(settings.PrimaryCards) && o === 0 ? m(_components_CardItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
             discussion: discussion
           }) : m(_components_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
             discussion: discussion
@@ -495,18 +513,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/common/helpers/icon */ "flarum/common/helpers/icon");
 /* harmony import */ var flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_common_components_Tooltip__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/common/components/Tooltip */ "flarum/common/components/Tooltip");
+/* harmony import */ var flarum_common_components_Tooltip__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_Tooltip__WEBPACK_IMPORTED_MODULE_1__);
+
 
 function craftBadges(badges) {
   if (badges.length) {
     return [m('.cardBadges', [badges.map(function (badge) {
-      return [m('span.cardBadge.Badge.Badge--' + badge.attrs.type, {
-        'data-original-title': badge.attrs.label[0],
-        oncreate: function oncreate(vnode) {
-          return $(vnode.dom).tooltip({
-            placement: 'right'
-          });
-        }
-      }, [flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_0___default()(badge.attrs.icon)])];
+      return [m((flarum_common_components_Tooltip__WEBPACK_IMPORTED_MODULE_1___default()), {
+        text: badge.attrs.label[0],
+        position: 'right'
+      }, m('span.cardBadge.Badge.Badge--' + badge.attrs.type, [flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_0___default()(badge.attrs.icon)]))];
     })])];
   }
 }
@@ -635,6 +652,17 @@ module.exports = flarum.core.compat['common/components/LoadingIndicator'];
 
 "use strict";
 module.exports = flarum.core.compat['common/components/Placeholder'];
+
+/***/ }),
+
+/***/ "flarum/common/components/Tooltip":
+/*!******************************************************************!*\
+  !*** external "flarum.core.compat['common/components/Tooltip']" ***!
+  \******************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/components/Tooltip'];
 
 /***/ }),
 

@@ -21,7 +21,7 @@ walsgit_discussion_cards:
         cardOptions_title: 'Card options'
         cardOptions_info: 'Set what data/infos should be shown on the cards.'
         defaultImage_title: 'Default image'
-        defaultImage_info: "Here you can change the default image used on cards wheen no image is found in the discussion's first message."
+        defaultImage_info: "Here you can change the default image used on cards wheen no image is found in the discussion's first message. <u>IMPORTANT</u>: <em>note that changing the image will discard any other unsaved settings changes and will reload the page automatically. Please save your changes before changing the image</em>."
         previewText_label: 'Preview text'
         previewText_help: "If activated, shows the start of the first message as a preview on the card."
         showAuthor_label: 'Show author'

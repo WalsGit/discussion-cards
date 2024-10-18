@@ -18,7 +18,13 @@ app.initializers.add('walsgit/discussion/cards', () => {
   });
 
   override(DiscussionList.prototype, 'view', function (original) {
-    const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
+    //const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
+    const settings = {};
+    for (const key in app.forum.data.attributes) {
+      if (key.startsWith('walsgitDiscussionCards')) {
+        settings[key.replace('walsgitDiscussionCards', '')] = app.forum.data.attributes[key];
+      }
+    }
     const state = this.attrs.state;
     const params = state.getParams();
     let loading;
@@ -37,13 +43,13 @@ app.initializers.add('walsgit/discussion/cards', () => {
       const text = app.translator.trans('core.forum.discussion_list.empty_text');
       return <div className="DiscussionList">{m(Placeholder, {text})}</div>;
     }
-    if (app.current.matches(IndexPage) && ((settings.allowedTags.length && settings.allowedTags.includes(params.tags)) || (!params.tags && settings.onIndexPage === 1))) {
+    if (app.current.matches(IndexPage) && ((settings.AllowedTags.length && settings.AllowedTags.includes(params.tags)) || (!params.tags && Number(settings.OnIndexPage) === 1))) {
       return (
         <div className={'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')}>
           <div class="DiscussionList-discussions flexCard">
             {state.getPages().map((pg, o) => {
               return pg.items.map((discussion, i) => {
-                return (i < settings.smallCards && o === 0)
+                return (i < Number(settings.PrimaryCards) && o === 0)
                   ? m(CardItem, {discussion: discussion})
                   : m(ListItem, {discussion: discussion})
               });
