@@ -19,7 +19,13 @@ class RegisterLessVariables implements ExtenderInterface
             $assets->css(function (SourceCollector $sources) {
                 $sources->addString(function () {
                     $settings = app(SettingsRepositoryInterface::class);
-                    $ext_settings = json_decode($settings->get('walsgit_discussion_cards'), true);
+                    $desktopCardWidth = $settings->get('walsgit_discussion_cards_desktopCardWidth');
+                    $tabletCardWidth = $settings->get('walsgit_discussion_cards_tabletCardWidth');
+                    $ext_settings = [
+                        'desktopCardWidth' => $desktopCardWidth,
+                        'tabletCardWidth' => $tabletCardWidth,
+                    ];
+                    //$ext_settings = json_decode($settings->get('walsgit_discussion_cards'), true);
 
                     $vars = [
                         'desktop-card-width' => Arr::get($ext_settings, 'desktopCardWidth', '49') . '%',

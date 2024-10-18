@@ -1,9 +1,14 @@
 # Changelog
 
 ## [0.4.1] - 2024-10-18
+### Fixed
+- Settings object (updated keys and source)
+- replaced deprecated $.tooltip
+TODO: fix cards not working on selected tags (only index page)
+
 ### Changed
 - Admin Settings page form & text
-- Settings keys
+- Settings keys (new names)
 - Migration (first, general default settings)
 
 ## [0.4.0] - 2024-10-15

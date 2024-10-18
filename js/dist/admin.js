@@ -95,6 +95,7 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
     }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.defaultImage_info")), (flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().data).settings.walsgit_discussion_cards_default_image_path === null ? m("div", {
       className: "imgStub"
     }) : m("img", {
+      className: "DC-UserUploadedImage",
       src: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().forum.attribute("baseUrl") + "/assets/" + (flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().data).settings.walsgit_discussion_cards_default_image_path
     }), m((flarum_admin_components_UploadImageButton__WEBPACK_IMPORTED_MODULE_3___default()), {
       name: "walsgit_discussion_cards_default_image",
