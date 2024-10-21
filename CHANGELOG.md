@@ -3,8 +3,8 @@
 ## [0.4.1] - 2024-10-18
 ### Fixed
 - Settings object (updated keys and source)
-- replaced deprecated $.tooltip
-TODO: fix cards not working on selected tags (only index page)
+- Replaced deprecated $.tooltip
+- Cards not working on selected tags (only index page)
 
 ### Changed
 - Admin Settings page form & text
