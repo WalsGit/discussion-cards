@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.4.1] - 2024-10-18
+## [0.4.1] - 2024-10-21
 ### Fixed
 - Settings object (updated keys and source)
 - Replaced deprecated $.tooltip
