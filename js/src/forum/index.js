@@ -18,8 +18,6 @@ app.initializers.add('walsgit/discussion/cards', () => {
   });
 
   override(DiscussionList.prototype, 'view', function (original) {
-    //const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
-    const isIndexPage = m.route.get() === '/';
     const settings = {};
     for (const key in app.forum.data.attributes) {
       if (key.startsWith('walsgitDiscussionCards')) {
@@ -44,12 +42,12 @@ app.initializers.add('walsgit/discussion/cards', () => {
       const text = app.translator.trans('core.forum.discussion_list.empty_text');
       return <div className="DiscussionList">{m(Placeholder, {text})}</div>;
     }
-    
+    const isIndexPage = m.route.get().split('?')[0] === '/';
     let tags = '';
     if (!isIndexPage) {
       tags = app.store.all('tags').find(t => t.slug() === params.tags).data.id;
     }
-    if (isIndexPage && ((settings.AllowedTags.length && settings.AllowedTags.includes(tags)) || (!tags && Number(settings.OnIndexPage) === 1))) {
+    if (app.current.matches(IndexPage) && ((settings.AllowedTags.length && settings.AllowedTags.includes(tags)) || (!params.tags && Number(settings.OnIndexPage) === 1))) {
       return (
         <div className={'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')}>
           <div class="DiscussionList-discussions flexCard">
