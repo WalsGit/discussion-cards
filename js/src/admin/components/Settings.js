@@ -12,7 +12,7 @@ export default class Settings extends ExtensionPage {
 						<p className="helpText">
 							{app.translator.trans("walsgit_discussion_cards.admin.settings.general.where_info")}
 						</p>
-            <div className="Section">
+						<div className="Section">
 							{this.buildSettingComponent({
 								type: "flarum-tags.select-tags",
 								setting: "walsgit_discussion_cards_allowedTags",
@@ -22,75 +22,75 @@ export default class Settings extends ExtensionPage {
 									requireParentTag: false,
 								},
 							})}
-              {this.buildSettingComponent({
+							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_onIndexPage",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.onIndexPage_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.onIndexPage_help"),
 							})}
 						</div>
-            <h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCardOptions_title")}</h3>
+						<h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCardOptions_title")}</h3>
 						<p className="helpText">
 							{app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCardOptions_info")}
 						</p>
-            <div className="Section">
+						<div className="Section">
 							{this.buildSettingComponent({
 								type: "number",
 								setting: "walsgit_discussion_cards_primaryCards",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_help"),
-                min: 1,
-                step: 1,
-                placeholder: 4,
+								min: 1,
+								step: 1,
+								placeholder: 4,
 							})}
 							{this.buildSettingComponent({
 								type: "number",
 								setting: "walsgit_discussion_cards_desktopCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_help"),
-                min: 1,
-                max: 100,
-                step: 1,
-                placeholder: 49,
+								min: 1,
+								max: 100,
+								step: 1,
+								placeholder: 49,
 							})}
 							{this.buildSettingComponent({
 								type: "number",
 								setting: "walsgit_discussion_cards_tabletCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_help"),
-                min: 1,
-                max: 100,
-                step: 1,
-                placeholder: 49,
+								min: 1,
+								max: 100,
+								step: 1,
+								placeholder: 49,
 							})}
-            </div>
-            <h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.cardOptions_title")}</h3>
+						</div>
+						<h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.cardOptions_title")}</h3>
 						<p className="helpText">
 							{app.translator.trans("walsgit_discussion_cards.admin.settings.general.cardOptions_info")}
 						</p>
 						<div className="Section">
-              <div className="DC-DefaultImageSettings">
-                <h4>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.defaultImage_title")}</h4>
-                <p className="helpText">
-                  {app.translator.trans("walsgit_discussion_cards.admin.settings.general.defaultImage_info")}
-                </p>
-                {app.data.settings.walsgit_discussion_cards_default_image_path === null ? <div className="imgStub"></div> : <img className="DC-UserUploadedImage" src={app.forum.attribute("baseUrl") + "/assets/" + app.data.settings.walsgit_discussion_cards_default_image_path}/>}
-                {m(UploadImageButton, {name: "walsgit_discussion_cards_default_image", class: "DC-UploadImageBtn"})}
-                {/* TODO: fix the UploadImageButton adding an empty <img> tag & test different sized images (and file types) */}
-              </div>
+							<div className="DC-DefaultImageSettings">
+								<h4>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.defaultImage_title")}</h4>
+								<p className="helpText">
+									{app.translator.trans("walsgit_discussion_cards.admin.settings.general.defaultImage_info")}
+								</p>
+								{app.data.settings.walsgit_discussion_cards_default_image_path === null ? <div className="imgStub"></div> : <img className="DC-UserUploadedImage" src={app.forum.attribute("baseUrl") + "/assets/" + app.data.settings.walsgit_discussion_cards_default_image_path}/>}
+								{m(UploadImageButton, {name: "walsgit_discussion_cards_default_image", class: "DC-UploadImageBtn"})}
+								{/* TODO: fix the UploadImageButton adding an empty <img> tag & test different sized images (and file types) */}
+							</div>
 							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_previewText",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.previewText_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.previewText_help"),
 							})}
-              {this.buildSettingComponent({
+							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_showAuthor",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showAuthor_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showAuthor_help"),
 							})}
-              {this.buildSettingComponent({
+							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_showReplies",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showReplies_label"),
@@ -108,21 +108,21 @@ export default class Settings extends ExtensionPage {
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.markReadCards_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.markReadCards_help"),
 							})}							
-            </div>
-            <h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_title")}</h3>
+						</div>
+						<h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_title")}</h3>
 						<p className="helpText">
 							{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_info")}
 						</p>
 						<div className="Section">
-              <h4>If <a href="https://flarum.org/extension/flarumite/simple-discussion-views" target="_blank" rel="noopener noreferrer">Flarumite Simple Discussion Views</a> is installed & activated</h4>
-              {this.buildSettingComponent({
+							<h4>If <a href="https://flarum.org/extension/flarumite/simple-discussion-views" target="_blank" rel="noopener noreferrer">Flarumite Simple Discussion Views</a> is installed & activated</h4>
+							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_showViews",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_help"),
 							})}
-            </div>
-            {this.submitButton()}
+						</div>
+						{this.submitButton()}
 					</div>
 				</div>
 			</div>

@@ -446,6 +446,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
   });
   (0,flarum_extend__WEBPACK_IMPORTED_MODULE_1__.override)((flarum_forum_components_DiscussionList__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'view', function (original) {
     //const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
+    var isIndexPage = m.route.get() === '/';
     var settings = {};
     for (var key in (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum).data.attributes) {
       if (key.startsWith('walsgitDiscussionCards')) {
@@ -471,7 +472,13 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
         text: text
       }));
     }
-    if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.AllowedTags.length && settings.AllowedTags.includes(params.tags) || !params.tags && Number(settings.OnIndexPage) === 1)) {
+    var tags = '';
+    if (!isIndexPage) {
+      tags = flarum_app__WEBPACK_IMPORTED_MODULE_0___default().store.all('tags').find(function (t) {
+        return t.slug() === params.tags;
+      }).data.id;
+    }
+    if (isIndexPage && (settings.AllowedTags.length && settings.AllowedTags.includes(tags) || !tags && Number(settings.OnIndexPage) === 1)) {
       return m("div", {
         className: 'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')
       }, m("div", {
