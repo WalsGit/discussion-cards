@@ -21,7 +21,7 @@ walsgit_discussion_cards:
         cardOptions_title: 'Card options'
         cardOptions_info: 'Set what data/infos should be shown on the cards.'
         defaultImage_title: 'Default image'
-        defaultImage_info: "Here you can change the default image used on cards wheen no image is found in the discussion's first message. <u>IMPORTANT</u>: <em>note that changing the image will discard any other unsaved settings changes and will reload the page automatically. Please save your changes before changing the image</em>."
+        defaultImage_info: "Here you can change the default image to be used on cards when none is found in the discussion's first message. <u>IMPORTANT</u>: <em>note that changing the image will discard any other unsaved settings changes you made and will reload the page automatically. Please save your changes before changing the image</em> (or vice versa 😉). Accepted formats: JPG, PNG, GIF, BMP or WebP files. Ideal résolution: 400px x 225px (all uploaded images will be converted to a PNG file and resized to a width of 400px, except for images with smaller width, which will keep there initial resolution). Depending on your file's resolution, the image could be shown cropped or stretched on cards, like in this preview:"
         previewText_label: 'Preview text'
         previewText_help: "If activated, shows the start of the first message as a preview on the card."
         showAuthor_label: 'Show author'
@@ -36,3 +36,14 @@ walsgit_discussion_cards:
         otherOptions_info: 'The following options will require other extensions to be installed and activated for them to work. <strong>IMPORTANT: please read <u>all</u> the info for each individual option and do the required steps before activating it</strong>.'
         showViews_label: 'Show views'
         showViews_help: '<u>Must</u> have the <strong>Flarumite Simple Discussion Views</strong> extension installed and activated. If option enabled, shows the number of views on the cards.'
+    tags:
+      options_heading: 'Discussion Cards'
+      activation_button: 'Activate for this tag'
+      deactivation_button: 'Deactivate for this tag'
+      defaultImage_title: 'Default image'
+      defaultImage_info: "Set or change the default image for this tag. If no image is set, the one defined in the main Discussion Cards settings will be used. Accepted formats: JPG, PNG, GIF, BMP or WebP files. Ideal résolution: 400px x 225px (all uploaded images will be converted to a PNG file and resized to a width of 400px, except for images with smaller width, which will keep there initial resolution)."
+      options_button: 'Other discussion cards settings'
+    tag_modal:
+      title: 'Tag Discussion Card Settings'
+      intro_text: 'These are the settings for the discussion cards for this tag. They will only work if the current tag is selected in the general discussion cards settings.'
+

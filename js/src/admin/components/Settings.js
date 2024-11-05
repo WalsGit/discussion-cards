@@ -74,7 +74,10 @@ export default class Settings extends ExtensionPage {
 								<p className="helpText">
 									{app.translator.trans("walsgit_discussion_cards.admin.settings.general.defaultImage_info")}
 								</p>
-								{app.data.settings.walsgit_discussion_cards_default_image_path === null ? <div className="imgStub"></div> : <img className="DC-UserUploadedImage" src={app.forum.attribute("baseUrl") + "/assets/" + app.data.settings.walsgit_discussion_cards_default_image_path}/>}
+								{app.forum.attribute("walsgitDiscussionCardsDefaultImage") === null 
+									? <div className="imgStub"></div> 
+									: <img className="DC-UserUploadedImage" src={app.forum.attribute("baseUrl") + "/assets/" + app.forum.attribute("walsgitDiscussionCardsDefaultImage")}/>
+								}
 								{m(UploadImageButton, {name: "walsgit_discussion_cards_default_image", class: "DC-UploadImageBtn"})}
 								{/* TODO: fix the UploadImageButton adding an empty <img> tag & test different sized images (and file types) */}
 							</div>

@@ -4,20 +4,19 @@ namespace Walsgit\Discussion\Cards\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractDeleteController;
 use Flarum\Foundation\Paths;
-use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\Tags\Tag;
+use Illuminate\Support\Arr;
 use Laminas\Diactoros\Response\EmptyResponse;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Psr\Http\Message\ServerRequestInterface;
 
-class DeleteImageController extends AbstractDeleteController
+class DeleteTagImageController extends AbstractDeleteController
 {
-    protected $settings;
     protected $paths;
 
-    public function __construct(SettingsRepositoryInterface $settings, Paths $paths)
+    public function __construct(Paths $paths)
     {
-        $this->settings = $settings;
         $this->paths = $paths;
     }
 
@@ -25,13 +24,18 @@ class DeleteImageController extends AbstractDeleteController
     {
         $request->getAttribute('actor')->assertAdmin();
 
-        $path = $this->settings->get($key = "walsgit_discussion_cards_default_image_path");
+        $tagId = $request->getParsedBody()['tagId'] ?? null;
+        // $tagId = Arr::get($request->getParsedBody(), 'tagId');
+        $tag = Tag::findOrFail($tagId);
 
-        $this->settings->set($key, null);
+        $path = $tag->walsgit_discussion_cards_tag_default_image;
+
+        $tag->walsgit_discussion_cards_tag_default_image = null;
+        $tag->save();
 
         $uploadDir = new Filesystem(new Local($this->paths->public.'/assets'));
 
-        if ($uploadDir->has($path)) {
+        if ($path && $uploadDir->has($path)) {
             $uploadDir->delete($path);
         }
 

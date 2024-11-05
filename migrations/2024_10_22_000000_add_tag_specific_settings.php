@@ -11,17 +11,19 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
+use Illuminate\Support\Facades\DB;
 
 return [
     'up' => function (Builder $schema) {
+
         $schema->table('tags', function (Blueprint $table) {
-                $table->text('walsgit_discussion_cards_tag_default_image')->nullable();
+                $table->text('walsgit_discussion_cards_tag_settings')->nullable()->after('walsgit_discussion_cards_tag_default_image');
         });
     },
 
     'down' => function (Builder $schema) {
         $schema->table('tags', function (Blueprint $table) {
-            $table->dropColumn('walsgit_discussion_cards_tag_default_image');
+            $table->dropColumn('walsgit_discussion_cards_tag_settings');
         });
     },
 ];

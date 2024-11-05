@@ -6,6 +6,10 @@ use Flarum\Extend;
 use Flarum\Api\Controller\ListDiscussionsController;
 use Walsgit\Discussion\Cards\Api\Controllers\UploadImageController;
 use Walsgit\Discussion\Cards\Api\Controllers\DeleteImageController;
+use Walsgit\Discussion\Cards\Api\Controllers\UploadTagImageController;
+use Walsgit\Discussion\Cards\Api\Controllers\DeleteTagImageController;
+use Walsgit\Discussion\Cards\Api\Controllers\UpdateAllowedTagsController;
+use Flarum\Tags\Api\Serializer\TagSerializer;
 
 return [
     (new Extend\Frontend('forum'))
@@ -36,8 +40,19 @@ return [
         ->serializeToForum('walsgitDiscussionCardsShowBadges', 'walsgit_discussion_cards_showBadges')
         ->serializeToForum('walsgitDiscussionCardsMarkReadCards', 'walsgit_discussion_cards_markReadCards')
         ->serializeToForum('walsgitDiscussionCardsShowViews', 'walsgit_discussion_cards_showViews'),
+    
+        (new Extend\ApiSerializer(TagSerializer::class))
+        ->attribute('walsgitDiscussionCardsTagDefaultImage', function ($serializer, $model) {
+            return $model->walsgit_discussion_cards_tag_default_image;
+        })
+        ->attribute('walsgitDiscussionCardsTagSettings', function ($serializer, $model) {
+            return $model->walsgit_discussion_cards_tag_settings;
+        }),
 
     (new Extend\Routes('api'))
         ->post('/walsgit_discussion_cards_default_image', 'walsgit_discussion_cards_default_image', UploadImageController::class)
         ->delete('/walsgit_discussion_cards_default_image', 'walsgit_discussion_cards_default_image.delete', DeleteImageController::class)
+        ->post('/walsgit_discussion_cards_tag_default_image', 'walsgit_discussion_cards_tag_default_image', UploadTagImageController::class)
+        ->delete('/walsgit_discussion_cards_tag_default_image', 'walsgit_discussion_cards_tag_default_image.delete', DeleteTagImageController::class)
+        ->post('/walsgit_discussion_cards_tag_update_allowedTags', 'walsgit_discussion_cards_updateAllowedTags', UpdateAllowedTagsController::class)
 ];
