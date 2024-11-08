@@ -9,6 +9,7 @@ use Walsgit\Discussion\Cards\Api\Controllers\DeleteImageController;
 use Walsgit\Discussion\Cards\Api\Controllers\UploadTagImageController;
 use Walsgit\Discussion\Cards\Api\Controllers\DeleteTagImageController;
 use Walsgit\Discussion\Cards\Api\Controllers\UpdateAllowedTagsController;
+use Walsgit\Discussion\Cards\Api\Controllers\UpdateTagSettingsController;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 
 return [
@@ -55,4 +56,5 @@ return [
         ->post('/walsgit_discussion_cards_tag_default_image', 'walsgit_discussion_cards_tag_default_image', UploadTagImageController::class)
         ->delete('/walsgit_discussion_cards_tag_default_image', 'walsgit_discussion_cards_tag_default_image.delete', DeleteTagImageController::class)
         ->post('/walsgit_discussion_cards_tag_update_allowedTags', 'walsgit_discussion_cards_updateAllowedTags', UpdateAllowedTagsController::class)
+        ->patch('/tags/{id}/tagSettings', 'walsgit_discussion_cards_updateTagSettings', UpdateTagSettingsController::class)
 ];

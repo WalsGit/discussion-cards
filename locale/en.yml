@@ -44,6 +44,13 @@ walsgit_discussion_cards:
       defaultImage_info: "Set or change the default image for this tag. If no image is set, the one defined in the main Discussion Cards settings will be used. Accepted formats: JPG, PNG, GIF, BMP or WebP files. Ideal résolution: 400px x 225px (all uploaded images will be converted to a PNG file and resized to a width of 400px, except for images with smaller width, which will keep there initial resolution)."
       options_button: 'Other discussion cards settings'
     tag_modal:
-      title: 'Tag Discussion Card Settings'
-      intro_text: 'These are the settings for the discussion cards for this tag. They will only work if the current tag is selected in the general discussion cards settings.'
+      title: 'Discussion Card Settings for '
+      intro_text: 'Here you can set different discussion cards settings for the current tag.'
+      primaryCards_label: 'Number of primary cards'
+      primaryCards_help: 'Number of bigger cards shown at the top of each page using discussion cards (global setting : {default}).'
+      desktopCardWidth_label: 'Primary cards width on desktop'
+      desktopCardWidth_help: 'Set the width (in %) of the primary cards on desktop (global setting : {default}%).'
+      tabletCardWidth_label: 'Primary cards width on tablets'
+      tabletCardWidth_help: 'Set the width (in %) of the primary cards on  (global setting : {default}%).'
+      submit_button: 'Save'
 

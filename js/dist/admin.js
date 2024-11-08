@@ -294,6 +294,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var defaultSettings = {};
 var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
   function WdcTagSettingsModal() {
     return _Modal.apply(this, arguments) || this;
@@ -302,14 +303,38 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
   var _proto = WdcTagSettingsModal.prototype;
   _proto.oninit = function oninit(vnode) {
     _Modal.prototype.oninit.call(this, vnode);
-    this.tagDefaultImage = flarum_common_utils_Stream__WEBPACK_IMPORTED_MODULE_3___default()(this.attrs.model.data.attributes.walsgitDiscussionCardsTagDefaultImage);
-    console.log(this);
+    this.tagSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings || null) || {};
+    console.log(this.tagSettings);
+    defaultSettings = {
+      primaryCards: app.forum.data.attributes.walsgitDiscussionCardsPrimaryCards,
+      desktopCardWidth: app.forum.data.attributes.walsgitDiscussionCardsDesktopCardWidth,
+      tabletCardWidth: app.forum.data.attributes.walsgitDiscussionCardsTabletCardWidth
+    };
+    if (!this.tagSettings.hasOwnProperty('primaryCards') || this.tagSettings.primaryCards === null) {
+      this.tagSettings.primaryCards = defaultSettings.primaryCards;
+    }
+    if (!this.tagSettings.hasOwnProperty('desktopCardWidth') || this.tagSettings.desktopCardWidth === null) {
+      this.tagSettings.desktopCardWidth = defaultSettings.desktopCardWidth;
+    }
+    if (!this.tagSettings.hasOwnProperty('tabletCardWidth') || this.tagSettings.tabletCardWidth === null) {
+      this.tagSettings.tabletCardWidth = defaultSettings.tabletCardWidth;
+    }
+    this.tagSettings.primaryCards = flarum_common_utils_Stream__WEBPACK_IMPORTED_MODULE_3___default()(this.tagSettings.primaryCards);
+    this.tagSettings.desktopCardWidth = flarum_common_utils_Stream__WEBPACK_IMPORTED_MODULE_3___default()(this.tagSettings.desktopCardWidth);
+    this.tagSettings.tabletCardWidth = flarum_common_utils_Stream__WEBPACK_IMPORTED_MODULE_3___default()(this.tagSettings.tabletCardWidth);
   };
   _proto.className = function className() {
     return "WdcTagSettingsModal Modal--large";
   };
   _proto.title = function title() {
-    return app.translator.trans("walsgit_discussion_cards.admin.tag_modal.title");
+    return [app.translator.trans("walsgit_discussion_cards.admin.tag_modal.title"), m("span", {
+      className: "TagLabel colored",
+      style: "--tag-bg: " + this.attrs.model.data.attributes.color + ";"
+    }, m("span", {
+      className: "TagLabel-text"
+    }, m("span", {
+      className: "TagLabel-name"
+    }, this.attrs.model.data.attributes.name)))];
   };
   _proto.content = function content() {
     return [m("div", {
@@ -318,35 +343,88 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
       className: "Form"
     }, m("p", null, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.intro_text")), m("div", {
       className: "Form-group"
-    }, m("textarea", {
+    }, m("label", {
+      htmlFor: "primaryCards"
+    }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.primaryCards_label")), m("div", {
+      className: "helpText"
+    }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.primaryCards_help", {
+      "default": defaultSettings.primaryCards
+    })), m("input", {
+      type: "text",
+      name: "primaryCards",
       className: "FormControl",
-      rows: "30",
-      bidi: this.tagDefaultImage
+      bidi: this.tagSettings.primaryCards
+    })), m("div", {
+      className: "Form-group"
+    }, m("label", {
+      htmlFor: "desktopCardWidth"
+    }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_label")), m("div", {
+      className: "helpText"
+    }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_help", {
+      "default": defaultSettings.desktopCardWidth
+    })), m("input", {
+      type: "text",
+      name: "desktopCardWidth",
+      className: "FormControl",
+      bidi: this.tagSettings.desktopCardWidth
+    })), m("div", {
+      className: "Form-group"
+    }, m("label", {
+      htmlFor: "tabletCardWidth"
+    }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_label")), m("div", {
+      className: "helpText"
+    }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_help", {
+      "default": defaultSettings.tabletCardWidth
+    })), m("input", {
+      type: "text",
+      name: "tabletCardWidth",
+      className: "FormControl",
+      bidi: this.tagSettings.tabletCardWidth
     })), m((flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_1___default()), {
       type: "submit",
       className: "Button Button--primary",
       loading: this.loading,
-      disabled: !this.changed()
+      disabled: this.changed()
     }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.submit_button"))))];
   };
   _proto.changed = function changed() {
-    return this.tagDefaultImage() !== this.attrs.model.walsgit_discussion_cards_tag_default_image;
+    var savedSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings);
+    function isSameSettings(obj1, obj2) {
+      if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+        return false;
+      }
+      for (var key in obj1) {
+        if (obj1.hasOwnProperty(key)) {
+          if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+            if (!compareObjects(obj1[key], obj2[key])) {
+              return false;
+            }
+          } else if (obj1[key] !== obj2[key]) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    return isSameSettings(JSON.parse(JSON.stringify(this.tagSettings)), savedSettings);
   };
   _proto.onsubmit = function onsubmit(e) {
     e.preventDefault();
     var tag = this.attrs.model;
-    var tagDefaultImage = this.tagDefaultImage();
+    var tagSettings = JSON.stringify(this.tagSettings);
     this.loading = true;
     app.request({
       method: "PATCH",
-      url: app.forum.attribute("apiUrl") + "/tags/" + tag.id() + "/tagDefaultImage",
+      url: app.forum.attribute("apiUrl") + "/tags/" + tag.id() + "/tagSettings",
       body: {
         data: {
-          tagDefaultImage: tagDefaultImage
+          tagSettings: tagSettings
         }
       }
     }).then(function () {
-      tag.data.attributes.tagDefaultImage = tagDefaultImage;
+      console.log('before : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
+      tag.data.attributes.walsgitDiscussionCardsTagSettings = tagSettings;
+      console.log('after : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
       app.modal.close();
     });
   };

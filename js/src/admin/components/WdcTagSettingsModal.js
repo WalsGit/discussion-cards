@@ -2,21 +2,52 @@ import Button from "flarum/common/components/Button";
 import Modal from "flarum/common/components/Modal";
 import Stream from "flarum/common/utils/Stream";
 
+let defaultSettings = {};
+
 export default class WdcTagSettingsModal extends Modal {
 	oninit(vnode) {
 		super.oninit(vnode);
 
-		this.tagDefaultImage = Stream(this.attrs.model.data.attributes.walsgitDiscussionCardsTagDefaultImage);
-        console.log(this);
+		this.tagSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings || null) || {};
+		console.log(this.tagSettings);
+
+		defaultSettings = {
+			primaryCards: app.forum.data.attributes.walsgitDiscussionCardsPrimaryCards,
+			desktopCardWidth: app.forum.data.attributes.walsgitDiscussionCardsDesktopCardWidth,
+			tabletCardWidth: app.forum.data.attributes.walsgitDiscussionCardsTabletCardWidth,
+		}
+		
+		if (!this.tagSettings.hasOwnProperty('primaryCards') || this.tagSettings.primaryCards === null) {
+			this.tagSettings.primaryCards = defaultSettings.primaryCards;
+		}
+		if (!this.tagSettings.hasOwnProperty('desktopCardWidth') || this.tagSettings.desktopCardWidth === null) {
+			this.tagSettings.desktopCardWidth = defaultSettings.desktopCardWidth;
+		}
+		if (!this.tagSettings.hasOwnProperty('tabletCardWidth') || this.tagSettings.tabletCardWidth === null) {
+			this.tagSettings.tabletCardWidth = defaultSettings.tabletCardWidth;
+		}
+
+		this.tagSettings.primaryCards = Stream(this.tagSettings.primaryCards);
+		this.tagSettings.desktopCardWidth = Stream(this.tagSettings.desktopCardWidth);
+		this.tagSettings.tabletCardWidth = Stream(this.tagSettings.tabletCardWidth);
+		
 	}
 	className() {
 		return "WdcTagSettingsModal Modal--large";
 	}
 
 	title() {
-		return app.translator.trans(
-			"walsgit_discussion_cards.admin.tag_modal.title"
-		);
+		return [
+			app.translator.trans("walsgit_discussion_cards.admin.tag_modal.title"),
+			<span 
+				className="TagLabel colored"
+				style={"--tag-bg: " + this.attrs.model.data.attributes.color + ";"}
+			>
+				<span className="TagLabel-text">
+					<span className="TagLabel-name">{this.attrs.model.data.attributes.name}</span>
+				</span>
+			</span>
+		]
 	}
 
 	content() {
@@ -28,17 +59,40 @@ export default class WdcTagSettingsModal extends Modal {
 					</p>
                         
 					<div className="Form-group">
-						<textarea
+						<label htmlFor="primaryCards">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.primaryCards_label")}</label>
+						<div className="helpText">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.primaryCards_help", {default: defaultSettings.primaryCards})}</div>
+						<input
+							type="text"
+							name="primaryCards"
 							className="FormControl"
-							rows="30"
-							bidi={this.tagDefaultImage}
+							bidi={this.tagSettings.primaryCards}
+						/>
+					</div>
+					<div className="Form-group">
+						<label htmlFor="desktopCardWidth">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_label")}</label>
+						<div className="helpText">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_help", {default: defaultSettings.desktopCardWidth})}</div>
+						<input
+							type="text"
+							name="desktopCardWidth"
+							className="FormControl"
+							bidi={this.tagSettings.desktopCardWidth}
+						/>
+					</div>
+					<div className="Form-group">
+						<label htmlFor="tabletCardWidth">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_label")}</label>
+						<div className="helpText">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_help", {default: defaultSettings.tabletCardWidth})}</div>
+						<input
+							type="text"
+							name="tabletCardWidth"
+							className="FormControl"
+							bidi={this.tagSettings.tabletCardWidth}
 						/>
 					</div>
 					<Button
 						type="submit"
 						className="Button Button--primary"
 						loading={this.loading}
-						disabled={!this.changed()}
+						disabled={this.changed()}
 					>
 						{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.submit_button")}
 					</Button>
@@ -46,16 +100,37 @@ export default class WdcTagSettingsModal extends Modal {
 			</div>,
 		];
 	}
-
 	changed() {
-		return this.tagDefaultImage() !== this.attrs.model.walsgit_discussion_cards_tag_default_image;
+		const savedSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings);
+
+		function isSameSettings(obj1, obj2) {
+			if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+				return false;
+			}
+		
+			for (const key in obj1) {
+				if (obj1.hasOwnProperty(key)) {
+					if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+						if (!compareObjects(obj1[key], obj2[key])) {
+							return false;
+						}
+					} else if (obj1[key] !== obj2[key]) {
+						return false;
+					}
+				}
+			}
+		
+			return true;
+		}
+
+		return isSameSettings(JSON.parse(JSON.stringify(this.tagSettings)), savedSettings);
 	}
 
 	onsubmit(e) {
 		e.preventDefault();
 
 		const tag = this.attrs.model;
-		const tagDefaultImage = this.tagDefaultImage();
+		const tagSettings = JSON.stringify(this.tagSettings);
 
 		this.loading = true;
 
@@ -65,10 +140,12 @@ export default class WdcTagSettingsModal extends Modal {
 				app.forum.attribute("apiUrl") +
 				"/tags/" +
 				tag.id() +
-				"/tagDefaultImage",
-			body: { data: { tagDefaultImage } },
+				"/tagSettings",
+			body: { data: { tagSettings } },
 		}).then(function () {
-			tag.data.attributes.tagDefaultImage = tagDefaultImage;
+			console.log('before : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
+			tag.data.attributes.walsgitDiscussionCardsTagSettings = tagSettings;
+			console.log('after : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
 			app.modal.close();
 		});
 	}
