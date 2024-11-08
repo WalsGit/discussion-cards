@@ -448,7 +448,9 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
     var settings = {};
     for (var key in (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum).data.attributes) {
       if (key.startsWith('walsgitDiscussionCards')) {
-        settings[key.replace('walsgitDiscussionCards', '')] = (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum).data.attributes[key];
+        var newKey = key.replace('walsgitDiscussionCards', '');
+        newKey = newKey.replace(/^./, newKey.charAt(0).toLowerCase());
+        settings[newKey] = (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum).data.attributes[key];
       }
     }
     var state = this.attrs.state;
@@ -476,15 +478,25 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
       tags = flarum_app__WEBPACK_IMPORTED_MODULE_0___default().store.all('tags').find(function (t) {
         return t.slug() === params.tags;
       }).data.id;
+      var tagSettings = JSON.parse(flarum_app__WEBPACK_IMPORTED_MODULE_0___default().store.all('tags').find(function (t) {
+        return t.slug() === params.tags;
+      }).data.attributes.walsgitDiscussionCardsTagSettings);
+      for (var _key in tagSettings) {
+        if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key]) {
+          settings[_key] = tagSettings[_key];
+        }
+      }
+      console.log(settings);
+      // TODO: Support for the tag default image and the tag cards custom width
     }
-    if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.AllowedTags.length && settings.AllowedTags.includes(tags) || !params.tags && Number(settings.OnIndexPage) === 1)) {
+    if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.allowedTags.length && settings.allowedTags.includes(tags) || !params.tags && Number(settings.onIndexPage) === 1)) {
       return m("div", {
         className: 'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')
       }, m("div", {
         "class": "DiscussionList-discussions flexCard"
       }, state.getPages().map(function (pg, o) {
         return pg.items.map(function (discussion, i) {
-          return i < Number(settings.PrimaryCards) && o === 0 ? m(_components_CardItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          return i < Number(settings.primaryCards) && o === 0 ? m(_components_CardItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
             discussion: discussion
           }) : m(_components_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
             discussion: discussion

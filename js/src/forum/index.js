@@ -21,7 +21,9 @@ app.initializers.add('walsgit/discussion/cards', () => {
     const settings = {};
     for (const key in app.forum.data.attributes) {
       if (key.startsWith('walsgitDiscussionCards')) {
-        settings[key.replace('walsgitDiscussionCards', '')] = app.forum.data.attributes[key];
+        let newKey = key.replace('walsgitDiscussionCards', '');
+        newKey = newKey.replace(/^./, newKey.charAt(0).toLowerCase());
+        settings[newKey] = app.forum.data.attributes[key];
       }
     }
     const state = this.attrs.state;
@@ -46,14 +48,22 @@ app.initializers.add('walsgit/discussion/cards', () => {
     let tags = '';
     if (!isIndexPage) {
       tags = app.store.all('tags').find(t => t.slug() === params.tags).data.id;
+      const tagSettings = JSON.parse(app.store.all('tags').find(t => t.slug() === params.tags).data.attributes.walsgitDiscussionCardsTagSettings);
+      for (const key in tagSettings) {
+        if (settings.hasOwnProperty(key) && tagSettings[key] !== settings[key]) {
+          settings[key] = tagSettings[key];
+        }
+      }
+      console.log(settings);
+      // TODO: Support for the tag default image and the tag cards custom width
     }
-    if (app.current.matches(IndexPage) && ((settings.AllowedTags.length && settings.AllowedTags.includes(tags)) || (!params.tags && Number(settings.OnIndexPage) === 1))) {
+    if (app.current.matches(IndexPage) && ((settings.allowedTags.length && settings.allowedTags.includes(tags)) || (!params.tags && Number(settings.onIndexPage) === 1))) {
       return (
         <div className={'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')}>
           <div class="DiscussionList-discussions flexCard">
             {state.getPages().map((pg, o) => {
               return pg.items.map((discussion, i) => {
-                return (i < Number(settings.PrimaryCards) && o === 0)
+                return (i < Number(settings.primaryCards) && o === 0)
                   ? m(CardItem, {discussion: discussion})
                   : m(ListItem, {discussion: discussion})
               });
