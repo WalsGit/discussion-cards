@@ -90,7 +90,6 @@ var cardItem = /*#__PURE__*/function (_Component) {
   };
   _proto.view = function view() {
     var discussion = this.discussion;
-    // const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
     var settings = {};
     for (var key in app.forum.data.attributes) {
       if (key.startsWith("walsgitDiscussionCards")) {
@@ -472,10 +471,10 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
         text: text
       }));
     }
-    var isIndexPage = m.route.get().split('?')[0] === '/';
-    var tags = '';
-    if (!isIndexPage) {
-      tags = flarum_app__WEBPACK_IMPORTED_MODULE_0___default().store.all('tags').find(function (t) {
+    var isTagPage = m.route.get().split('?')[0].startsWith('/t/');
+    var tag = '';
+    if (isTagPage) {
+      tag = flarum_app__WEBPACK_IMPORTED_MODULE_0___default().store.all('tags').find(function (t) {
         return t.slug() === params.tags;
       }).data.id;
       var tagSettings = JSON.parse(flarum_app__WEBPACK_IMPORTED_MODULE_0___default().store.all('tags').find(function (t) {
@@ -489,7 +488,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
       console.log(settings);
       // TODO: Support for the tag default image and the tag cards custom width
     }
-    if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.allowedTags.length && settings.allowedTags.includes(tags) || !params.tags && Number(settings.onIndexPage) === 1)) {
+    if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.allowedTags.length && settings.allowedTags.includes(tag) || !params.tags && Number(settings.onIndexPage) === 1)) {
       return m("div", {
         className: 'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')
       }, m("div", {

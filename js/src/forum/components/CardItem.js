@@ -19,7 +19,6 @@ export default class cardItem extends Component {
 
 	view() {
 		const discussion = this.discussion;
-		// const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
 		const settings = {};
 		for (const key in app.forum.data.attributes) {
 			if (key.startsWith("walsgitDiscussionCards")) {

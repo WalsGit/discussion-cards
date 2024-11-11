@@ -44,10 +44,10 @@ app.initializers.add('walsgit/discussion/cards', () => {
       const text = app.translator.trans('core.forum.discussion_list.empty_text');
       return <div className="DiscussionList">{m(Placeholder, {text})}</div>;
     }
-    const isIndexPage = m.route.get().split('?')[0] === '/';
-    let tags = '';
-    if (!isIndexPage) {
-      tags = app.store.all('tags').find(t => t.slug() === params.tags).data.id;
+    const isTagPage = m.route.get().split('?')[0].startsWith('/t/');
+    let tag = '';
+    if (isTagPage) {
+      tag = app.store.all('tags').find(t => t.slug() === params.tags).data.id;
       const tagSettings = JSON.parse(app.store.all('tags').find(t => t.slug() === params.tags).data.attributes.walsgitDiscussionCardsTagSettings);
       for (const key in tagSettings) {
         if (settings.hasOwnProperty(key) && tagSettings[key] !== settings[key]) {
@@ -57,7 +57,7 @@ app.initializers.add('walsgit/discussion/cards', () => {
       console.log(settings);
       // TODO: Support for the tag default image and the tag cards custom width
     }
-    if (app.current.matches(IndexPage) && ((settings.allowedTags.length && settings.allowedTags.includes(tags)) || (!params.tags && Number(settings.onIndexPage) === 1))) {
+    if (app.current.matches(IndexPage) && ((settings.allowedTags.length && settings.allowedTags.includes(tag)) || (!params.tags && Number(settings.onIndexPage) === 1))) {
       return (
         <div className={'DiscussionList' + (state.isSearchResults() ? ' DiscussionList--searchResults' : '')}>
           <div class="DiscussionList-discussions flexCard">
