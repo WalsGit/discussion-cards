@@ -1,7 +1,7 @@
-export default function getPostImage(post, key = 1) {
+export default function getPostImage(post, defaultImage, key = 1) {
 
   const regex = /<img(?!.*?class="emoji").*?src=[\'"](.*?)[\'"].*?>/;
-  const image = app.forum.attribute('walsgitDiscussionCardsDefaultImage');
+  const image = defaultImage;
   const defaultImg = app.forum.attribute("baseUrl") + "/assets/" + image;
 
   if (post) {

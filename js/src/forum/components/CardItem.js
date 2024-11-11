@@ -21,16 +21,30 @@ export default class cardItem extends Component {
 		const discussion = this.discussion;
 		const settings = {};
 		for (const key in app.forum.data.attributes) {
-			if (key.startsWith("walsgitDiscussionCards")) {
-				settings[key.replace("walsgitDiscussionCards", "")] =
-					app.forum.data.attributes[key];
+			if (key.startsWith('walsgitDiscussionCards')) {
+				let newKey = key.replace('walsgitDiscussionCards', '');
+				newKey = newKey.replace(/^./, newKey.charAt(0).toLowerCase());
+				settings[newKey] = app.forum.data.attributes[key];
 			}
 		}
+		const slug = m.route.get().split('/t/')[1]?.split('?')[0];
+		const tagId = app.store.all('tags').find(t => t.slug() === slug).data.id;
+		const tag = app.store.all('tags').find(t => t.id() === tagId);
+		const tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
+		const tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+		tagSettings.defaultImage = tagImage;
+
+		for (const key in tagSettings) {
+			if (settings.hasOwnProperty(key) && tagSettings[key] !== settings[key] && tagSettings[key] !== null) {
+				settings[key] = tagSettings[key];
+			}
+		}
+
 		const isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? "Unread" : "";
 		const attrs = {};
 		attrs.className =
 			"wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : "");
-		const image = getPostImage(discussion.firstPost());
+		const image = getPostImage(discussion.firstPost(), settings.defaultImage);
 		const media = image ? (
 			<img
 				src={image}

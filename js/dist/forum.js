@@ -89,17 +89,35 @@ var cardItem = /*#__PURE__*/function (_Component) {
     this.discussion = this.attrs.discussion;
   };
   _proto.view = function view() {
+    var _m$route$get$split$;
     var discussion = this.discussion;
     var settings = {};
     for (var key in app.forum.data.attributes) {
-      if (key.startsWith("walsgitDiscussionCards")) {
-        settings[key.replace("walsgitDiscussionCards", "")] = app.forum.data.attributes[key];
+      if (key.startsWith('walsgitDiscussionCards')) {
+        var newKey = key.replace('walsgitDiscussionCards', '');
+        newKey = newKey.replace(/^./, newKey.charAt(0).toLowerCase());
+        settings[newKey] = app.forum.data.attributes[key];
+      }
+    }
+    var slug = (_m$route$get$split$ = m.route.get().split('/t/')[1]) == null ? void 0 : _m$route$get$split$.split('?')[0];
+    var tagId = app.store.all('tags').find(function (t) {
+      return t.slug() === slug;
+    }).data.id;
+    var tag = app.store.all('tags').find(function (t) {
+      return t.id() === tagId;
+    });
+    var tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
+    var tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+    tagSettings.defaultImage = tagImage;
+    for (var _key in tagSettings) {
+      if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
+        settings[_key] = tagSettings[_key];
       }
     }
     var isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? "Unread" : "";
     var attrs = {};
     attrs.className = "wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : "");
-    var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost());
+    var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost(), settings.defaultImage);
     var media = image ? m("img", {
       src: image,
       className: "previewCardImg",
@@ -279,18 +297,35 @@ var listItem = /*#__PURE__*/function (_Component) {
     _Component.prototype.oninit.call(this, vnode);
   };
   _proto.view = function view() {
+    var _m$route$get$split$;
     var discussion = this.attrs.discussion;
-    //const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
     var settings = {};
     for (var key in app.forum.data.attributes) {
       if (key.startsWith('walsgitDiscussionCards')) {
-        settings[key.replace('walsgitDiscussionCards', '')] = app.forum.data.attributes[key];
+        var newKey = key.replace('walsgitDiscussionCards', '');
+        newKey = newKey.replace(/^./, newKey.charAt(0).toLowerCase());
+        settings[newKey] = app.forum.data.attributes[key];
+      }
+    }
+    var slug = (_m$route$get$split$ = m.route.get().split('/t/')[1]) == null ? void 0 : _m$route$get$split$.split('?')[0];
+    var tagId = app.store.all('tags').find(function (t) {
+      return t.slug() === slug;
+    }).data.id;
+    var tag = app.store.all('tags').find(function (t) {
+      return t.id() === tagId;
+    });
+    var tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
+    var tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+    tagSettings.defaultImage = tagImage;
+    for (var _key in tagSettings) {
+      if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
+        settings[_key] = tagSettings[_key];
       }
     }
     var isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? 'Unread' : '';
     var attrs = {};
     attrs.className = "wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : '');
-    var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost());
+    var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost(), settings.defaultImage);
     var media = image ? m("img", {
       src: image,
       className: "previewCardImg",
@@ -377,12 +412,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getPostImage)
 /* harmony export */ });
-function getPostImage(post, key) {
+function getPostImage(post, defaultImage, key) {
   if (key === void 0) {
     key = 1;
   }
   var regex = /<img(?!.*?class="emoji").*?src=[\'"](.*?)[\'"].*?>/;
-  var image = app.forum.attribute('walsgitDiscussionCardsDefaultImage');
+  var image = defaultImage;
   var defaultImg = app.forum.attribute("baseUrl") + "/assets/" + image;
   if (post) {
     var src = regex.exec(post.contentHtml());
@@ -485,7 +520,6 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
           settings[_key] = tagSettings[_key];
         }
       }
-      console.log(settings);
       // TODO: Support for the tag default image and the tag cards custom width
     }
     if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.allowedTags.length && settings.allowedTags.includes(tag) || !params.tags && Number(settings.onIndexPage) === 1)) {

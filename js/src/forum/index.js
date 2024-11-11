@@ -54,7 +54,6 @@ app.initializers.add('walsgit/discussion/cards', () => {
           settings[key] = tagSettings[key];
         }
       }
-      console.log(settings);
       // TODO: Support for the tag default image and the tag cards custom width
     }
     if (app.current.matches(IndexPage) && ((settings.allowedTags.length && settings.allowedTags.includes(tag)) || (!params.tags && Number(settings.onIndexPage) === 1))) {
