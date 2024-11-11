@@ -101,9 +101,13 @@ export default class WdcTagSettingsModal extends Modal {
 		];
 	}
 	changed() {
-		const savedSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings);
+		let savedSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings || 'null') || {};
 
 		function isSameSettings(obj1, obj2) {
+			if(typeof obj1 !== 'object' ||typeof obj2 !== 'object') {
+				return false;
+			}
+
 			if (Object.keys(obj1).length !== Object.keys(obj2).length) {
 				return false;
 			}
