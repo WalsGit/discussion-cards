@@ -9,6 +9,7 @@ use Flarum\Frontend\Compiler\Source\SourceCollector;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Arr;
+use Flarum\Tags\Tag;
 
 
 class RegisterLessVariables implements ExtenderInterface
@@ -19,23 +20,35 @@ class RegisterLessVariables implements ExtenderInterface
             $assets->css(function (SourceCollector $sources) {
                 $sources->addString(function () {
                     $settings = app(SettingsRepositoryInterface::class);
-                    $desktopCardWidth = $settings->get('walsgit_discussion_cards_desktopCardWidth');
-                    $tabletCardWidth = $settings->get('walsgit_discussion_cards_tabletCardWidth');
-                    $ext_settings = [
-                        'desktopCardWidth' => $desktopCardWidth,
-                        'tabletCardWidth' => $tabletCardWidth,
-                    ];
-                    //$ext_settings = json_decode($settings->get('walsgit_discussion_cards'), true);
+                    
+                    $defaultDesktopCardWidth = $settings->get('walsgit_discussion_cards_desktopCardWidth');
+                    $defaultTabletCardWidth = $settings->get('walsgit_discussion_cards_tabletCardWidth');
+                    
+                    $tags = Tag::all();
 
-                    $vars = [
-                        'desktop-card-width' => Arr::get($ext_settings, 'desktopCardWidth', '49') . '%',
-                        'tablet-card-width' => Arr::get($ext_settings, 'tabletCardWidth', '49') . '%',
-                    ];
+                    $css = "@desktop-card-width: {$defaultDesktopCardWidth}%;\n";
+                    $css .= "@tablet-card-width: {$defaultTabletCardWidth}%;\n";
 
-                    return array_reduce(array_keys($vars), function ($string, $name) use ($vars) {
-                        return $string . "@$name: {$vars[$name]};";
-                    }, '');
+                    foreach ($tags as $tag) {
+                        $tagSettings = $tag->walsgit_discussion_cards_tag_settings
+                                        ? json_decode($tag->walsgit_discussion_cards_tag_settings, true)
+                                        : [];
+                        $desktopWidth = $tagSettings['desktopCardWidth'] ?? $defaultDesktopCardWidth;
+                        $tabletWidth = $tagSettings['tabletCardWidth'] ?? $defaultTabletCardWidth;
 
+                        $css .= <<<CSS
+                        .CardsListItem.Card[data-tag-id="{$tag->id}"] {
+                            @media @desktop-up {
+                                width: {$desktopWidth}%;
+                            }
+                            @media @tablet {
+                                width: {$tabletWidth}%;
+                            }
+                        }
+                        CSS;
+                    }
+
+                    return $css;
                 });
             });
         });

@@ -60,6 +60,7 @@ export default class cardItem extends Component {
 			<div
 				key={discussion.id()}
 				data-id={discussion.id()}
+				data-tag-id={tagId}
 				className={
 					"CardsListItem Card " +
 					isRead +
@@ -79,7 +80,7 @@ export default class cardItem extends Component {
 								discussion,
 								this
 							).toArray()
-					  )
+						)
 					: ""}
 				<Link
 					href={app.route.discussion(discussion, 0)}

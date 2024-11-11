@@ -7,9 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Walsgit\\Discussion\\Cards\\Api\\Controllers\\DeleteImageController' => $baseDir . '/src/Api/Controllers/DeleteImageController.php',
-    'Walsgit\\Discussion\\Cards\\Api\\Controllers\\DeleteTagImageController' => $baseDir . '/src/Api/Controllers/DeleteTagImageController.php',
-    'Walsgit\\Discussion\\Cards\\Api\\Controllers\\UploadImageController' => $baseDir . '/src/Api/Controllers/UploadImageController.php',
-    'Walsgit\\Discussion\\Cards\\Api\\Controllers\\UploadTagImageController' => $baseDir . '/src/Api/Controllers/UploadTagImageController.php',
-    'Walsgit\\Discussion\\Cards\\Extenders\\RegisterLessVariables' => $baseDir . '/src/Extenders/RegisterLessVariables.php',
 );

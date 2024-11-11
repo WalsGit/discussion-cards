@@ -129,6 +129,7 @@ var cardItem = /*#__PURE__*/function (_Component) {
     return m("div", {
       key: discussion.id(),
       "data-id": discussion.id(),
+      "data-tag-id": tagId,
       className: "CardsListItem Card " + isRead + (discussion.isHidden() ? " Hidden" : "")
     }, flarum_forum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_9___default().controls(discussion, this).toArray().length ? m((flarum_common_components_Dropdown__WEBPACK_IMPORTED_MODULE_8___default()), {
       icon: "fas fa-ellipsis-v",
