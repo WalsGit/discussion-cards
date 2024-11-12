@@ -89,7 +89,6 @@ var cardItem = /*#__PURE__*/function (_Component) {
     this.discussion = this.attrs.discussion;
   };
   _proto.view = function view() {
-    var _m$route$get$split$;
     var discussion = this.discussion;
     var settings = {};
     for (var key in app.forum.data.attributes) {
@@ -99,19 +98,24 @@ var cardItem = /*#__PURE__*/function (_Component) {
         settings[newKey] = app.forum.data.attributes[key];
       }
     }
-    var slug = (_m$route$get$split$ = m.route.get().split('/t/')[1]) == null ? void 0 : _m$route$get$split$.split('?')[0];
-    var tagId = app.store.all('tags').find(function (t) {
-      return t.slug() === slug;
-    }).data.id;
-    var tag = app.store.all('tags').find(function (t) {
-      return t.id() === tagId;
-    });
-    var tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
-    var tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
-    tagSettings.defaultImage = tagImage;
-    for (var _key in tagSettings) {
-      if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
-        settings[_key] = tagSettings[_key];
+    var isTagPage = m.route.get().split('?')[0].startsWith('/t/');
+    var tagId;
+    if (isTagPage) {
+      var _m$route$get$split$;
+      var slug = (_m$route$get$split$ = m.route.get().split('/t/')[1]) == null ? void 0 : _m$route$get$split$.split('?')[0];
+      tagId = app.store.all('tags').find(function (t) {
+        return t.slug() === slug;
+      }).data.id;
+      var tag = app.store.all('tags').find(function (t) {
+        return t.id() === tagId;
+      });
+      var tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
+      var tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+      tagSettings.defaultImage = tagImage;
+      for (var _key in tagSettings) {
+        if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
+          settings[_key] = tagSettings[_key];
+        }
       }
     }
     var isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? "Unread" : "";
@@ -129,7 +133,7 @@ var cardItem = /*#__PURE__*/function (_Component) {
     return m("div", {
       key: discussion.id(),
       "data-id": discussion.id(),
-      "data-tag-id": tagId,
+      "data-tag-id": isTagPage ? tagId : null,
       className: "CardsListItem Card " + isRead + (discussion.isHidden() ? " Hidden" : "")
     }, flarum_forum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_9___default().controls(discussion, this).toArray().length ? m((flarum_common_components_Dropdown__WEBPACK_IMPORTED_MODULE_8___default()), {
       icon: "fas fa-ellipsis-v",
@@ -298,7 +302,6 @@ var listItem = /*#__PURE__*/function (_Component) {
     _Component.prototype.oninit.call(this, vnode);
   };
   _proto.view = function view() {
-    var _m$route$get$split$;
     var discussion = this.attrs.discussion;
     var settings = {};
     for (var key in app.forum.data.attributes) {
@@ -308,19 +311,23 @@ var listItem = /*#__PURE__*/function (_Component) {
         settings[newKey] = app.forum.data.attributes[key];
       }
     }
-    var slug = (_m$route$get$split$ = m.route.get().split('/t/')[1]) == null ? void 0 : _m$route$get$split$.split('?')[0];
-    var tagId = app.store.all('tags').find(function (t) {
-      return t.slug() === slug;
-    }).data.id;
-    var tag = app.store.all('tags').find(function (t) {
-      return t.id() === tagId;
-    });
-    var tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
-    var tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
-    tagSettings.defaultImage = tagImage;
-    for (var _key in tagSettings) {
-      if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
-        settings[_key] = tagSettings[_key];
+    var isTagPage = m.route.get().split('?')[0].startsWith('/t/');
+    if (isTagPage) {
+      var _m$route$get$split$;
+      var slug = (_m$route$get$split$ = m.route.get().split('/t/')[1]) == null ? void 0 : _m$route$get$split$.split('?')[0];
+      var tagId = app.store.all('tags').find(function (t) {
+        return t.slug() === slug;
+      }).data.id;
+      var tag = app.store.all('tags').find(function (t) {
+        return t.id() === tagId;
+      });
+      var tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
+      var tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+      tagSettings.defaultImage = tagImage;
+      for (var _key in tagSettings) {
+        if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
+          settings[_key] = tagSettings[_key];
+        }
       }
     }
     var isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? 'Unread' : '';
@@ -521,7 +528,6 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
           settings[_key] = tagSettings[_key];
         }
       }
-      // TODO: Support for the tag default image and the tag cards custom width
     }
     if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default())) && (settings.allowedTags.length && settings.allowedTags.includes(tag) || !params.tags && Number(settings.onIndexPage) === 1)) {
       return m("div", {

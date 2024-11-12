@@ -28,18 +28,22 @@ export default class listItem extends Component {
 				settings[newKey] = app.forum.data.attributes[key];
 			}
 		}
-    const slug = m.route.get().split('/t/')[1]?.split('?')[0];
-		const tagId = app.store.all('tags').find(t => t.slug() === slug).data.id;
-		const tag = app.store.all('tags').find(t => t.id() === tagId);
-		const tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
-		const tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
-		tagSettings.defaultImage = tagImage;
 
-		for (const key in tagSettings) {
-			if (settings.hasOwnProperty(key) && tagSettings[key] !== settings[key] && tagSettings[key] !== null) {
-				settings[key] = tagSettings[key];
-			}
-		}
+    const isTagPage = m.route.get().split('?')[0].startsWith('/t/');
+		if (isTagPage) {
+      const slug = m.route.get().split('/t/')[1]?.split('?')[0];
+      const tagId = app.store.all('tags').find(t => t.slug() === slug).data.id;
+      const tag = app.store.all('tags').find(t => t.id() === tagId);
+      const tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
+      const tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+      tagSettings.defaultImage = tagImage;
+
+      for (const key in tagSettings) {
+        if (settings.hasOwnProperty(key) && tagSettings[key] !== settings[key] && tagSettings[key] !== null) {
+          settings[key] = tagSettings[key];
+        }
+      }
+    }
 
     const isRead = Number(settings.MarkReadCards) === 1 && (!discussion.isRead() && app.session.user) ? 'Unread' : '';
     const attrs = {};
@@ -47,15 +51,15 @@ export default class listItem extends Component {
     const image = getPostImage(discussion.firstPost(), settings.defaultImage);
     const media = image
       ? <img src={image}
-             className="previewCardImg"
-             alt={discussion.title()}
-             loading="lazy"/>
+            className="previewCardImg"
+            alt={discussion.title()}
+            loading="lazy"/>
       : <div className="imgStub"/>
 
     return (
       <div key={discussion.id()}
-           data-id={discussion.id()}
-           className={"CardsListItem List " + isRead + (discussion.isHidden() ? " Hidden" : "")}>
+          data-id={discussion.id()}
+          className={"CardsListItem List " + isRead + (discussion.isHidden() ? " Hidden" : "")}>
         {DiscussionControls.controls(discussion, this).toArray().length
           ? m(Dropdown, {
             icon: 'fas fa-ellipsis-v',
