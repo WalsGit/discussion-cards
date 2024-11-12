@@ -45,9 +45,9 @@ export default class listItem extends Component {
       }
     }
 
-    const isRead = Number(settings.MarkReadCards) === 1 && (!discussion.isRead() && app.session.user) ? 'Unread' : '';
+    const isRead = Number(settings.markReadCards) === 1 && (!discussion.isRead() && app.session.user) ? 'Unread' : '';
     const attrs = {};
-    attrs.className = "wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : '');
+    attrs.className = "wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : '');
     const image = getPostImage(discussion.firstPost(), settings.defaultImage);
     const media = image
       ? <img src={image}
@@ -70,7 +70,7 @@ export default class listItem extends Component {
         <Link href={app.route.discussion(discussion, 0)}
               className="cardLink">
 
-          {Number(settings.ShowBadges) === 1
+          {Number(settings.showBadges) === 1
             ? craftBadges(discussion.badges().toArray())
             : ''}
 
@@ -78,7 +78,7 @@ export default class listItem extends Component {
 
             <div className="rowSpan-3 colSpan">
               <div {...attrs}>
-                {Number(settings.ShowViews) === 1 && !isNaN(discussion.views())
+                {Number(settings.showViews) === 1 && !isNaN(discussion.views())
                   ? <div className="imageLabel discussionViews">
                     {icon('fas fa-eye', {className: 'labelIcon'})}
                     {discussion.views()}
@@ -86,7 +86,7 @@ export default class listItem extends Component {
                   : ''}
                 {media}
 
-                {Number(settings.ShowAuthor) === 1
+                {Number(settings.showAuthor) === 1
                   ? <div className="cardFoot">
                     <div className="Author">
                       {username(discussion.user())}
@@ -109,11 +109,11 @@ export default class listItem extends Component {
                 <div className="cardTags">{craftTags(discussion.tags())}</div>
               </div>
 
-              {Number(settings.PreviewText) === 1 && discussion.firstPost()
+              {Number(settings.previewText) === 1 && discussion.firstPost()
                 ? <div className="previewPost">{truncate(discussion.firstPost().contentPlain(), 150)}</div>
                 : ''}
 
-              {app.screen() === 'phone' && Number(settings.ShowReplies) === 1
+              {app.screen() === 'phone' && Number(settings.showReplies) === 1
                 ? <div className="cardSpacer">
                   <Link
                     className="Replies"
@@ -131,7 +131,7 @@ export default class listItem extends Component {
                     </div>
                   </Link>
                 </div>
-                : Number(settings.ShowReplies) === 1 ?
+                : Number(settings.showReplies) === 1 ?
                   <div className="imageLabel discussionReplyCount">
                     {icon('fas fa-comment', {className: 'labelIcon'})}
                     {discussion.replyCount()}

@@ -1,16 +1,14 @@
 # Changelog
 
-## [1.0.0] - 2024-11-05
+## [1.0.0] - 2024-11-12
+### Added
+- NEW FEATURE : Setting a default image per tag
+- NEW FEATURE : Setting custom number of primary card and card width per tag
+- New migrations (tag settings)
+
 ### Fixed
 - UploadImageButton now showing the uploaded image.
 - gap between image preview and remove button in settings page due to UploadImageButton's empty <p><img></p>
-
-
-### Added
-- NEW FEATURE : Setting a default image per tag
-- New migrations
-TODO: handle the default tag setting on load of the tag edit modal (if null, get the general settings from app)
-TODO: add the fields and button in the WdcTagSettingsModal & handle the upload with new class
 
 ### Changed
 - Migration for the new tag default image (column name)

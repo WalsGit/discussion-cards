@@ -43,10 +43,10 @@ export default class cardItem extends Component {
 				}
 			}
 		}
-		const isRead = Number(settings.MarkReadCards) === 1 && !discussion.isRead() && app.session.user ? "Unread" : "";
+		const isRead = Number(settings.markReadCards) === 1 && !discussion.isRead() && app.session.user ? "Unread" : "";
 		const attrs = {};
 		attrs.className =
-			"wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : "");
+			"wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : "");
 		const image = getPostImage(discussion.firstPost(), settings.defaultImage);
 		const media = image ? (
 			<img
@@ -89,12 +89,12 @@ export default class cardItem extends Component {
 					href={app.route.discussion(discussion, 0)}
 					className="cardLink"
 				>
-					{Number(settings.ShowBadges) === 1
+					{Number(settings.showBadges) === 1
 						? craftBadges(discussion.badges().toArray())
 						: ""}
 
 					<div {...attrs}>
-						{Number(settings.ShowViews) === 1 &&
+						{Number(settings.showViews) === 1 &&
 						!isNaN(discussion.views()) ? (
 							<div className="imageLabel discussionViews">
 								{icon("fas fa-eye", { className: "labelIcon" })}
@@ -105,7 +105,7 @@ export default class cardItem extends Component {
 						)}
 						{media}
 
-						{Number(settings.ShowAuthor) === 1 ? (
+						{Number(settings.showAuthor) === 1 ? (
 							<div className="cardFoot">
 								<div className="Author">
 									{username(discussion.user())}
@@ -125,7 +125,7 @@ export default class cardItem extends Component {
 					<div className="cardTitle">
 						<h2>{discussion.title()}</h2>
 					</div>
-					{Number(settings.PreviewText) === 1 && discussion.firstPost() ? (
+					{Number(settings.previewText) === 1 && discussion.firstPost() ? (
 						<div className="previewPost">
 							{truncate(
 								discussion.firstPost().contentPlain(),
@@ -136,7 +136,7 @@ export default class cardItem extends Component {
 						""
 					)}
 
-					{Number(settings.ShowReplies) === 1 ? (
+					{Number(settings.showReplies) === 1 ? (
 						<div className="cardSpacer">
 							<Link
 								className="Replies"
