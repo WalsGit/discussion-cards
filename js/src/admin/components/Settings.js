@@ -39,7 +39,7 @@ export default class Settings extends ExtensionPage {
 								setting: "walsgit_discussion_cards_primaryCards",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_help"),
-								min: 1,
+								min: 0,
 								step: 1,
 								placeholder: 4,
 							})}
@@ -48,7 +48,7 @@ export default class Settings extends ExtensionPage {
 								setting: "walsgit_discussion_cards_desktopCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_help"),
-								min: 1,
+								min: 10,
 								max: 100,
 								step: 1,
 								placeholder: 49,
@@ -58,7 +58,7 @@ export default class Settings extends ExtensionPage {
 								setting: "walsgit_discussion_cards_tabletCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_help"),
-								min: 1,
+								min: 10,
 								max: 100,
 								step: 1,
 								placeholder: 49,
@@ -79,7 +79,6 @@ export default class Settings extends ExtensionPage {
 									: <img className="DC-UserUploadedImage" src={app.forum.attribute("baseUrl") + "/assets/" + app.forum.attribute("walsgitDiscussionCardsDefaultImage")}/>
 								}
 								{m(UploadImageButton, {name: "walsgit_discussion_cards_default_image", class: "DC-UploadImageBtn"})}
-								{/* TODO: fix the UploadImageButton adding an empty <img> tag & test different sized images (and file types) */}
 							</div>
 							{this.buildSettingComponent({
 								type: "switch",

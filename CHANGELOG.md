@@ -5,6 +5,12 @@
 - NEW FEATURE : Setting a default image per tag
 - NEW FEATURE : Setting custom number of primary card and card width per tag
 - New migrations (tag settings)
+- Client and server-side validation for the tags settings
+TODO: figure out some validation for the extention settings page
+TODO: fix changes in extention settings don't update in tags setting without page refresh
+TODO: fix read class isn't removed after deactivation from settings
+TODO: locale cleanup and FR translation
+TODO: code cleanup
 
 ### Fixed
 - UploadImageButton now showing the uploaded image.
@@ -12,6 +18,7 @@
 
 ### Changed
 - Migration for the new tag default image (column name)
+- Switched read/unread discussions' filter (now read are grayscaled and unread in full colors)
 
 ## [0.4.1] - 2024-10-21
 ### Fixed
