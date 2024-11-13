@@ -6,8 +6,6 @@
 - NEW FEATURE : Setting custom number of primary card and card width per tag
 - New migrations (tag settings)
 - Client and server-side validation for the tags settings
-TODO: figure out some validation for the extention settings page
-TODO: fix changes in extention settings don't update in tags setting without page refresh
 TODO: locale cleanup and FR translation
 TODO: code cleanup
 TODO: fix the app.data.settings... double allowedTags keys

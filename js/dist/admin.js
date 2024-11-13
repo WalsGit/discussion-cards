@@ -144,12 +144,9 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
     })), this.submitButton())));
   };
   _proto.onsubmit = function onsubmit() {
-    // Récupérer les valeurs des paramètres
     var primaryCards = Number(this.setting('walsgit_discussion_cards_primaryCards')());
     var desktopCardWidth = Number(this.setting('walsgit_discussion_cards_desktopCardWidth')());
     var tabletCardWidth = Number(this.setting('walsgit_discussion_cards_tabletCardWidth')());
-
-    // Vérification des valeurs numériques
     if (primaryCards < 0 || isNaN(primaryCards)) {
       flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().alerts.show({
         type: 'error'
@@ -172,9 +169,21 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
   };
   _proto.saveSettings = function saveSettings(e) {
     if (!this.onsubmit()) {
-      return; // Arrêter si la validation échoue
+      return;
     }
-    _ExtensionPage.prototype.saveSettings.call(this, e); // Appeler la méthode d'origine si la validation passe
+    var settings = this.dirty();
+    _ExtensionPage.prototype.saveSettings.call(this, e).then(function () {
+      var newSettings = {};
+      for (var key in settings) {
+        var endOfKey = key.replace('walsgit_discussion_cards_', '');
+        endOfKey = endOfKey.replace(/^./, endOfKey.charAt(0).toUpperCase());
+        var newKey = 'walsgitDiscussionCards' + endOfKey;
+        newSettings[newKey] = settings[key];
+      }
+      flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().forum.pushAttributes(newSettings);
+    })["catch"](function (error) {
+      console.error(error);
+    });
   };
   return Settings;
 }((flarum_admin_components_ExtensionPage__WEBPACK_IMPORTED_MODULE_2___default()));

@@ -135,12 +135,10 @@ export default class Settings extends ExtensionPage {
 	}
 
 	onsubmit() {
-        // Récupérer les valeurs des paramètres
 		const primaryCards = Number(this.setting('walsgit_discussion_cards_primaryCards')());
 		const desktopCardWidth = Number(this.setting('walsgit_discussion_cards_desktopCardWidth')());
 		const tabletCardWidth = Number(this.setting('walsgit_discussion_cards_tabletCardWidth')());
 
-        // Vérification des valeurs numériques
         if (primaryCards < 0 || isNaN(primaryCards)) {
             app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
             return false;
@@ -159,9 +157,23 @@ export default class Settings extends ExtensionPage {
 
 	saveSettings(e) {
         if (!this.onsubmit()) {
-            return; // Arrêter si la validation échoue
+            return;
         }
+		const settings = this.dirty();
 
-        super.saveSettings(e); // Appeler la méthode d'origine si la validation passe
+        super.saveSettings(e)
+		.then(() => {
+			const newSettings = {};
+			for (const key in settings) {
+				let endOfKey = key.replace('walsgit_discussion_cards_', '');
+				endOfKey = endOfKey.replace(/^./, endOfKey.charAt(0).toUpperCase());
+				const newKey = 'walsgitDiscussionCards' + endOfKey;
+				newSettings[newKey] = settings[key];
+			}
+			app.forum.pushAttributes(newSettings);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
     }
 }
