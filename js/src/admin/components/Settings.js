@@ -36,6 +36,7 @@ export default class Settings extends ExtensionPage {
 						<div className="Section">
 							{this.buildSettingComponent({
 								type: "number",
+								className: 'DC-Number',
 								setting: "walsgit_discussion_cards_primaryCards",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_help"),
@@ -45,6 +46,7 @@ export default class Settings extends ExtensionPage {
 							})}
 							{this.buildSettingComponent({
 								type: "number",
+								className: 'DC-Number',
 								setting: "walsgit_discussion_cards_desktopCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_help"),
@@ -55,6 +57,7 @@ export default class Settings extends ExtensionPage {
 							})}
 							{this.buildSettingComponent({
 								type: "number",
+								className: 'DC-Number',
 								setting: "walsgit_discussion_cards_tabletCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_help"),

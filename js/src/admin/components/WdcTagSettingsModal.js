@@ -62,9 +62,9 @@ export default class WdcTagSettingsModal extends Modal {
 						<label htmlFor="primaryCards">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.primaryCards_label")}</label>
 						<div className="helpText">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.primaryCards_help", {default: defaultSettings.primaryCards})}</div>
 						<input
-							type="text"
+							type="number"
 							name="primaryCards"
-							className="FormControl"
+							className="FormControl DC-Number"
 							bidi={this.tagSettings.primaryCards}
 						/>
 					</div>
@@ -72,9 +72,9 @@ export default class WdcTagSettingsModal extends Modal {
 						<label htmlFor="desktopCardWidth">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_label")}</label>
 						<div className="helpText">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_help", {default: defaultSettings.desktopCardWidth})}</div>
 						<input
-							type="text"
+							type="number"
 							name="desktopCardWidth"
-							className="FormControl"
+							className="FormControl DC-Number"
 							bidi={this.tagSettings.desktopCardWidth}
 						/>
 					</div>
@@ -82,9 +82,9 @@ export default class WdcTagSettingsModal extends Modal {
 						<label htmlFor="tabletCardWidth">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_label")}</label>
 						<div className="helpText">{app.translator.trans("walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_help", {default: defaultSettings.tabletCardWidth})}</div>
 						<input
-							type="text"
+							type="number"
 							name="tabletCardWidth"
-							className="FormControl"
+							className="FormControl DC-Number"
 							bidi={this.tagSettings.tabletCardWidth}
 						/>
 					</div>

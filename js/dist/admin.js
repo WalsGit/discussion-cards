@@ -60,6 +60,7 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       className: "Section"
     }, this.buildSettingComponent({
       type: "number",
+      className: 'DC-Number',
       setting: "walsgit_discussion_cards_primaryCards",
       label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_label"),
       help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_help"),
@@ -68,6 +69,7 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       placeholder: 4
     }), this.buildSettingComponent({
       type: "number",
+      className: 'DC-Number',
       setting: "walsgit_discussion_cards_desktopCardWidth",
       label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_label"),
       help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_help"),
@@ -77,6 +79,7 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       placeholder: 49
     }), this.buildSettingComponent({
       type: "number",
+      className: 'DC-Number',
       setting: "walsgit_discussion_cards_tabletCardWidth",
       label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_label"),
       help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_help"),
@@ -383,9 +386,9 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
     }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.primaryCards_help", {
       "default": defaultSettings.primaryCards
     })), m("input", {
-      type: "text",
+      type: "number",
       name: "primaryCards",
-      className: "FormControl",
+      className: "FormControl DC-Number",
       bidi: this.tagSettings.primaryCards
     })), m("div", {
       className: "Form-group"
@@ -396,9 +399,9 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
     }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_help", {
       "default": defaultSettings.desktopCardWidth
     })), m("input", {
-      type: "text",
+      type: "number",
       name: "desktopCardWidth",
-      className: "FormControl",
+      className: "FormControl DC-Number",
       bidi: this.tagSettings.desktopCardWidth
     })), m("div", {
       className: "Form-group"
@@ -409,9 +412,9 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
     }, app.translator.trans("walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_help", {
       "default": defaultSettings.tabletCardWidth
     })), m("input", {
-      type: "text",
+      type: "number",
       name: "tabletCardWidth",
-      className: "FormControl",
+      className: "FormControl DC-Number",
       bidi: this.tagSettings.tabletCardWidth
     })), m((flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_1___default()), {
       type: "submit",
