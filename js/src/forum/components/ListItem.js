@@ -45,7 +45,7 @@ export default class listItem extends Component {
       }
     }
 
-    const isRead = Number(settings.markReadCards) === 1 && (!discussion.isRead() && app.session.user) ? '' : 'read';
+    const isRead = Number(settings.markReadCards) === 1 && (discussion.isRead() && app.session.user) ? 'read' : '';
     const attrs = {};
     attrs.className = "wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : '');
     const image = getPostImage(discussion.firstPost(), settings.defaultImage);

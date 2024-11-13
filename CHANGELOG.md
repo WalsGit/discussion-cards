@@ -8,7 +8,6 @@
 - Client and server-side validation for the tags settings
 TODO: figure out some validation for the extention settings page
 TODO: fix changes in extention settings don't update in tags setting without page refresh
-TODO: fix read class isn't removed after deactivation from settings
 TODO: locale cleanup and FR translation
 TODO: code cleanup
 

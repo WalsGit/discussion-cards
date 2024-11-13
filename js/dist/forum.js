@@ -118,7 +118,7 @@ var cardItem = /*#__PURE__*/function (_Component) {
         }
       }
     }
-    var isRead = Number(settings.markReadCards) === 1 && !discussion.isRead() && app.session.user ? "" : "read";
+    var isRead = Number(settings.markReadCards) === 1 && discussion.isRead() && app.session.user ? "read" : "";
     var attrs = {};
     attrs.className = "wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : "");
     var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost(), settings.defaultImage);
@@ -330,7 +330,7 @@ var listItem = /*#__PURE__*/function (_Component) {
         }
       }
     }
-    var isRead = Number(settings.markReadCards) === 1 && !discussion.isRead() && app.session.user ? '' : 'read';
+    var isRead = Number(settings.markReadCards) === 1 && discussion.isRead() && app.session.user ? 'read' : '';
     var attrs = {};
     attrs.className = "wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : '');
     var image = (0,_helpers_getPostImage__WEBPACK_IMPORTED_MODULE_3__["default"])(discussion.firstPost(), settings.defaultImage);
