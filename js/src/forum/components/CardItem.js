@@ -44,7 +44,6 @@ export default class cardItem extends Component {
 			}
 		}
 		const isRead = Number(settings.markReadCards) === 1 && !discussion.isRead() && app.session.user ? "" : "read";
-		console.log('is read:', isRead);
 		const attrs = {};
 		attrs.className =
 			"wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : "");
