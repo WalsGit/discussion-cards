@@ -27,7 +27,6 @@ app.initializers.add("walsgit/discussion-cards", () => {
 				? app.translator.trans("walsgit_discussion_cards.admin.tags.deactivation_button")
 				: app.translator.trans("walsgit_discussion_cards.admin.tags.activation_button");
 			
-			// Fonction pour basculer l'état d'activation
 			const toggleActivation = () => {
 				isActivatedForTag = !isActivatedForTag;
 				if (isActivatedForTag) {
@@ -36,18 +35,15 @@ app.initializers.add("walsgit/discussion-cards", () => {
 					allowedTags = allowedTags.filter(id => id !== this.tag.id());
 				}
 
-				// Mettre à jour l'attribut sur le forum (à adapter selon ton système de stockage)
 				app.request({
 					method: "POST",
 					url: app.forum.attribute("apiUrl") + "/walsgit_discussion_cards_tag_update_allowedTags",
 					body: { allowedTags },
 				}).then(() => {
-					// Update the forum attribute with new allowedTags
 					app.forum.data.attributes.walsgitDiscussionCardsAllowedTags = JSON.stringify(allowedTags);
+					app.data.settings.walsgit_discussion_cards_allowedTags = JSON.stringify(allowedTags);
 
-					// Toggle activation state
 					isActivatedForTag = !isActivatedForTag;
-					// Actualiser les classes et le texte après la mise à jour
 					activationBtnClasses = isActivatedForTag
 						? "DC-ActivationBtn Button activated"
 						: "DC-ActivationBtn Button Button--primary";
@@ -55,7 +51,7 @@ app.initializers.add("walsgit/discussion-cards", () => {
 					activationBtnText = isActivatedForTag
 						? app.translator.trans("walsgit_discussion_cards.admin.tags.deactivation_button")
 						: app.translator.trans("walsgit_discussion_cards.admin.tags.activation_button");
-					m.redraw(); // Mettre à jour l'affichage
+					m.redraw();
 				});
 			};
 			

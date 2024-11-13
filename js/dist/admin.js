@@ -555,8 +555,6 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add("walsgit/disc
       var activationBtnClasses = isActivatedForTag ? "DC-ActivationBtn Button activated" : "DC-ActivationBtn Button Button--primary";
       var DcTagSettingsClasses = isActivatedForTag ? "DC-TagSettings" : "DC-TagSettings DC-Hidden";
       var activationBtnText = isActivatedForTag ? flarum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans("walsgit_discussion_cards.admin.tags.deactivation_button") : flarum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans("walsgit_discussion_cards.admin.tags.activation_button");
-
-      // Fonction pour basculer l'état d'activation
       var toggleActivation = function toggleActivation() {
         isActivatedForTag = !isActivatedForTag;
         if (isActivatedForTag) {
@@ -566,8 +564,6 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add("walsgit/disc
             return id !== _this.tag.id();
           });
         }
-
-        // Mettre à jour l'attribut sur le forum (à adapter selon ton système de stockage)
         flarum_app__WEBPACK_IMPORTED_MODULE_0___default().request({
           method: "POST",
           url: flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("apiUrl") + "/walsgit_discussion_cards_tag_update_allowedTags",
@@ -575,16 +571,13 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add("walsgit/disc
             allowedTags: allowedTags
           }
         }).then(function () {
-          // Update the forum attribute with new allowedTags
           (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().forum).data.attributes.walsgitDiscussionCardsAllowedTags = JSON.stringify(allowedTags);
-
-          // Toggle activation state
+          (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().data).settings.walsgit_discussion_cards_allowedTags = JSON.stringify(allowedTags);
           isActivatedForTag = !isActivatedForTag;
-          // Actualiser les classes et le texte après la mise à jour
           activationBtnClasses = isActivatedForTag ? "DC-ActivationBtn Button activated" : "DC-ActivationBtn Button Button--primary";
           DcTagSettingsClasses = isActivatedForTag ? "DC-TagSettings" : "DC-TagSettings DC-Hidden";
           activationBtnText = isActivatedForTag ? flarum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans("walsgit_discussion_cards.admin.tags.deactivation_button") : flarum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans("walsgit_discussion_cards.admin.tags.activation_button");
-          m.redraw(); // Mettre à jour l'affichage
+          m.redraw();
         });
       };
       items.add("tag-discussion-cards-options", m("fieldset", {
