@@ -140,6 +140,39 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_help")
     })), this.submitButton())));
   };
+  _proto.onsubmit = function onsubmit() {
+    // Récupérer les valeurs des paramètres
+    var primaryCards = Number(this.setting('walsgit_discussion_cards_primaryCards')());
+    var desktopCardWidth = Number(this.setting('walsgit_discussion_cards_desktopCardWidth')());
+    var tabletCardWidth = Number(this.setting('walsgit_discussion_cards_tabletCardWidth')());
+
+    // Vérification des valeurs numériques
+    if (primaryCards < 0 || isNaN(primaryCards)) {
+      flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().alerts.show({
+        type: 'error'
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
+      return false;
+    }
+    if (desktopCardWidth < 10 || desktopCardWidth > 100 || isNaN(desktopCardWidth)) {
+      flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().alerts.show({
+        type: 'error'
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_error'));
+      return false;
+    }
+    if (tabletCardWidth < 10 || tabletCardWidth > 100 || isNaN(tabletCardWidth)) {
+      flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().alerts.show({
+        type: 'error'
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_error'));
+      return false;
+    }
+    return true;
+  };
+  _proto.saveSettings = function saveSettings(e) {
+    if (!this.onsubmit()) {
+      return; // Arrêter si la validation échoue
+    }
+    _ExtensionPage.prototype.saveSettings.call(this, e); // Appeler la méthode d'origine si la validation passe
+  };
   return Settings;
 }((flarum_admin_components_ExtensionPage__WEBPACK_IMPORTED_MODULE_2___default()));
 

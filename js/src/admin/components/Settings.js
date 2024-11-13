@@ -130,4 +130,35 @@ export default class Settings extends ExtensionPage {
 			</div>
 		);
 	}
+
+	onsubmit() {
+        // Récupérer les valeurs des paramètres
+		const primaryCards = Number(this.setting('walsgit_discussion_cards_primaryCards')());
+		const desktopCardWidth = Number(this.setting('walsgit_discussion_cards_desktopCardWidth')());
+		const tabletCardWidth = Number(this.setting('walsgit_discussion_cards_tabletCardWidth')());
+
+        // Vérification des valeurs numériques
+        if (primaryCards < 0 || isNaN(primaryCards)) {
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
+            return false;
+        }
+        if (desktopCardWidth < 10 || desktopCardWidth > 100 || isNaN(desktopCardWidth)) {
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_error'));
+            return false;
+        }
+        if (tabletCardWidth < 10 || tabletCardWidth > 100 || isNaN(tabletCardWidth)) {
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_error'));
+            return false;
+        }
+
+        return true;
+    }
+
+	saveSettings(e) {
+        if (!this.onsubmit()) {
+            return; // Arrêter si la validation échoue
+        }
+
+        super.saveSettings(e); // Appeler la méthode d'origine si la validation passe
+    }
 }
