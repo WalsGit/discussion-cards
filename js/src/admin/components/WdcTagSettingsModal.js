@@ -132,21 +132,18 @@ export default class WdcTagSettingsModal extends Modal {
 	onsubmit(e) {
 		e.preventDefault();
 
-		// Validate primaryCards
 		const primaryCards = parseInt(this.tagSettings.primaryCards());
 		if (isNaN(primaryCards) || primaryCards < 0) {
 			app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
 			return;
 		}
 	
-		// Validate desktopCardWidth
 		const desktopWidth = parseInt(this.tagSettings.desktopCardWidth());
 		if (isNaN(desktopWidth) || desktopWidth < 10 || desktopWidth > 100) {
 			app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_error'));
 			return;
 		}
 	
-		// Validate tabletCardWidth
 		const tabletWidth = parseInt(this.tagSettings.tabletCardWidth());
 		if (isNaN(tabletWidth) || tabletWidth < 10 || tabletWidth > 100) {
 			app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_error'));
@@ -154,7 +151,7 @@ export default class WdcTagSettingsModal extends Modal {
 		}
 
 		const tag = this.attrs.model;
-		// Update the values with validated integers
+
 		this.tagSettings.primaryCards(primaryCards);
 		this.tagSettings.desktopCardWidth(desktopWidth);
 		this.tagSettings.tabletCardWidth(tabletWidth);

@@ -2,10 +2,6 @@
 
 namespace Walsgit\Discussion\Cards\Api\Controllers;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1); // TODO: donc forget to remove
-
-
 use Flarum\Api\Controller\ShowForumController;
 use Flarum\Foundation\Paths;
 use Flarum\Tags\Tag;

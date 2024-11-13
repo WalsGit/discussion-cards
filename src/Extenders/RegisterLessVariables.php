@@ -8,7 +8,6 @@ use Flarum\Frontend\Assets;
 use Flarum\Frontend\Compiler\Source\SourceCollector;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Support\Arr;
 use Flarum\Tags\Tag;
 
 

@@ -7,8 +7,6 @@
 - New migrations (tag settings)
 - Client and server-side validation for the tags settings
 TODO: locale cleanup and FR translation
-TODO: code cleanup
-TODO: fix the app.data.settings... double allowedTags keys
 
 ### Fixed
 - UploadImageButton now showing the uploaded image.

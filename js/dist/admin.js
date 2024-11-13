@@ -457,8 +457,6 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
   };
   _proto.onsubmit = function onsubmit(e) {
     e.preventDefault();
-
-    // Validate primaryCards
     var primaryCards = parseInt(this.tagSettings.primaryCards());
     if (isNaN(primaryCards) || primaryCards < 0) {
       app.alerts.show({
@@ -466,8 +464,6 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
       }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
       return;
     }
-
-    // Validate desktopCardWidth
     var desktopWidth = parseInt(this.tagSettings.desktopCardWidth());
     if (isNaN(desktopWidth) || desktopWidth < 10 || desktopWidth > 100) {
       app.alerts.show({
@@ -475,8 +471,6 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
       }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_error'));
       return;
     }
-
-    // Validate tabletCardWidth
     var tabletWidth = parseInt(this.tagSettings.tabletCardWidth());
     if (isNaN(tabletWidth) || tabletWidth < 10 || tabletWidth > 100) {
       app.alerts.show({
@@ -485,7 +479,6 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
       return;
     }
     var tag = this.attrs.model;
-    // Update the values with validated integers
     this.tagSettings.primaryCards(primaryCards);
     this.tagSettings.desktopCardWidth(desktopWidth);
     this.tagSettings.tabletCardWidth(tabletWidth);

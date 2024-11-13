@@ -5,7 +5,6 @@ namespace Walsgit\Discussion\Cards\Api\Controllers;
 use Flarum\Api\Controller\AbstractDeleteController;
 use Flarum\Foundation\Paths;
 use Flarum\Tags\Tag;
-use Illuminate\Support\Arr;
 use Laminas\Diactoros\Response\EmptyResponse;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
@@ -25,7 +24,6 @@ class DeleteTagImageController extends AbstractDeleteController
         $request->getAttribute('actor')->assertAdmin();
 
         $tagId = $request->getParsedBody()['tagId'] ?? null;
-        // $tagId = Arr::get($request->getParsedBody(), 'tagId');
         $tag = Tag::findOrFail($tagId);
 
         $path = $tag->walsgit_discussion_cards_tag_default_image;
