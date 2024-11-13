@@ -9,7 +9,6 @@ export default class WdcTagSettingsModal extends Modal {
 		super.oninit(vnode);
 
 		this.tagSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings || null) || {};
-		console.log(this.tagSettings);
 
 		defaultSettings = {
 			primaryCards: app.forum.data.attributes.walsgitDiscussionCardsPrimaryCards,
@@ -173,9 +172,7 @@ export default class WdcTagSettingsModal extends Modal {
 				"/tagSettings",
 			body: { data: { tagSettings } },
 		}).then(function () {
-			console.log('before : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
 			tag.data.attributes.walsgitDiscussionCardsTagSettings = tagSettings;
-			console.log('after : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
 			app.modal.close();
 		});
 	}

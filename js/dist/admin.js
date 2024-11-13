@@ -349,7 +349,6 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
   _proto.oninit = function oninit(vnode) {
     _Modal.prototype.oninit.call(this, vnode);
     this.tagSettings = JSON.parse(this.attrs.model.data.attributes.walsgitDiscussionCardsTagSettings || null) || {};
-    console.log(this.tagSettings);
     defaultSettings = {
       primaryCards: app.forum.data.attributes.walsgitDiscussionCardsPrimaryCards,
       desktopCardWidth: app.forum.data.attributes.walsgitDiscussionCardsDesktopCardWidth,
@@ -501,9 +500,7 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
         }
       }
     }).then(function () {
-      console.log('before : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
       tag.data.attributes.walsgitDiscussionCardsTagSettings = tagSettings;
-      console.log('after : ', tag.data.attributes.walsgitDiscussionCardsTagSettings);
       app.modal.close();
     });
   };
