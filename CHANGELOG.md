@@ -6,7 +6,7 @@
 - NEW FEATURE : Setting custom number of primary card and card width per tag
 - New migrations (tag settings)
 - Client and server-side validation for the tags settings
-TODO: locale cleanup and FR translation
+- French translation
 
 ### Fixed
 - UploadImageButton now showing the uploaded image.

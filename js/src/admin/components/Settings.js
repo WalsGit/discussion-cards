@@ -140,15 +140,15 @@ export default class Settings extends ExtensionPage {
 		const tabletCardWidth = Number(this.setting('walsgit_discussion_cards_tabletCardWidth')());
 
         if (primaryCards < 0 || isNaN(primaryCards)) {
-            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.errors.primaryCards'));
             return false;
         }
         if (desktopCardWidth < 10 || desktopCardWidth > 100 || isNaN(desktopCardWidth)) {
-            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_error'));
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.errors.desktopCardWidth'));
             return false;
         }
         if (tabletCardWidth < 10 || tabletCardWidth > 100 || isNaN(tabletCardWidth)) {
-            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_error'));
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.errors.tabletCardWidth'));
             return false;
         }
 

@@ -150,19 +150,19 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
     if (primaryCards < 0 || isNaN(primaryCards)) {
       flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().alerts.show({
         type: 'error'
-      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.errors.primaryCards'));
       return false;
     }
     if (desktopCardWidth < 10 || desktopCardWidth > 100 || isNaN(desktopCardWidth)) {
       flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().alerts.show({
         type: 'error'
-      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_error'));
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.errors.desktopCardWidth'));
       return false;
     }
     if (tabletCardWidth < 10 || tabletCardWidth > 100 || isNaN(tabletCardWidth)) {
       flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().alerts.show({
         type: 'error'
-      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_error'));
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans('walsgit_discussion_cards.admin.errors.tabletCardWidth'));
       return false;
     }
     return true;
@@ -461,21 +461,21 @@ var WdcTagSettingsModal = /*#__PURE__*/function (_Modal) {
     if (isNaN(primaryCards) || primaryCards < 0) {
       app.alerts.show({
         type: 'error'
-      }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.primaryCards_error'));
+      }, app.translator.trans('walsgit_discussion_cards.admin.errors.primaryCards'));
       return;
     }
     var desktopWidth = parseInt(this.tagSettings.desktopCardWidth());
     if (isNaN(desktopWidth) || desktopWidth < 10 || desktopWidth > 100) {
       app.alerts.show({
         type: 'error'
-      }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.desktopCardWidth_error'));
+      }, app.translator.trans('walsgit_discussion_cards.admin.errors.desktopCardWidth'));
       return;
     }
     var tabletWidth = parseInt(this.tagSettings.tabletCardWidth());
     if (isNaN(tabletWidth) || tabletWidth < 10 || tabletWidth > 100) {
       app.alerts.show({
         type: 'error'
-      }, app.translator.trans('walsgit_discussion_cards.admin.tag_modal.tabletCardWidth_error'));
+      }, app.translator.trans('walsgit_discussion_cards.admin.errors.tabletCardWidth'));
       return;
     }
     var tag = this.attrs.model;
