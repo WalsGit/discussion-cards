@@ -21,7 +21,7 @@
     },
     "extra": {
         "flarum-extension": {
-            "title": "Discussion Сards",
+            "title": "Flarum Discussion Сards",
             "category": "feature",
             "icon": {
                 "name": "fas fa-border-all",
