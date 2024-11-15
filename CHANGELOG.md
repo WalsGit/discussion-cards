@@ -1,7 +1,4 @@
 # Changelog
-## [1.0.3] - 2024-11-15
-### Changed
-- Removed old funding.yml
 
 ## [1.0.2] - 2024-11-15
 ### Changed
