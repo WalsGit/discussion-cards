@@ -3,13 +3,11 @@
   "name": "@walsgit/flarum-discussion-cards",
   "dependencies": {
     "flarum-webpack-config": "^2.0.2",
-    "webpack": "^5.95.0"
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production"
-  },
-  "devDependencies": {
-    "webpack-cli": "^5.1.4"
   }
 }
