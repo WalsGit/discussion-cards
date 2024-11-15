@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.1] - 2024-11-15
+### Fixed
+- French translation bug (removed extra quote)
+
 ## [1.0.0] - 2024-11-15
 ### Added
 - NEW FEATURE : Setting a default image per tag
