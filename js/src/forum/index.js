@@ -45,7 +45,7 @@ app.initializers.add('walsgit/discussion/cards', () => {
       return <div className="DiscussionList">{m(Placeholder, {text})}</div>;
     }
     const isTagPage = m.route.get().split('?')[0].startsWith('/t/');
-    let tag = '';
+    let tag = null;
     if (isTagPage) {
       tag = app.store.all('tags').find(t => t.slug() === params.tags).data.id;
       const tagSettings = JSON.parse(app.store.all('tags').find(t => t.slug() === params.tags).data.attributes.walsgitDiscussionCardsTagSettings);
