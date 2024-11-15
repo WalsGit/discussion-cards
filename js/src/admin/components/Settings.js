@@ -36,29 +36,32 @@ export default class Settings extends ExtensionPage {
 						<div className="Section">
 							{this.buildSettingComponent({
 								type: "number",
+								className: 'DC-Number',
 								setting: "walsgit_discussion_cards_primaryCards",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.primaryCards_help"),
-								min: 1,
+								min: 0,
 								step: 1,
 								placeholder: 4,
 							})}
 							{this.buildSettingComponent({
 								type: "number",
+								className: 'DC-Number',
 								setting: "walsgit_discussion_cards_desktopCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.desktopCardWidth_help"),
-								min: 1,
+								min: 10,
 								max: 100,
 								step: 1,
 								placeholder: 49,
 							})}
 							{this.buildSettingComponent({
 								type: "number",
+								className: 'DC-Number',
 								setting: "walsgit_discussion_cards_tabletCardWidth",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.tabletCardWidth_help"),
-								min: 1,
+								min: 10,
 								max: 100,
 								step: 1,
 								placeholder: 49,
@@ -74,9 +77,11 @@ export default class Settings extends ExtensionPage {
 								<p className="helpText">
 									{app.translator.trans("walsgit_discussion_cards.admin.settings.general.defaultImage_info")}
 								</p>
-								{app.data.settings.walsgit_discussion_cards_default_image_path === null ? <div className="imgStub"></div> : <img className="DC-UserUploadedImage" src={app.forum.attribute("baseUrl") + "/assets/" + app.data.settings.walsgit_discussion_cards_default_image_path}/>}
+								{app.forum.attribute("walsgitDiscussionCardsDefaultImage") === null 
+									? <div className="imgStub"></div> 
+									: <img className="DC-UserUploadedImage" src={app.forum.attribute("baseUrl") + "/assets/" + app.forum.attribute("walsgitDiscussionCardsDefaultImage")}/>
+								}
 								{m(UploadImageButton, {name: "walsgit_discussion_cards_default_image", class: "DC-UploadImageBtn"})}
-								{/* TODO: fix the UploadImageButton adding an empty <img> tag & test different sized images (and file types) */}
 							</div>
 							{this.buildSettingComponent({
 								type: "switch",
@@ -128,4 +133,47 @@ export default class Settings extends ExtensionPage {
 			</div>
 		);
 	}
+
+	onsubmit() {
+		const primaryCards = Number(this.setting('walsgit_discussion_cards_primaryCards')());
+		const desktopCardWidth = Number(this.setting('walsgit_discussion_cards_desktopCardWidth')());
+		const tabletCardWidth = Number(this.setting('walsgit_discussion_cards_tabletCardWidth')());
+
+        if (primaryCards < 0 || isNaN(primaryCards)) {
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.errors.primaryCards'));
+            return false;
+        }
+        if (desktopCardWidth < 10 || desktopCardWidth > 100 || isNaN(desktopCardWidth)) {
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.errors.desktopCardWidth'));
+            return false;
+        }
+        if (tabletCardWidth < 10 || tabletCardWidth > 100 || isNaN(tabletCardWidth)) {
+            app.alerts.show({ type: 'error' }, app.translator.trans('walsgit_discussion_cards.admin.errors.tabletCardWidth'));
+            return false;
+        }
+
+        return true;
+    }
+
+	saveSettings(e) {
+        if (!this.onsubmit()) {
+            return;
+        }
+		const settings = this.dirty();
+
+        super.saveSettings(e)
+		.then(() => {
+			const newSettings = {};
+			for (const key in settings) {
+				let endOfKey = key.replace('walsgit_discussion_cards_', '');
+				endOfKey = endOfKey.replace(/^./, endOfKey.charAt(0).toUpperCase());
+				const newKey = 'walsgitDiscussionCards' + endOfKey;
+				newSettings[newKey] = settings[key];
+			}
+			app.forum.pushAttributes(newSettings);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+    }
 }

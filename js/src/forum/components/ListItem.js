@@ -10,6 +10,7 @@ import DiscussionControls from 'flarum/forum/utils/DiscussionControls';
 import Link from 'flarum/common/components/Link';
 import {truncate} from 'flarum/common/utils/string';
 import LastReplies from './LastReplies';
+import compareTags from "../helpers/compareTags";
 
 
 export default class listItem extends Component {
@@ -20,28 +21,66 @@ export default class listItem extends Component {
 
   view() {
     const discussion = this.attrs.discussion;
-    //const settings = JSON.parse(app.forum.attribute('walsgitDiscussionCards'));
     const settings = {};
     for (const key in app.forum.data.attributes) {
-      if (key.startsWith('walsgitDiscussionCards')) {
-        settings[key.replace('walsgitDiscussionCards', '')] = app.forum.data.attributes[key];
+			if (key.startsWith('walsgitDiscussionCards')) {
+				let newKey = key.replace('walsgitDiscussionCards', '');
+				newKey = newKey.replace(/^./, newKey.charAt(0).toLowerCase());
+				settings[newKey] = app.forum.data.attributes[key];
+			}
+		}
+
+    const isTagPage = m.route.get().split('?')[0].startsWith('/t/');
+		if (isTagPage) {
+      const slug = m.route.get().split('/t/')[1]?.split('?')[0];
+      const tagId = app.store.all('tags').find(t => t.slug() === slug).data.id;
+      const tag = app.store.all('tags').find(t => t.id() === tagId);
+      const tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
+      const tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+      tagSettings.defaultImage = tagImage;
+
+      for (const key in tagSettings) {
+        if (settings.hasOwnProperty(key) && tagSettings[key] !== settings[key] && tagSettings[key] !== null) {
+          settings[key] = tagSettings[key];
+        }
       }
     }
-    const isRead = Number(settings.MarkReadCards) === 1 && (!discussion.isRead() && app.session.user) ? 'Unread' : '';
+    /* On the IndexPage (all discussions) checks which default image to show based on tag priority */
+		const isIndexPage = m.route.get().split('?')[0] === '/';
+		if (isIndexPage) {
+			const tags = discussion.tags();
+			for (const key in tags) {
+				const tagId = tags[key].id();
+				const isChild = tags[key].isChild();
+				const parent = tags[key].data.hasOwnProperty('relationships') && tags[key].parent() ? tags[key].parent()['data'].id : null;
+				const position = tags[key].position();
+				const tagCustomImg = tags[key].attribute('walsgitDiscussionCardsTagDefaultImage');
+				const currentTag = { id: tagId, isChild, parent, position, tagCustomImg }
+				let priorityTag = null;
+				if (!settings.allowedTags.includes(tagId) || tagCustomImg === null) continue;
+
+				if (priorityTag === null || compareTags(currentTag, priorityTag) < 0) {
+					priorityTag = { id: tagId, isChild, parent, position, tagCustomImg };
+					settings.defaultImage = tagCustomImg;
+				}
+			}
+		}
+
+    const isRead = Number(settings.markReadCards) === 1 && (discussion.isRead() && app.session.user) ? 'read' : '';
     const attrs = {};
-    attrs.className = "wrapImg" + (Number(settings.ShowAuthor) === 1 ? " After" : '');
-    const image = getPostImage(discussion.firstPost());
+    attrs.className = "wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : '');
+    const image = getPostImage(discussion.firstPost(), settings.defaultImage);
     const media = image
       ? <img src={image}
-             className="previewCardImg"
-             alt={discussion.title()}
-             loading="lazy"/>
+            className="previewCardImg"
+            alt={discussion.title()}
+            loading="lazy"/>
       : <div className="imgStub"/>
 
     return (
       <div key={discussion.id()}
-           data-id={discussion.id()}
-           className={"CardsListItem List " + isRead + (discussion.isHidden() ? " Hidden" : "")}>
+          data-id={discussion.id()}
+          className={"CardsListItem List " + isRead + (discussion.isHidden() ? " Hidden" : "")}>
         {DiscussionControls.controls(discussion, this).toArray().length
           ? m(Dropdown, {
             icon: 'fas fa-ellipsis-v',
@@ -52,7 +91,7 @@ export default class listItem extends Component {
         <Link href={app.route.discussion(discussion, 0)}
               className="cardLink">
 
-          {Number(settings.ShowBadges) === 1
+          {Number(settings.showBadges) === 1
             ? craftBadges(discussion.badges().toArray())
             : ''}
 
@@ -60,7 +99,7 @@ export default class listItem extends Component {
 
             <div className="rowSpan-3 colSpan">
               <div {...attrs}>
-                {Number(settings.ShowViews) === 1 && !isNaN(discussion.views())
+                {Number(settings.showViews) === 1 && !isNaN(discussion.views())
                   ? <div className="imageLabel discussionViews">
                     {icon('fas fa-eye', {className: 'labelIcon'})}
                     {discussion.views()}
@@ -68,7 +107,7 @@ export default class listItem extends Component {
                   : ''}
                 {media}
 
-                {Number(settings.ShowAuthor) === 1
+                {Number(settings.showAuthor) === 1
                   ? <div className="cardFoot">
                     <div className="Author">
                       {username(discussion.user())}
@@ -91,11 +130,11 @@ export default class listItem extends Component {
                 <div className="cardTags">{craftTags(discussion.tags())}</div>
               </div>
 
-              {Number(settings.PreviewText) === 1 && discussion.firstPost()
+              {Number(settings.previewText) === 1 && discussion.firstPost()
                 ? <div className="previewPost">{truncate(discussion.firstPost().contentPlain(), 150)}</div>
                 : ''}
 
-              {app.screen() === 'phone' && Number(settings.ShowReplies) === 1
+              {app.screen() === 'phone' && Number(settings.showReplies) === 1
                 ? <div className="cardSpacer">
                   <Link
                     className="Replies"
@@ -113,7 +152,7 @@ export default class listItem extends Component {
                     </div>
                   </Link>
                 </div>
-                : Number(settings.ShowReplies) === 1 ?
+                : Number(settings.showReplies) === 1 ?
                   <div className="imageLabel discussionReplyCount">
                     {icon('fas fa-comment', {className: 'labelIcon'})}
                     {discussion.replyCount()}
