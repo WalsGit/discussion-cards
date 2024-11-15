@@ -17,7 +17,7 @@ Also it changes how the setting to distinguish between read & unread discussion 
 ![Discussion Cards](https://i.postimg.cc/FsxNPWYk/flarum-ext-discussioncards-1.png)
 
 ### Notes
-- Developed and tested on Flarum 1.8.7.
+- Developed and tested on Flarum 1.8.7 then tested on 1.8.8.
 - Thanks to whomever suggested on Discord to use the tags selection component (sorry, we can no longer access the messages on Discord to mention them properly).
 - New settings page inspired by ``Friends of Flarum``'s [Best Answer](https://github.com/FriendsOfFlarum/best-answer) Extension.
 - Additional tags settings based on ``@askvortsov``'s [Discussion Templates](https://github.com/askvortsov1/flarum-discussion-templates) Extension.
