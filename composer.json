@@ -1,6 +1,6 @@
 {
-    "name": "walsgit/discussion-cards",
-    "description": "Output of discussions in form of cards",
+    "name": "walsgit/flarum-discussion-cards",
+    "description": "Output of discussions lists in form of cards",
     "type": "flarum-extension",
     "keywords": ["flarum", "extension", "discussion", "cards"],
     "license": "MIT",
