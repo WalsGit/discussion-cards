@@ -2,7 +2,7 @@
     "name": "walsgit/discussion-cards",
     "description": "Output of discussions in form of cards",
     "type": "flarum-extension",
-    "keywords": ["discussion"],
+    "keywords": ["flarum", "extension", "discussion", "cards"],
     "license": "MIT",
     "authors": [
         {
@@ -22,7 +22,7 @@
     "extra": {
         "flarum-extension": {
             "title": "Discussion Сards",
-            "category": "discussion",
+            "category": "feature",
             "icon": {
                 "name": "fas fa-border-all",
                 "backgroundColor": "#008e97",

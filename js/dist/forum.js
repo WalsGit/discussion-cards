@@ -65,6 +65,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! flarum/common/utils/string */ "flarum/common/utils/string");
 /* harmony import */ var flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _LastReplies__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./LastReplies */ "./src/forum/components/LastReplies.js");
+/* harmony import */ var _helpers_compareTags__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../helpers/compareTags */ "./src/forum/helpers/compareTags.js");
+
 
 
 
@@ -115,6 +117,37 @@ var cardItem = /*#__PURE__*/function (_Component) {
       for (var _key in tagSettings) {
         if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
           settings[_key] = tagSettings[_key];
+        }
+      }
+    }
+    /* On the IndexPage (all discussions) checks which default image to show based on tag priority */
+    var isIndexPage = m.route.get().split('?')[0] === '/';
+    if (isIndexPage) {
+      var tags = discussion.tags();
+      for (var _key2 in tags) {
+        var _tagId = tags[_key2].id();
+        var isChild = tags[_key2].isChild();
+        var parent = tags[_key2].data.hasOwnProperty('relationships') && tags[_key2].parent() ? tags[_key2].parent()['data'].id : null;
+        var position = tags[_key2].position();
+        var tagCustomImg = tags[_key2].attribute('walsgitDiscussionCardsTagDefaultImage');
+        var currentTag = {
+          id: _tagId,
+          isChild: isChild,
+          parent: parent,
+          position: position,
+          tagCustomImg: tagCustomImg
+        };
+        var priorityTag = null;
+        if (!settings.allowedTags.includes(_tagId) || tagCustomImg === null) continue;
+        if (priorityTag === null || (0,_helpers_compareTags__WEBPACK_IMPORTED_MODULE_13__["default"])(currentTag, priorityTag) < 0) {
+          priorityTag = {
+            id: _tagId,
+            isChild: isChild,
+            parent: parent,
+            position: position,
+            tagCustomImg: tagCustomImg
+          };
+          settings.defaultImage = tagCustomImg;
         }
       }
     }
@@ -273,6 +306,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! flarum/common/utils/string */ "flarum/common/utils/string");
 /* harmony import */ var flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _LastReplies__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./LastReplies */ "./src/forum/components/LastReplies.js");
+/* harmony import */ var _helpers_compareTags__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../helpers/compareTags */ "./src/forum/helpers/compareTags.js");
+
 
 
 
@@ -321,6 +356,37 @@ var listItem = /*#__PURE__*/function (_Component) {
       for (var _key in tagSettings) {
         if (settings.hasOwnProperty(_key) && tagSettings[_key] !== settings[_key] && tagSettings[_key] !== null) {
           settings[_key] = tagSettings[_key];
+        }
+      }
+    }
+    /* On the IndexPage (all discussions) checks which default image to show based on tag priority */
+    var isIndexPage = m.route.get().split('?')[0] === '/';
+    if (isIndexPage) {
+      var tags = discussion.tags();
+      for (var _key2 in tags) {
+        var _tagId = tags[_key2].id();
+        var isChild = tags[_key2].isChild();
+        var parent = tags[_key2].data.hasOwnProperty('relationships') && tags[_key2].parent() ? tags[_key2].parent()['data'].id : null;
+        var position = tags[_key2].position();
+        var tagCustomImg = tags[_key2].attribute('walsgitDiscussionCardsTagDefaultImage');
+        var currentTag = {
+          id: _tagId,
+          isChild: isChild,
+          parent: parent,
+          position: position,
+          tagCustomImg: tagCustomImg
+        };
+        var priorityTag = null;
+        if (!settings.allowedTags.includes(_tagId) || tagCustomImg === null) continue;
+        if (priorityTag === null || (0,_helpers_compareTags__WEBPACK_IMPORTED_MODULE_13__["default"])(currentTag, priorityTag) < 0) {
+          priorityTag = {
+            id: _tagId,
+            isChild: isChild,
+            parent: parent,
+            position: position,
+            tagCustomImg: tagCustomImg
+          };
+          settings.defaultImage = tagCustomImg;
         }
       }
     }
@@ -400,6 +466,30 @@ var listItem = /*#__PURE__*/function (_Component) {
   return listItem;
 }((flarum_common_Component__WEBPACK_IMPORTED_MODULE_1___default()));
 
+
+/***/ }),
+
+/***/ "./src/forum/helpers/compareTags.js":
+/*!******************************************!*\
+  !*** ./src/forum/helpers/compareTags.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ compareTags)
+/* harmony export */ });
+function compareTags(currentTag, priorityTag) {
+  if (currentTag.isChild && !priorityTag.isChild) return -1;
+  if (!currentTag.isChild && priorityTag.isChild) return 1;
+  if (currentTag.isChild && priorityTag.isChild && currentTag.parent === priorityTag.parent) return currentTag.position - priorityTag.position;
+  if (currentTag.isChild && priorityTag.isChild && currentTag.parent !== priorityTag.parent) return currentTag.parent - priorityTag.parent;
+  if (!currentTag.position && priorityTag.position) return 1;
+  if (currentTag.position && !priorityTag.position) return -1;
+  if (currentTag.position && priorityTag.position) return currentTag.position - priorityTag.position;
+  return currentTag.id - priorityTag.id;
+}
 
 /***/ }),
 

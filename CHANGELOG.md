@@ -1,40 +1,24 @@
 # Changelog
 
-## [1.0.0] - 2024-11-12
+## [1.0.0] - 2024-11-15
 ### Added
 - NEW FEATURE : Setting a default image per tag
-- NEW FEATURE : Setting custom number of primary card and card width per tag
-- New migrations (tag settings)
+- NEW FEATURE : Setting custom number of primary cards and custom cards width per tag
+- NEW on Index page (all discussions) shows default card images based on tags of discussion (based on tag priority)
+- NEW migrations (tag settings)
 - Client and server-side validation for the tags settings
+- Some validation for the general extension settings
 - French translation
-
-### Fixed
-- UploadImageButton now showing the uploaded image.
-- gap between image preview and remove button in settings page due to UploadImageButton's empty <p><img></p>
-
-### Changed
-- Migration for the new tag default image (column name)
-- Switched read/unread discussions' filter (now read are grayscaled and unread in full colors)
-
-## [0.4.1] - 2024-10-21
-### Fixed
-- Settings object (updated keys and source)
-- Replaced deprecated $.tooltip
-- Cards not working on selected tags (only index page)
+- Changelog.md
 
 ### Changed
 - Admin Settings page form & text
-- Settings keys (new names)
-- Migration (first, general default settings)
-
-## [0.4.0] - 2024-10-15
-### Added
-- Migrations: default image column to tags table
-- Changelog.md
+- Image stub (changed it for a more neutral one with the Flarum logo)
+- Migrations (with new settings keys and added new tag settings)
+- Switched read/unread discussions' filter (now read are grayscaled and unread are in full colors)
+- Reamde.md, License.md, namespace...
+- Removed Russian translation
 
 ### Fixed
-- Forum css
-
-### Changed
-- image stub (changed for a more neutral one)
-- Reamde.md, License.md, namespace...
+- Replaced deprecated $.tooltip
+- UploadImageButton now showing the uploaded image (created a new custom component).

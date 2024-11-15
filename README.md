@@ -2,12 +2,26 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/walsgit/discussion-cards.svg)](https://packagist.org/packages/walsgit/discussion-cards) [![Total Downloads](https://img.shields.io/packagist/dt/walsgit/discussion-cards.svg)](https://packagist.org/packages/walsgit/discussion-cards)
 
-A [Flarum](https://flarum.org) extension (Fork of Dem13n's [discussion-cards](https://github.com/Dem13n/discussion-cards)). Allows you to display discussions in the form of cards, the first image of the first post is used as a preview, if there are no images, a stub is displayed.
+A [Flarum](https://flarum.org) extension (**Fork** of ``@Dem13n``'s [discussion-cards](https://github.com/Dem13n/discussion-cards)). Allows you to display discussions in the form of cards, the first image of the first post is used as a preview, if there are no images, a stub is displayed.
 
-![Discussion Cards](https://i.imgur.com/i7FZGHq.png)
+This *fork* adds ``new features`` where you can now set custom cards settings per tag page (different default image along with number and width of primary cards).
+On the ``index page`` (all discussions), if a discussion has multiple tags with their own custom image set, the displayed image will be chosen according to these priority rules:
+```
+1. The image of the the highest positioned child primary tag of the highest positioned parent primary tag
+2. The image of the highest positioned parent primary tag
+3. The image of the secondary tag with the lowest id
+4. The general default image
+```
+Also it changes how the setting to distinguish between read & unread discussion cards work: now the read discussions are filtred with a grayscale instead of the unread ones.
 
-## New features
-WIP...
+![Discussion Cards](https://i.postimg.cc/FsxNPWYk/flarum-ext-discussioncards-1.png)
+
+### Notes
+- Developed and tested on Flarum 1.8.7.
+- Thanks to whomever suggested on Discord to use the tags selection component (sorry, we can no longer access the messages on Discord to mention them properly).
+- New settings page inspired by ``Friends of Flarum``'s [Best Answer](https://github.com/FriendsOfFlarum/best-answer) Extension.
+- Additional tags settings based on ``@askvortsov``'s [Discussion Templates](https://github.com/askvortsov1/flarum-discussion-templates) Extension.
+- Developped this with the help of AI (mainly ChatGPT, Cody & Gemini).
 
 ## Installation
 

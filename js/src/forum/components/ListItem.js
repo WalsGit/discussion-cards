@@ -10,6 +10,7 @@ import DiscussionControls from 'flarum/forum/utils/DiscussionControls';
 import Link from 'flarum/common/components/Link';
 import {truncate} from 'flarum/common/utils/string';
 import LastReplies from './LastReplies';
+import compareTags from "../helpers/compareTags";
 
 
 export default class listItem extends Component {
@@ -44,6 +45,26 @@ export default class listItem extends Component {
         }
       }
     }
+    /* On the IndexPage (all discussions) checks which default image to show based on tag priority */
+		const isIndexPage = m.route.get().split('?')[0] === '/';
+		if (isIndexPage) {
+			const tags = discussion.tags();
+			for (const key in tags) {
+				const tagId = tags[key].id();
+				const isChild = tags[key].isChild();
+				const parent = tags[key].data.hasOwnProperty('relationships') && tags[key].parent() ? tags[key].parent()['data'].id : null;
+				const position = tags[key].position();
+				const tagCustomImg = tags[key].attribute('walsgitDiscussionCardsTagDefaultImage');
+				const currentTag = { id: tagId, isChild, parent, position, tagCustomImg }
+				let priorityTag = null;
+				if (!settings.allowedTags.includes(tagId) || tagCustomImg === null) continue;
+
+				if (priorityTag === null || compareTags(currentTag, priorityTag) < 0) {
+					priorityTag = { id: tagId, isChild, parent, position, tagCustomImg };
+					settings.defaultImage = tagCustomImg;
+				}
+			}
+		}
 
     const isRead = Number(settings.markReadCards) === 1 && (discussion.isRead() && app.session.user) ? 'read' : '';
     const attrs = {};
