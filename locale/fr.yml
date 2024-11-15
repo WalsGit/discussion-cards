@@ -4,7 +4,7 @@ walsgit_discussion_cards:
   admin:
     settings:
       general:
-        where_title: "Où ?""
+        where_title: "Où ?"
         where_info: "Choisissez où vous voulez utiliser des cartes de discussions"
         allowedTags_label: "Sélectionnez les étiquettes"
         allowedTags_help: "Les cartes de discussions seront activées et affichées sur les pages des étiquettes sélectionnées"
