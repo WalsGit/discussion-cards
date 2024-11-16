@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.4] - 2024-11-16
+### Added
+- Support & discuss URLs
+
 ## [1.0.3] - 2024-11-15
 ### Changed
 - Removed old funding.yml
