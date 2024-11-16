@@ -43,4 +43,4 @@ php flarum cache:clear
 
 - [Packagist](https://packagist.org/packages/walsgit/flarum-discussion-cards)
 - [GitHub](https://github.com/walsgit/flarum-discussion-cards)
-
+- [Discuss](https://discuss.flarum.org/d/36343-flarum-discussion-cards)
