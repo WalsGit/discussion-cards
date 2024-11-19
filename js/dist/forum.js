@@ -175,7 +175,7 @@ var cardItem = /*#__PURE__*/function (_Component) {
     }, flarum_forum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_9___default().controls(discussion, this).toArray()) : "", m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
       href: app.route.discussion(discussion, 0),
       className: "cardLink"
-    }, Number(settings.showBadges) === 1 ? (0,_utils_craftBadges__WEBPACK_IMPORTED_MODULE_2__["default"])(discussion.badges().toArray()) : "", m("div", attrs, console.log(discussion.data.attributes.hasOwnProperty('views')), discussion.data.attributes.hasOwnProperty('views') && m('[', null, Number(settings.showViews) === 1 && !isNaN(discussion.views()) ? m("div", {
+    }, Number(settings.showBadges) === 1 ? (0,_utils_craftBadges__WEBPACK_IMPORTED_MODULE_2__["default"])(discussion.badges().toArray()) : "", m("div", attrs, discussion.data.attributes.hasOwnProperty('views') && m('[', null, Number(settings.showViews) === 1 && !isNaN(discussion.views()) ? m("div", {
       className: "imageLabel discussionViews"
     }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()("fas fa-eye", {
       className: "labelIcon"

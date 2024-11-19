@@ -116,7 +116,6 @@ export default class cardItem extends Component {
 						: ""}
 
 					<div {...attrs}>
-						{console.log(discussion.data.attributes.hasOwnProperty('views'))}
 						{discussion.data.attributes.hasOwnProperty('views') && (
 							<>
 								{Number(settings.showViews) === 1 &&
