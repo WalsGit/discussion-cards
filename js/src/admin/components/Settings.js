@@ -1,9 +1,17 @@
 import app from "flarum/admin/app";
 import ExtensionPage from "flarum/admin/components/ExtensionPage";
 import UploadImageButton from 'flarum/admin/components/UploadImageButton';
+import isExtensionInstalled from "../helpers/isExtensionInstalled";
+import isExtensionActive from "../helpers/isExtensionActive";
 
 export default class Settings extends ExtensionPage {
 	content() {
+		/* Supported third party extensions' info */
+		const viewsExtension = {
+			id: 'flarumite-simple-discussion-views',
+			name: 'Flarumite Simple Discussion Views',
+		};
+		
 		return (
 			<div className="DiscussionCardsSettings">
 				<div className="container">
@@ -119,12 +127,19 @@ export default class Settings extends ExtensionPage {
 							{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_info")}
 						</p>
 						<div className="Section">
-							<h4>If <a href="https://flarum.org/extension/flarumite/simple-discussion-views" target="_blank" rel="noopener noreferrer">Flarumite Simple Discussion Views</a> is installed & activated</h4>
+							<h4>
+								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_title_start")}
+								<a href="https://flarum.org/extension/flarumite/simple-discussion-views" target="_blank" rel="noopener noreferrer">Flarumite Simple Discussion Views</a>
+								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_title_end")}
+							</h4>
 							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_showViews",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_label"),
-								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_help"),
+								help: !isExtensionInstalled(viewsExtension.id) 
+								? app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_notInstalled", {extName: viewsExtension.name}) : !isExtensionActive(viewsExtension.id) 
+								? app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_notActivated", {extName: viewsExtension.name}) : app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_help"),
+								disabled: isExtensionActive(viewsExtension) ? false : true,
 							})}
 						</div>
 						{this.submitButton()}

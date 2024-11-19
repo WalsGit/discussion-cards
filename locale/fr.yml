@@ -34,8 +34,12 @@ walsgit_discussion_cards:
         markReadCards_help: "Si activé, les discussions lues se veront appliquer un filtre noir et blanc (sur l'image & tags), tandis que les discussions non lues garderont leur pleines couleurs."
         otherOptions_title: "Options qui nécessitent d'autres extensions"
         otherOptions_info: "Les options qui suivent sont dépendantes de l'installation et de l'activation d'extensions tierces pour fonctionner. <strong>IMPORTANT: merci de lire <u>l'intégralité</u> des informations de chaque option et assurez vous d'avoir réalisé toutes les étapes requises avant de l'activer</strong>."
+        showViews_title_start: "Avec l'extension "
+        showViews_title_end: " installée et activtée, vous pouvez :"
         showViews_label: "Affichez le nombre de vues"
-        showViews_help: "<u>Nécessite</u> d'avoir installé et activé l'extension <strong>Flarumite Simple Discussion Views</strong>. Si l'option est activée, cela affichera le nombre de vues de la discussion sur sa carte."
+        showViews_help: "Si l'option est activée, cela affichera le nombre de vues de la discussion sur sa carte."
+        showViews_notInstalled: "L'extension <strong>{extName}</strong> doit être installée et activée pour que cette option fonctionne."
+        showViews_notActivated: "L'extension <strong>{extName}</strong> doit être activée pour que cette option fonctionne."
     tags:
       options_heading: "Discussion Cards"
       activation_button: "Activez pour cette étiquette"

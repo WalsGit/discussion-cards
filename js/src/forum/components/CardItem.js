@@ -116,15 +116,21 @@ export default class cardItem extends Component {
 						: ""}
 
 					<div {...attrs}>
-						{Number(settings.showViews) === 1 &&
-						!isNaN(discussion.views()) ? (
-							<div className="imageLabel discussionViews">
-								{icon("fas fa-eye", { className: "labelIcon" })}
-								{discussion.views()}
-							</div>
-						) : (
-							""
+						{console.log(discussion.data.attributes.hasOwnProperty('views'))}
+						{discussion.data.attributes.hasOwnProperty('views') && (
+							<>
+								{Number(settings.showViews) === 1 &&
+								!isNaN(discussion.views()) ? (
+									<div className="imageLabel discussionViews">
+										{icon("fas fa-eye", { className: "labelIcon" })}
+										{discussion.views()}
+									</div>
+								) : (
+									""
+								)}
+							</>
 						)}
+
 						{media}
 
 						{Number(settings.showAuthor) === 1 ? (

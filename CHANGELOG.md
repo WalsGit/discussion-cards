@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0] - 2024-11-19
+- TODO: make compatible with blog (v17development-blog)
+### Changed
+- Options for 3rd party extensions will only be enabled if said extensions are installed and activated.
+- Text & description associated with 3rd party extensions options
+
+### Fixed
+- Views won't throw error when show views option is activated but the relevant extension isn't installed and activated.
+
 ## [1.0.4] - 2024-11-16
 ### Added
 - Support & discuss URLs

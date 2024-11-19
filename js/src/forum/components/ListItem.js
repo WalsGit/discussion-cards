@@ -99,12 +99,17 @@ export default class listItem extends Component {
 
             <div className="rowSpan-3 colSpan">
               <div {...attrs}>
-                {Number(settings.showViews) === 1 && !isNaN(discussion.views())
-                  ? <div className="imageLabel discussionViews">
-                    {icon('fas fa-eye', {className: 'labelIcon'})}
-                    {discussion.views()}
-                  </div>
-                  : ''}
+                {discussion.data.attributes.hasOwnProperty('views') && (
+                  <>
+                  {Number(settings.showViews) === 1 && !isNaN(discussion.views())
+                    ? <div className="imageLabel discussionViews">
+                      {icon('fas fa-eye', {className: 'labelIcon'})}
+                      {discussion.views()}
+                    </div>
+                    : ''}
+                  </>
+                )}
+                
                 {media}
 
                 {Number(settings.showAuthor) === 1
