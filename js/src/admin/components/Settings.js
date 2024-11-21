@@ -3,6 +3,7 @@ import ExtensionPage from "flarum/admin/components/ExtensionPage";
 import UploadImageButton from 'flarum/admin/components/UploadImageButton';
 import isExtensionInstalled from "../helpers/isExtensionInstalled";
 import isExtensionActive from "../helpers/isExtensionActive";
+import icon from "flarum/common/helpers/icon";
 
 export default class Settings extends ExtensionPage {
 	content() {
@@ -10,8 +11,16 @@ export default class Settings extends ExtensionPage {
 		const viewsExtension = {
 			id: 'flarumite-simple-discussion-views',
 			name: 'Flarumite Simple Discussion Views',
+			url: 'https://flarum.org/extension/flarumite/simple-discussion-views',
 		};
-		
+		const blogExtension = {
+			id: 'v17development-blog',
+			name: 'Flarum Blog',
+			url: 'https://flarum.org/extension/v17development/flarum-blog',
+		};
+
+		const warningIcon = icon("fas fa-exclamation-triangle");
+
 		return (
 			<div className="DiscussionCardsSettings">
 				<div className="container">
@@ -129,17 +138,53 @@ export default class Settings extends ExtensionPage {
 						<div className="Section">
 							<h4>
 								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_title_start")}
-								<a href="https://flarum.org/extension/flarumite/simple-discussion-views" target="_blank" rel="noopener noreferrer">Flarumite Simple Discussion Views</a>
+								<a href={viewsExtension.url} target="_blank" rel="noopener noreferrer">{viewsExtension.name}</a>
 								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_title_end")}
 							</h4>
+							<div className="helpText">
+								<em>
+									{!isExtensionInstalled(viewsExtension.id) 
+									? + app.translator.trans("walsgit_discussion_cards.admin.settings.general.viewsExtension_notInstalled", {icon: warningIcon}) : 
+									!isExtensionActive(viewsExtension.id) 
+									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.viewsExtension_notActivated", {icon: warningIcon}) :
+									''}
+								</em>
+							</div>
 							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_showViews",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_label"),
-								help: !isExtensionInstalled(viewsExtension.id) 
-								? app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_notInstalled", {extName: viewsExtension.name}) : !isExtensionActive(viewsExtension.id) 
-								? app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_notActivated", {extName: viewsExtension.name}) : app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_help"),
-								disabled: isExtensionActive(viewsExtension) ? false : true,
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_help"),
+								disabled: isExtensionActive(viewsExtension.id) ? false : true,
+							})}
+							<hr></hr>
+							<h4>
+								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_title_start")}
+								<a href={blogExtension.url} target="_blank" rel="noopener noreferrer">{blogExtension.name}</a>
+								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_title_end")}
+							</h4>
+							<div className="helpText">
+								<em>
+									{!isExtensionInstalled(blogExtension.id) 
+									? + app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_notInstalled", {icon: warningIcon}) : 
+									!isExtensionActive(blogExtension.id) 
+									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_notActivated", {icon: warningIcon}) :
+									''}
+								</em>
+							</div>
+							{this.buildSettingComponent({
+								type: "switch",
+								setting: "walsgit_discussion_cards_useBlogImages",
+								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogImages_label"),
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogImages_help"),
+								disabled: isExtensionActive(blogExtension.id) ? false : true,
+							})}
+							{this.buildSettingComponent({
+								type: "switch",
+								setting: "walsgit_discussion_cards_useBlogSummary",
+								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogSummary_label"),
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogSummary_help"),
+								disabled: isExtensionActive(blogExtension.id) ? false : true,
 							})}
 						</div>
 						{this.submitButton()}

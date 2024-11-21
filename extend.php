@@ -40,7 +40,9 @@ return [
         ->serializeToForum('walsgitDiscussionCardsShowReplies', 'walsgit_discussion_cards_showReplies')
         ->serializeToForum('walsgitDiscussionCardsShowBadges', 'walsgit_discussion_cards_showBadges')
         ->serializeToForum('walsgitDiscussionCardsMarkReadCards', 'walsgit_discussion_cards_markReadCards')
-        ->serializeToForum('walsgitDiscussionCardsShowViews', 'walsgit_discussion_cards_showViews'),
+        ->serializeToForum('walsgitDiscussionCardsShowViews', 'walsgit_discussion_cards_showViews')
+        ->serializeToForum('walsgitDiscussionCardsUseBlogImages', 'walsgit_discussion_cards_useBlogImages')
+        ->serializeToForum('walsgitDiscussionCardsUseBlogSummary', 'walsgit_discussion_cards_useBlogSummary'),
     
         (new Extend\ApiSerializer(TagSerializer::class))
         ->attribute('walsgitDiscussionCardsTagDefaultImage', function ($serializer, $model) {

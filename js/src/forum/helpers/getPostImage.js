@@ -1,13 +1,19 @@
-export default function getPostImage(post, defaultImage, key = 1) {
+import isValideImageUrl from "./isValideImageUrl";
+
+export default function getPostImage(post, image, isblogPost = false, key = 1) {
 
   const regex = /<img(?!.*?class="emoji").*?src=[\'"](.*?)[\'"].*?>/;
-  const image = defaultImage;
-  const defaultImg = app.forum.attribute("baseUrl") + "/assets/" + image;
+
+  if(isblogPost && isValideImageUrl(image)) {
+    return image;
+  }
+
+  const assetImage = app.forum.attribute("baseUrl") + "/assets/" + image;
 
   if (post) {
     const src = regex.exec(post.contentHtml());
     if (typeof key === "number" && key > 0) {
-      return (src) ? src[key] : (image ? defaultImg : null);
+      return (src) ? src[key] : (image ? assetImage : null);
     } else if (key === '~') {
       return src;
     } else {
