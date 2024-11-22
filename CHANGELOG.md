@@ -1,10 +1,11 @@
 # Changelog
 
-## [1.1.0] - 2024-11-21
+## [1.1.0] - 2024-11-22
 ### Added
-- Support for `v17development/flarum-blog` extension
-- option to chose to use the blog's images (post featured image and blog default's image) for blog post cards
-- option to chose to use blog posts' summary as preview text for blog post cards
+- NEW FEATURE: Support for `v17development/flarum-blog` extension
+- NEW Option to chose to use the blog's images (post featured image and blog default's image) for blog post cards
+- NEW Option to chose to use blog posts' summary as preview text for blog post cards
+- A donation link
 
 ### Changed
 - Options for 3rd party extensions will only be enabled if said extensions are installed and activated.
