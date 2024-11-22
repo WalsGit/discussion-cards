@@ -14,6 +14,8 @@ On the ``index page`` (all discussions), if a discussion has multiple tags with 
 ```
 Also it changes how the setting to distinguish between read & unread discussion cards work: now the read discussions are filtred with a grayscale instead of the unread ones.
 
+As of version `1.1.0` added support for `v17development/flarum-blog` extension. If activated, you can set to use the blog's extension images for blog posts' cards and/or their article summary as preview text on the cards.
+
 ![Discussion Cards](https://i.postimg.cc/FsxNPWYk/flarum-ext-discussioncards-1.png)
 
 ### Notes
@@ -44,3 +46,4 @@ php flarum cache:clear
 - [Packagist](https://packagist.org/packages/walsgit/flarum-discussion-cards)
 - [GitHub](https://github.com/walsgit/flarum-discussion-cards)
 - [Discuss](https://discuss.flarum.org/d/36343-flarum-discussion-cards)
+- [Donate](https://walsgit.github.io/Donations/)

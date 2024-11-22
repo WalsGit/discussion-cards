@@ -11,6 +11,7 @@ import Link from 'flarum/common/components/Link';
 import {truncate} from 'flarum/common/utils/string';
 import LastReplies from './LastReplies';
 import compareTags from "../helpers/compareTags";
+import isValideImageUrl from "../helpers/isValideImageUrl";
 
 
 export default class listItem extends Component {
@@ -30,6 +31,23 @@ export default class listItem extends Component {
 			}
 		}
 
+    /* Getting & setting relevant info for 3rd party Flarum Blog support */
+		const blogActivated = app.forum.data.attributes.hasOwnProperty('blogTags');
+		const blogSettings = {};
+		const postIsBlogType = discussion.data.relationships.hasOwnProperty('blogMeta');
+		const blogPost = {}
+		if(blogActivated) {
+			blogSettings.tags = app.forum.attribute('blogTags');
+			blogSettings.defaultImage = app.forum.attribute('blogDefaultImage');
+
+			if(postIsBlogType) {
+				const blogPostsData = discussion.store.data.blogMeta[discussion.data.relationships.blogMeta.data.id];
+				if(isValideImageUrl(blogPostsData.attribute('featuredImage'))) {
+					blogPost.featuredImage = blogPostsData.attribute('featuredImage');					
+				}
+			}
+		}
+
     const isTagPage = m.route.get().split('?')[0].startsWith('/t/');
 		if (isTagPage) {
       const slug = m.route.get().split('/t/')[1]?.split('?')[0];
@@ -37,7 +55,12 @@ export default class listItem extends Component {
       const tag = app.store.all('tags').find(t => t.id() === tagId);
       const tagSettings = tag ? JSON.parse(tag.data.attributes.walsgitDiscussionCardsTagSettings || '{}') : {};
       const tagImage = tag ? tag.data.attributes.walsgitDiscussionCardsTagDefaultImage : null;
+      
       tagSettings.defaultImage = tagImage;
+      /* In case Flarum Blog Extension and useBlogImage are activated  */
+      if(blogActivated && Number(settings.useBlogImages) === 1 && blogSettings.tags.includes(tagId)) {
+				tagSettings.defaultImage = postIsBlogType && blogPost.featuredImage && isValideImageUrl(blogPost.featuredImage) ? blogPost.featuredImage : blogSettings.defaultImage;
+			}
 
       for (const key in tagSettings) {
         if (settings.hasOwnProperty(key) && tagSettings[key] !== settings[key] && tagSettings[key] !== null) {
@@ -45,6 +68,7 @@ export default class listItem extends Component {
         }
       }
     }
+
     /* On the IndexPage (all discussions) checks which default image to show based on tag priority */
 		const isIndexPage = m.route.get().split('?')[0] === '/';
 		if (isIndexPage) {
@@ -54,10 +78,16 @@ export default class listItem extends Component {
 				const isChild = tags[key].isChild();
 				const parent = tags[key].data.hasOwnProperty('relationships') && tags[key].parent() ? tags[key].parent()['data'].id : null;
 				const position = tags[key].position();
-				const tagCustomImg = tags[key].attribute('walsgitDiscussionCardsTagDefaultImage');
+
+				let tagCustomImg = tags[key].attribute('walsgitDiscussionCardsTagDefaultImage');
+        /* In case Flarum Blog Extension and useBlogImage are activated  */
+				if(blogActivated && Number(settings.useBlogImages) === 1 && blogSettings.tags.includes(tagId)) {
+					tagCustomImg = postIsBlogType && blogPost.featuredImage && isValideImageUrl(blogPost.featuredImage) ? blogPost.featuredImage : blogSettings.defaultImage;
+				}
+
 				const currentTag = { id: tagId, isChild, parent, position, tagCustomImg }
 				let priorityTag = null;
-				if (!settings.allowedTags.includes(tagId) || tagCustomImg === null) continue;
+				if (!settings.allowedTags.includes(tagId) || tagCustomImg === null)	continue;
 
 				if (priorityTag === null || compareTags(currentTag, priorityTag) < 0) {
 					priorityTag = { id: tagId, isChild, parent, position, tagCustomImg };
@@ -69,7 +99,7 @@ export default class listItem extends Component {
     const isRead = Number(settings.markReadCards) === 1 && (discussion.isRead() && app.session.user) ? 'read' : '';
     const attrs = {};
     attrs.className = "wrapImg" + (Number(settings.showAuthor) === 1 ? " After" : '');
-    const image = getPostImage(discussion.firstPost(), settings.defaultImage);
+    const image = getPostImage(discussion.firstPost(), settings.defaultImage, postIsBlogType);
     const media = image
       ? <img src={image}
             className="previewCardImg"
@@ -99,12 +129,17 @@ export default class listItem extends Component {
 
             <div className="rowSpan-3 colSpan">
               <div {...attrs}>
-                {Number(settings.showViews) === 1 && !isNaN(discussion.views())
-                  ? <div className="imageLabel discussionViews">
-                    {icon('fas fa-eye', {className: 'labelIcon'})}
-                    {discussion.views()}
-                  </div>
-                  : ''}
+                {discussion.data.attributes.hasOwnProperty('views') && (
+                  <>
+                  {Number(settings.showViews) === 1 && !isNaN(discussion.views())
+                    ? <div className="imageLabel discussionViews">
+                      {icon('fas fa-eye', {className: 'labelIcon'})}
+                      {discussion.views()}
+                    </div>
+                    : ''}
+                  </>
+                )}
+                
                 {media}
 
                 {Number(settings.showAuthor) === 1
@@ -130,9 +165,16 @@ export default class listItem extends Component {
                 <div className="cardTags">{craftTags(discussion.tags())}</div>
               </div>
 
-              {Number(settings.previewText) === 1 && discussion.firstPost()
-                ? <div className="previewPost">{truncate(discussion.firstPost().contentPlain(), 150)}</div>
-                : ''}
+              {Number(settings.previewText) === 1 && discussion.firstPost() ? (
+                <div className="previewPost">
+                  {blogActivated && Number(settings.useBlogSummary) === 1 && discussion.data.relationships.hasOwnProperty('blogMeta') && discussion.blogMeta().summary() !== ''
+                    ? truncate(discussion.blogMeta().summary(), 150)
+                    : truncate(discussion.firstPost().contentPlain(), 150)
+                  }
+                </div>
+                ) : (
+                  ''
+                )}
 
               {app.screen() === 'phone' && Number(settings.showReplies) === 1
                 ? <div className="cardSpacer">

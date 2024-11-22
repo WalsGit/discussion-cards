@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0] - 2024-11-22
+### Added
+- NEW FEATURE: Support for `v17development/flarum-blog` extension
+- NEW Option to chose to use the blog's images (post featured image and blog default's image) for blog post cards
+- NEW Option to chose to use blog posts' summary as preview text for blog post cards
+- A donation link
+
+### Changed
+- Options for 3rd party extensions will only be enabled if said extensions are installed and activated.
+- Text & description associated with 3rd party extensions options
+
+### Fixed
+- Views won't throw error when `show views` option is activated but the relevant extension isn't installed and activated.
+
 ## [1.0.4] - 2024-11-16
 ### Added
 - Support & discuss URLs
