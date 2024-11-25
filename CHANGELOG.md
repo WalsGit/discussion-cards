@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.1] - 2024-11-25
+### Fixed
+- French translation bug
+
 ## [1.1.0] - 2024-11-22
 ### Added
 - NEW FEATURE: Support for `v17development/flarum-blog` extension
