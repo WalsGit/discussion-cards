@@ -47,7 +47,7 @@ walsgit_discussion_cards:
         useBlogImages_label: "Utilisez l'image de l'article de blog ou celle par défaut du blog"
         useBlogImages_help: "Si l'option est activée, l'image de la carte de chaque article de blog sera déterminée comme suit : d'abord l'image de l'article (featured image) ; si aucune, la première image trouvé au sein de l'article ; si aucune, l'image par défaut de l'extension de blog ; si aucune, l'image par defaut de l'étiquette; si aucune, l'image par défaut principale des cartes de discussion. Notez que les paramètres personnalisés des étiquettes, qui seront utilisées comme catégories de blog, seront bien entendu ignorés si vous choisissez de rediriger les étiquettes de blog dans les paramètres de l'extension Flarum Blog."
         useBlogSummary_label: "Utilisez le résumé de l'article de blog pour la prévisualisation du message"
-        useBlogSummary_help: "Si cette option et "prévisualisez le message" sont activées, les cartes des articles de blogs afficheront le début du résumé de l'article de blog au lieu du début du text de l'article."
+        useBlogSummary_help: "Si cette option et \"prévisualisez le message\" sont activées, les cartes des articles de blogs afficheront le début du résumé de l'article de blog au lieu du début du text de l'article."
     tags:
       options_heading: "Discussion Cards"
       activation_button: "Activez pour cette étiquette"

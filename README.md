@@ -1,6 +1,6 @@
 ## Flarum Discussion Cards
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/walsgit/flarum-discussion-cards.svg)](https://packagist.org/packages/walsgit/flarum-discussion-cards) [![Total Downloads](https://img.shields.io/packagist/dt/walsgit/flarum-discussion-cards.svg)](https://packagist.org/packages/walsgit/flarum-discussion-cards)
+![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/walsgit/flarum-discussion-cards.svg)](https://packagist.org/packages/walsgit/flarum-discussion-cards) [![Total Downloads](https://img.shields.io/packagist/dt/walsgit/flarum-discussion-cards.svg)](https://packagist.org/packages/walsgit/flarum-discussion-cards) [![Donate here](https://img.shields.io/badge/donate-here-%23008e97)](https://walsgit.github.io/Donations/)
 
 A [Flarum](https://flarum.org) extension (**Fork** of ``@Dem13n``'s [discussion-cards](https://github.com/Dem13n/discussion-cards)). Allows you to display discussions in the form of cards, the first image of the first post is used as a preview, if there are no images, a stub is displayed.
 
