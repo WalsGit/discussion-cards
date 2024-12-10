@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.0] - 2024-12-10
+### Changed
+- The way read cards are marked (removed B&W filter): now read cards' title and text have a lighter font weight (like the default Flarum discussion list behavior)
+
 ## [1.1.1] - 2024-11-25
 ### Fixed
 - French translation bug

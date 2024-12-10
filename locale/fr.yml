@@ -31,7 +31,7 @@ walsgit_discussion_cards:
         showBadges_label: "Affichez les badges"
         showBadges_help: "Si activé, cela affichera des badges sur les cartes en haut à gauche."
         markReadCards_label: "Différenciez les cartes des discussions lu et non lu"
-        markReadCards_help: "Si activé, les discussions lues se veront appliquer un filtre noir et blanc (sur l'image & tags), tandis que les discussions non lues garderont leur pleines couleurs."
+        markReadCards_help: "Si activé, les discussions lues auront leur titre et texte grisés avec une police moins grasse."
         otherOptions_title: "Options qui nécessitent d'autres extensions"
         otherOptions_info: "Les options qui suivent sont dépendantes de l'installation et de l'activation d'extensions tierces pour fonctionner. <strong>IMPORTANT: merci de lire <u>l'intégralité</u> des informations de chaque option et assurez vous d'avoir réalisé toutes les étapes requises avant de l'activer</strong>."
         showViews_title_start: "Avec l'extension "

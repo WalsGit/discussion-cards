@@ -31,7 +31,7 @@ walsgit_discussion_cards:
         showBadges_label: "Show badges"
         showBadges_help: "If activated, shows badges at the top left corner of the cards."
         markReadCards_label: "Differentiate cards of read/unread discussions"
-        markReadCards_help: "If activated, read discussions will have a black & white filter on their cards (image & tags), whereas unread discussions will be in full colors."
+        markReadCards_help: "If activated, read discussions will have a lighter title and text."
         otherOptions_title: "Options requiring other extensions"
         otherOptions_info: "The following options will require other extensions to be installed and activated for them to work. <strong>IMPORTANT: please read <u>all</u> the info for each individual option and do the required steps before activating them</strong>."
         showViews_title_start: "With the "
