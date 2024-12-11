@@ -12,6 +12,7 @@ import { truncate } from "flarum/common/utils/string";
 import LastReplies from "./LastReplies";
 import compareTags from "../helpers/compareTags";
 import isValideImageUrl from "../helpers/isValideImageUrl";
+import TerminalPost from 'flarum/components/TerminalPost';
 
 export default class cardItem extends Component {
 	oninit(vnode) {
@@ -192,6 +193,14 @@ export default class cardItem extends Component {
 						</div>
 					) : (
 						""
+					)}
+
+					{Number(settings.showLastPostInfo) === 1 && discussion.firstPost() ? (
+						<div className="terminalPost">
+						<TerminalPost discussion={discussion} lastPost={discussion.lastPostNumber()} />
+						</div>
+					) : (
+						''
 					)}
 
 					{Number(settings.showReplies) === 1 ? (

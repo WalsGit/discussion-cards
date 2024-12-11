@@ -145,6 +145,12 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       disabled: (0,_helpers_isExtensionActive__WEBPACK_IMPORTED_MODULE_5__["default"])(viewsExtension.id) ? false : true
     }), this.buildSettingComponent({
       type: "switch",
+      setting: "walsgit_discussion_cards_showLastPostInfo",
+      label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_label"),
+      help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_help"),
+      disabled: (0,_helpers_isExtensionActive__WEBPACK_IMPORTED_MODULE_5__["default"])(viewsExtension.id) ? false : true
+    }), this.buildSettingComponent({
+      type: "switch",
       setting: "walsgit_discussion_cards_showBadges",
       label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_label"),
       help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_help")

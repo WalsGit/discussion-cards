@@ -127,6 +127,13 @@ export default class Settings extends ExtensionPage {
 							})}
 							{this.buildSettingComponent({
 								type: "switch",
+								setting: "walsgit_discussion_cards_showLastPostInfo",
+								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_label"),
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_help"),
+								disabled: isExtensionActive(viewsExtension.id) ? false : true,
+							})}
+							{this.buildSettingComponent({
+								type: "switch",
 								setting: "walsgit_discussion_cards_showBadges",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_help"),

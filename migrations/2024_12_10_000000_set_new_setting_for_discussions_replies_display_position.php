@@ -15,4 +15,5 @@ $allowedTags = [];
 
 return Migration::addSettings([
     'walsgit_discussion_cards_showRepliesOnRight' => 0,
+    'walsgit_discussion_cards_showLastPostInfo' => 0,
 ]);

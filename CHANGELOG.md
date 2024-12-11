@@ -2,7 +2,9 @@
 
 ## [1.2.0] - 2024-12-11
 ### Added
-- NEW option to show the number of replies on the right side of a card's title (like the default Flarum design) instead of on the image (new migration needed)
+- NEW option to show the number of replies on the right side of a card's title (like the default Flarum design) instead of on the image.
+- NEW option to show the last post informations on the cards (like the default Flarum design): username & date of last post.
+- New migration file for the aforementioned new options.
 
 ### Changed
 - The way read cards are marked (removed B&W filter): now read cards' title and text have a lighter font weight (like the default Flarum discussion list behavior)

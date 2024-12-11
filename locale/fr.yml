@@ -30,6 +30,8 @@ walsgit_discussion_cards:
         showReplies_help: "Si activé, cela affichera le nombre de réponses sur les cartes (et les avatars des quelques participants à la discussion sur les cartes primaires)."
         showRepliesOnRight_label: "Affichez le nombre de réponses à droite du titre de la carte"
         showRepliesOnRight_help: "Si l'option est activée, cela placera le nombre de réponses à droite du titre des cartes (non primaires) sur les écrans larges (au lieu d'en bas à gauche de l'image comme c'est le cas par défaut)."
+        showLastPostInfo_label: "Affichez les infos du dernier post"
+        showLastPostInfo_help: "Si l'option est activée, cela affichera sur la carte, sous la prévisualisation du message (ou sous les étiquettes si la prévisualisation n'est pas activée), le nom d'utilisateur de l'auteur de la dernière réponse de la discussion ainsi que sa date."
         showBadges_label: "Affichez les badges"
         showBadges_help: "Si activé, cela affichera des badges sur les cartes en haut à gauche."
         markReadCards_label: "Différenciez les cartes des discussions lu et non lu"

@@ -13,6 +13,7 @@ import LastReplies from './LastReplies';
 import compareTags from "../helpers/compareTags";
 import isValideImageUrl from "../helpers/isValideImageUrl";
 import abbreviateNumber from 'flarum/common/utils/abbreviateNumber';
+import TerminalPost from 'flarum/components/TerminalPost';
 
 
 export default class listItem extends Component {
@@ -185,6 +186,14 @@ export default class listItem extends Component {
                 ) : (
                   ''
                 )}
+                
+              {Number(settings.showLastPostInfo) === 1 && discussion.firstPost() ? (
+                <div className="terminalPost">
+                  <TerminalPost discussion={discussion} lastPost={discussion.lastPostNumber()} />
+                </div>
+              ) : (
+                ''
+              )}
 
               {app.screen() === 'phone' && Number(settings.showReplies) === 1
                 ? <div className="cardSpacer">

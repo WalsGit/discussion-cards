@@ -67,6 +67,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LastReplies__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./LastReplies */ "./src/forum/components/LastReplies.js");
 /* harmony import */ var _helpers_compareTags__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../helpers/compareTags */ "./src/forum/helpers/compareTags.js");
 /* harmony import */ var _helpers_isValideImageUrl__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../helpers/isValideImageUrl */ "./src/forum/helpers/isValideImageUrl.js");
+/* harmony import */ var flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! flarum/components/TerminalPost */ "flarum/components/TerminalPost");
+/* harmony import */ var flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_15__);
+
 
 
 
@@ -218,7 +221,12 @@ var cardItem = /*#__PURE__*/function (_Component) {
       className: "cardTitle"
     }, m("h2", null, discussion.title())), Number(settings.previewText) === 1 && discussion.firstPost() ? m("div", {
       className: "previewPost"
-    }, blogActivated && Number(settings.useBlogSummary) === 1 && discussion.data.relationships.hasOwnProperty('blogMeta') && discussion.blogMeta().summary() !== '' ? (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.blogMeta().summary(), 150) : (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : "", Number(settings.showReplies) === 1 ? m("div", {
+    }, blogActivated && Number(settings.useBlogSummary) === 1 && discussion.data.relationships.hasOwnProperty('blogMeta') && discussion.blogMeta().summary() !== '' ? (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.blogMeta().summary(), 150) : (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : "", Number(settings.showLastPostInfo) === 1 && discussion.firstPost() ? m("div", {
+      className: "terminalPost"
+    }, m((flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_15___default()), {
+      discussion: discussion,
+      lastPost: discussion.lastPostNumber()
+    })) : '', Number(settings.showReplies) === 1 ? m("div", {
       className: "cardSpacer"
     }, m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
       className: "Replies",
@@ -337,6 +345,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_isValideImageUrl__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../helpers/isValideImageUrl */ "./src/forum/helpers/isValideImageUrl.js");
 /* harmony import */ var flarum_common_utils_abbreviateNumber__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! flarum/common/utils/abbreviateNumber */ "flarum/common/utils/abbreviateNumber");
 /* harmony import */ var flarum_common_utils_abbreviateNumber__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_abbreviateNumber__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! flarum/components/TerminalPost */ "flarum/components/TerminalPost");
+/* harmony import */ var flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_16__);
+
 
 
 
@@ -505,7 +516,12 @@ var listItem = /*#__PURE__*/function (_Component) {
       className: "cardTags"
     }, (0,_utils_craftTags__WEBPACK_IMPORTED_MODULE_4__["default"])(discussion.tags()))), Number(settings.previewText) === 1 && discussion.firstPost() ? m("div", {
       className: "previewPost"
-    }, blogActivated && Number(settings.useBlogSummary) === 1 && discussion.data.relationships.hasOwnProperty('blogMeta') && discussion.blogMeta().summary() !== '' ? (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.blogMeta().summary(), 150) : (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : '', app.screen() === 'phone' && Number(settings.showReplies) === 1 ? m("div", {
+    }, blogActivated && Number(settings.useBlogSummary) === 1 && discussion.data.relationships.hasOwnProperty('blogMeta') && discussion.blogMeta().summary() !== '' ? (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.blogMeta().summary(), 150) : (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : '', Number(settings.showLastPostInfo) === 1 && discussion.firstPost() ? m("div", {
+      className: "terminalPost"
+    }, m((flarum_components_TerminalPost__WEBPACK_IMPORTED_MODULE_16___default()), {
+      discussion: discussion,
+      lastPost: discussion.lastPostNumber()
+    })) : '', app.screen() === 'phone' && Number(settings.showReplies) === 1 ? m("div", {
       className: "cardSpacer"
     }, m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_10___default()), {
       className: "Replies",
@@ -972,6 +988,17 @@ module.exports = flarum.core.compat['common/utils/humanTime'];
 
 "use strict";
 module.exports = flarum.core.compat['common/utils/string'];
+
+/***/ }),
+
+/***/ "flarum/components/TerminalPost":
+/*!****************************************************************!*\
+  !*** external "flarum.core.compat['components/TerminalPost']" ***!
+  \****************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/TerminalPost'];
 
 /***/ }),
 
