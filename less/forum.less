@@ -17,6 +17,20 @@
     .Repcount {
       font-weight: 500;
     }
+
+    .DiscussionListItem-count {
+      color: var(--discussion-title-color);
+      font-weight: 400;
+
+      &:before {
+        .far();
+        content: @fa-var-comment;
+      }
+
+      @media phone {
+        display: none;
+      }
+    }
     
   }
 
@@ -148,6 +162,10 @@
 
 .cardTitle {
   padding: 0 1rem 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .previewPost {
@@ -381,6 +399,10 @@
     h2.title {
       font-size: 19px;
       margin: 10px 0 0 0;
+      flex: 1 1 auto;
+      min-width: 0;
+      word-wrap: break-word;
+      white-space: normal;
     }
 
     .cardTags {
@@ -439,6 +461,21 @@
 
     .DiscussionListItem-controls.open {
       z-index: 3;
+    }
+
+    .DiscussionListItem-count {
+      color: var(--heading-color);
+      font-weight: bold;
+      margin-right: 0;
+      cursor: pointer;
+      flex-shrink: 0;
+      align-self: self-start;
+      padding-top: 3px;
+
+      &:before {
+        .fas();
+        content: @fa-var-comment;
+      }
     }
   }
 }

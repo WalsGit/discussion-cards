@@ -335,6 +335,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LastReplies__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./LastReplies */ "./src/forum/components/LastReplies.js");
 /* harmony import */ var _helpers_compareTags__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../helpers/compareTags */ "./src/forum/helpers/compareTags.js");
 /* harmony import */ var _helpers_isValideImageUrl__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../helpers/isValideImageUrl */ "./src/forum/helpers/isValideImageUrl.js");
+/* harmony import */ var flarum_common_utils_abbreviateNumber__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! flarum/common/utils/abbreviateNumber */ "flarum/common/utils/abbreviateNumber");
+/* harmony import */ var flarum_common_utils_abbreviateNumber__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_abbreviateNumber__WEBPACK_IMPORTED_MODULE_15__);
+
 
 
 
@@ -490,7 +493,15 @@ var listItem = /*#__PURE__*/function (_Component) {
     }, m("h2", {
       title: discussion.title(),
       className: "title"
-    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80))), m("div", {
+    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80)), app.screen() !== 'phone' && Number(settings.showReplies) === 1 && Number(settings.showRepliesOnRight) === 1 ? m("div", {
+      className: "DiscussionListItem-count"
+    }, m("span", {
+      "aria-hidden": "true"
+    }, flarum_common_utils_abbreviateNumber__WEBPACK_IMPORTED_MODULE_15___default()(discussion.replyCount())), m("span", {
+      className: "visually-hidden"
+    }, app.translator.trans('core.forum.discussion_list.unread_replies_a11y_label', {
+      count: discussion.replyCount()
+    }))) : ''), m("div", {
       className: "cardTags"
     }, (0,_utils_craftTags__WEBPACK_IMPORTED_MODULE_4__["default"])(discussion.tags()))), Number(settings.previewText) === 1 && discussion.firstPost() ? m("div", {
       className: "previewPost"
@@ -511,7 +522,7 @@ var listItem = /*#__PURE__*/function (_Component) {
       count: discussion.replyCount() || '0'
     }))), m("div", {
       className: "Arrow"
-    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-angle-right')))) : Number(settings.showReplies) === 1 ? m("div", {
+    }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-angle-right')))) : Number(settings.showReplies) === 1 && !Number(settings.showRepliesOnRight) ? m("div", {
       className: "imageLabel discussionReplyCount"
     }, flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()('fas fa-comment', {
       className: 'labelIcon'
@@ -928,6 +939,17 @@ module.exports = flarum.core.compat['common/helpers/icon'];
 
 "use strict";
 module.exports = flarum.core.compat['common/helpers/username'];
+
+/***/ }),
+
+/***/ "flarum/common/utils/abbreviateNumber":
+/*!**********************************************************************!*\
+  !*** external "flarum.core.compat['common/utils/abbreviateNumber']" ***!
+  \**********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/utils/abbreviateNumber'];
 
 /***/ }),
 

@@ -12,6 +12,7 @@ import {truncate} from 'flarum/common/utils/string';
 import LastReplies from './LastReplies';
 import compareTags from "../helpers/compareTags";
 import isValideImageUrl from "../helpers/isValideImageUrl";
+import abbreviateNumber from 'flarum/common/utils/abbreviateNumber';
 
 
 export default class listItem extends Component {
@@ -161,6 +162,15 @@ export default class listItem extends Component {
               <div className="flexBox">
                 <div className="cardTitle">
                   <h2 title={discussion.title()} className="title">{truncate(discussion.title(), 80)}</h2>
+                  {app.screen() !== 'phone' && Number(settings.showReplies) === 1 && Number(settings.showRepliesOnRight) === 1 ?
+                  <div className="DiscussionListItem-count">
+                    <span aria-hidden="true">{abbreviateNumber(discussion.replyCount())}</span>
+
+                    <span className="visually-hidden">
+                      {app.translator.trans('core.forum.discussion_list.unread_replies_a11y_label', { count: discussion.replyCount() })}
+                    </span>
+                  </div>
+                : ''}
                 </div>
                 <div className="cardTags">{craftTags(discussion.tags())}</div>
               </div>
@@ -194,7 +204,7 @@ export default class listItem extends Component {
                     </div>
                   </Link>
                 </div>
-                : Number(settings.showReplies) === 1 ?
+                : Number(settings.showReplies) === 1 && !Number(settings.showRepliesOnRight) ?
                   <div className="imageLabel discussionReplyCount">
                     {icon('fas fa-comment', {className: 'labelIcon'})}
                     {discussion.replyCount()}

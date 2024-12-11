@@ -120,6 +120,13 @@ export default class Settings extends ExtensionPage {
 							})}
 							{this.buildSettingComponent({
 								type: "switch",
+								setting: "walsgit_discussion_cards_showRepliesOnRight",
+								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_label"),
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_help"),
+								disabled: isExtensionActive(viewsExtension.id) ? false : true,
+							})}
+							{this.buildSettingComponent({
+								type: "switch",
 								setting: "walsgit_discussion_cards_showBadges",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_help"),
@@ -131,10 +138,12 @@ export default class Settings extends ExtensionPage {
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.markReadCards_help"),
 							})}							
 						</div>
+						{/* 3rd party extensions options */}
 						<h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_title")}</h3>
 						<p className="helpText">
 							{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_info")}
 						</p>
+						{/* flarumite/simple-discussion-views */}
 						<div className="Section">
 							<h4>
 								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_title_start")}
@@ -158,6 +167,7 @@ export default class Settings extends ExtensionPage {
 								disabled: isExtensionActive(viewsExtension.id) ? false : true,
 							})}
 							<hr></hr>
+							{/* v17development/flarum-blog */}
 							<h4>
 								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_title_start")}
 								<a href={blogExtension.url} target="_blank" rel="noopener noreferrer">{blogExtension.name}</a>
