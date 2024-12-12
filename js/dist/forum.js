@@ -121,6 +121,10 @@ var cardItem = /*#__PURE__*/function (_Component) {
         }
       }
     }
+
+    /* Getting & setting relevant info for 3rd party Repost extension */
+    var repostActivated = 'shebaoting-repost' in flarum.extensions;
+    var repostUrl = discussion.data.attributes.original_url || null;
     var isTagPage = m.route.get().split('?')[0].startsWith('/t/');
     var tagId;
     if (isTagPage) {
@@ -219,7 +223,15 @@ var cardItem = /*#__PURE__*/function (_Component) {
       className: "cardTags"
     }, (0,_utils_craftTags__WEBPACK_IMPORTED_MODULE_4__["default"])(discussion.tags())), m("div", {
       className: "cardTitle"
-    }, m("h2", null, discussion.title())), Number(settings.previewText) === 1 && discussion.firstPost() ? m("div", {
+    }, m("h2", {
+      title: discussion.title(),
+      className: "title"
+    }, Number(settings.allowRepostLinks) === 1 && repostActivated && repostUrl ? m("a", {
+      href: repostUrl,
+      onclick: function onclick(e) {
+        return e.stopPropagation();
+      }
+    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80)) : (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80))), Number(settings.previewText) === 1 && discussion.firstPost() ? m("div", {
       className: "previewPost"
     }, blogActivated && Number(settings.useBlogSummary) === 1 && discussion.data.relationships.hasOwnProperty('blogMeta') && discussion.blogMeta().summary() !== '' ? (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.blogMeta().summary(), 150) : (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.firstPost().contentPlain(), 150)) : "", Number(settings.showLastPostInfo) === 1 && discussion.firstPost() ? m("div", {
       className: "terminalPost"
@@ -399,6 +411,10 @@ var listItem = /*#__PURE__*/function (_Component) {
         }
       }
     }
+
+    /* Getting & setting relevant info for 3rd party Repost extension */
+    var repostActivated = 'shebaoting-repost' in flarum.extensions;
+    var repostUrl = discussion.data.attributes.original_url || null;
     var isTagPage = m.route.get().split('?')[0].startsWith('/t/');
     if (isTagPage) {
       var _m$route$get$split$;
@@ -504,7 +520,12 @@ var listItem = /*#__PURE__*/function (_Component) {
     }, m("h2", {
       title: discussion.title(),
       className: "title"
-    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80)), app.screen() !== 'phone' && Number(settings.showReplies) === 1 && Number(settings.showRepliesOnRight) === 1 ? m("div", {
+    }, Number(settings.allowRepostLinks) === 1 && repostActivated && repostUrl ? m("a", {
+      href: repostUrl,
+      onclick: function onclick(e) {
+        return e.stopPropagation();
+      }
+    }, (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80)) : (0,flarum_common_utils_string__WEBPACK_IMPORTED_MODULE_11__.truncate)(discussion.title(), 80)), app.screen() !== 'phone' && Number(settings.showReplies) === 1 && Number(settings.showRepliesOnRight) === 1 ? m("div", {
       className: "DiscussionListItem-count"
     }, m("span", {
       "aria-hidden": "true"

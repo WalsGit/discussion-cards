@@ -52,6 +52,12 @@ walsgit_discussion_cards:
         useBlogImages_help: "If option is enabled, the cards' image for every blog post will set to: the blog post's featured image; if none, to the blog's content's first found image; if none, to the blog extension's default image; if none, to the discussion cards' tag default image; if none, to the discussion cards' main default image. Note that custom settings for tags used as blog tags will of course be ignored if you chose to redirect blog tags in the Flarum Blog extension settings."
         useBlogSummary_label: "Use blog post's summary as preview text"
         useBlogSummary_help: "If this option and preview text are enabled, the cards for blog posts will show the start of the blog post's summary as preview text instead of the start of the blog post's text."
+        repostExtension_title_start: "With the "
+        repostExtension_title_end: " extension installed and activated, you can set the following (1) option:"
+        repostExtension_notInstalled: "{icon} This extension needs to be installed & activated for this setting to work."
+        repostExtension_notActivated: "{icon} This extension needs to be activated for this setting to work."
+        allowRepostLinks_label: "Allow Repost links behavior on cards"
+        allowRepostLinks_help: "If this option is enabled (along with the Repost extension), cards for discussions that starts with a url, will open the url when the title of the card is clicked on, whereas the discussion will open, as usual, if any other part of the card is clicked on."
     tags:
       options_heading: "Discussion Cards"
       activation_button: "Activate for this tag"

@@ -48,6 +48,10 @@ export default class cardItem extends Component {
 			}
 		}
 
+		/* Getting & setting relevant info for 3rd party Repost extension */
+		const repostActivated = 'shebaoting-repost' in flarum.extensions;
+		const repostUrl = discussion.data.attributes.original_url || null;
+
 		const isTagPage = m.route.get().split('?')[0].startsWith('/t/');
 		let tagId;
 		if (isTagPage) {
@@ -182,7 +186,9 @@ export default class cardItem extends Component {
 						{craftTags(discussion.tags())}
 					</div>
 					<div className="cardTitle">
-						<h2>{discussion.title()}</h2>
+						<h2 title={discussion.title()} className="title">
+							{Number(settings.allowRepostLinks) === 1 && repostActivated && repostUrl ? <a href={repostUrl} onclick={(e) => e.stopPropagation()}>{truncate(discussion.title(), 80)}</a> : truncate(discussion.title(), 80)}
+						</h2>
 					</div>
 					{Number(settings.previewText) === 1 && discussion.firstPost() ? (
 						<div className="previewPost">

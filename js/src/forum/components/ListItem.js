@@ -50,6 +50,10 @@ export default class listItem extends Component {
 			}
 		}
 
+    /* Getting & setting relevant info for 3rd party Repost extension */
+    const repostActivated = 'shebaoting-repost' in flarum.extensions;
+    const repostUrl = discussion.data.attributes.original_url || null;
+
     const isTagPage = m.route.get().split('?')[0].startsWith('/t/');
 		if (isTagPage) {
       const slug = m.route.get().split('/t/')[1]?.split('?')[0];
@@ -162,7 +166,9 @@ export default class listItem extends Component {
 
               <div className="flexBox">
                 <div className="cardTitle">
-                  <h2 title={discussion.title()} className="title">{truncate(discussion.title(), 80)}</h2>
+                  <h2 title={discussion.title()} className="title">
+                    {Number(settings.allowRepostLinks) === 1 && repostActivated && repostUrl ? <a href={repostUrl} onclick={(e) => e.stopPropagation()}>{truncate(discussion.title(), 80)}</a> : truncate(discussion.title(), 80)}
+                  </h2>
                   {app.screen() !== 'phone' && Number(settings.showReplies) === 1 && Number(settings.showRepliesOnRight) === 1 ?
                   <div className="DiscussionListItem-count">
                     <span aria-hidden="true">{abbreviateNumber(discussion.replyCount())}</span>

@@ -49,6 +49,11 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       name: 'Flarum Blog',
       url: 'https://flarum.org/extension/v17development/flarum-blog'
     };
+    var repostExtension = {
+      id: 'shebaoting-repost',
+      name: 'Repost',
+      url: 'https://flarum.org/extension/shebaoting/repost'
+    };
     var warningIcon = flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()("fas fa-exclamation-triangle");
     return m("div", {
       className: "DiscussionCardsSettings"
@@ -201,6 +206,22 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogSummary_label"),
       help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogSummary_help"),
       disabled: (0,_helpers_isExtensionActive__WEBPACK_IMPORTED_MODULE_5__["default"])(blogExtension.id) ? false : true
+    }), m("hr", null), m("h4", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_title_start"), m("a", {
+      href: repostExtension.url,
+      target: "_blank",
+      rel: "noopener noreferrer"
+    }, repostExtension.name), flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_title_end")), m("div", {
+      className: "helpText"
+    }, m("em", null, !(0,_helpers_isExtensionInstalled__WEBPACK_IMPORTED_MODULE_4__["default"])(repostExtension.id) ? +flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_notInstalled", {
+      icon: warningIcon
+    }) : !(0,_helpers_isExtensionActive__WEBPACK_IMPORTED_MODULE_5__["default"])(repostExtension.id) ? flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_notActivated", {
+      icon: warningIcon
+    }) : '')), this.buildSettingComponent({
+      type: "switch",
+      setting: "walsgit_discussion_cards_allowRepostLinks",
+      label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.allowRepostLinks_label"),
+      help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.allowRepostLinks_help"),
+      disabled: (0,_helpers_isExtensionActive__WEBPACK_IMPORTED_MODULE_5__["default"])(repostExtension.id) ? false : true
     })), this.submitButton())));
   };
   _proto.onsubmit = function onsubmit() {
