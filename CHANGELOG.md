@@ -6,6 +6,7 @@
 - NEW option to show the last post informations on the cards (like the default Flarum design): username & date of last post.
 - NEW FEATURE: support for `shebaoting/repost` extension.
 - New migration file for the aforementioned new options & features.
+- Post image search function now detects images in posts set via inline styles property `background: url(...)` or `background-image: url()`, like for the thumbnails in YouTube video embeds.
 
 ### Changed
 - The way read cards are marked (removed B&W filter): now read cards' title and text have a lighter font weight (like the default Flarum discussion list behavior)

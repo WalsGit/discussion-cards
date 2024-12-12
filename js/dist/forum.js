@@ -615,7 +615,7 @@ function getPostImage(post, image, isblogPost, key) {
   if (key === void 0) {
     key = 1;
   }
-  var regex = /<img(?!.*?class="emoji").*?src=[\'"](.*?)[\'"].*?>/;
+  var regex = /<img(?!.*?class="emoji").*?src=[\'"](.*?)[\'"].*?>|background(?:-image)?:\s*url\(['"]?(.*?)['"]?\)/i;
   if (isblogPost && (0,_isValideImageUrl__WEBPACK_IMPORTED_MODULE_0__["default"])(image)) {
     return image;
   }
@@ -623,7 +623,7 @@ function getPostImage(post, image, isblogPost, key) {
   if (post) {
     var src = regex.exec(post.contentHtml());
     if (typeof key === "number" && key > 0) {
-      return src ? src[key] : image ? assetImage : null;
+      return src ? src[1] || src[2] : image ? assetImage : null;
     } else if (key === '~') {
       return src;
     } else {
