@@ -163,7 +163,7 @@ export default class Settings extends ExtensionPage {
 							<div className="helpText">
 								<em>
 									{!isExtensionInstalled(viewsExtension.id) 
-									? + app.translator.trans("walsgit_discussion_cards.admin.settings.general.viewsExtension_notInstalled", {icon: warningIcon}) : 
+									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.viewsExtension_notInstalled", {icon: warningIcon}) : 
 									!isExtensionActive(viewsExtension.id) 
 									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.viewsExtension_notActivated", {icon: warningIcon}) :
 									''}
@@ -186,7 +186,7 @@ export default class Settings extends ExtensionPage {
 							<div className="helpText">
 								<em>
 									{!isExtensionInstalled(blogExtension.id) 
-									? + app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_notInstalled", {icon: warningIcon}) : 
+									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_notInstalled", {icon: warningIcon}) : 
 									!isExtensionActive(blogExtension.id) 
 									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_notActivated", {icon: warningIcon}) :
 									''}
@@ -216,7 +216,7 @@ export default class Settings extends ExtensionPage {
 							<div className="helpText">
 								<em>
 									{!isExtensionInstalled(repostExtension.id) 
-									? + app.translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_notInstalled", {icon: warningIcon}) : 
+									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_notInstalled", {icon: warningIcon}) : 
 									!isExtensionActive(repostExtension.id) 
 									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_notActivated", {icon: warningIcon}) :
 									''}
