@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.0] - 2024-12-12
+## [1.2.0] - 2024-12-17
 ### Added
 - NEW option to show the number of replies on the right side of a card's title (like the default Flarum design) instead of on the image.
 - NEW option to show the last post informations on the cards (like the default Flarum design): username & date of last post.
@@ -10,6 +10,7 @@
 
 ### Changed
 - The way read cards are marked (removed B&W filter): now read cards' title and text have a lighter font weight (like the default Flarum discussion list behavior)
+- When there are too many tags, not all of them where visible: now they will scroll horizontally when you hover on the cards' tag list on desktop and you can manually scroll them on mobile.
 
 ## [1.1.1] - 2024-11-25
 ### Fixed

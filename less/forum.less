@@ -158,6 +158,8 @@
 .cardLink {
   display: block;
   height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .cardTitle {
@@ -239,6 +241,34 @@
   width: calc(~'100% - 30px');
   white-space: nowrap;
   overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, #000 90%, rgba(0,0,0,0) 100%);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media tablet {
+    overflow-x:unset;
+  }
+
+  &.overflowing {
+    &:hover {
+      -webkit-mask-image: none;
+      min-width: max-content;
+      animation: scroll 10s linear infinite;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 }
 
 .cardTag {
@@ -424,8 +454,26 @@
       margin: 5px 15px 15px;
       display: block;
       width: calc(~'100% - 30px');
-      white-space: nowrap;
-      overflow: hidden;
+      font-size: 12px;
+      -webkit-mask-image: linear-gradient(to right, #000 90%, rgba(0,0,0,0) 100%);
+
+      &.overflowing {
+        &:hover {
+          -webkit-mask-image: none;
+          min-width: max-content;
+          animation: scroll 10s linear infinite;
+        }
+      }
+
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
     .previewPost {
@@ -511,6 +559,8 @@
 
 .flexBox {
   display: flex;
+  overflow: hidden;
+  position: relative;
 }
 
 .rowSpan {

@@ -8,8 +8,12 @@ import Placeholder from 'flarum/common/components/Placeholder';
 import Button from 'flarum/common/components/Button';
 import CardItem from './components/CardItem';
 import ListItem from './components/ListItem';
+import checkOverflowingTags from './helpers/checkOverflowingTags';
 
 app.initializers.add('walsgit/discussion/cards', () => {
+
+  extend(DiscussionList.prototype, 'oncreate', checkOverflowingTags);
+  extend(DiscussionList.prototype, 'onupdate', checkOverflowingTags);
 
   extend(DiscussionListState.prototype, 'requestParams', function (params) {
     if (app.current.matches(IndexPage)) {

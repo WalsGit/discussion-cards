@@ -571,6 +571,41 @@ var listItem = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./src/forum/helpers/checkOverflowingTags.js":
+/*!***************************************************!*\
+  !*** ./src/forum/helpers/checkOverflowingTags.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ checkOverflowingTags)
+/* harmony export */ });
+function checkOverflowingTags() {
+  var cardListItemsOnPrimary = document.querySelectorAll(".CardsListItem.Card .cardLink");
+  var cardListItems = document.querySelectorAll(".cardGrid .colSpan-2");
+  var toggleOverflowClass = function toggleOverflowClass(cardTags, cardListItem) {
+    if (!cardTags) return;
+    if (cardTags.scrollWidth > cardListItem.clientWidth - 30) {
+      // -30 to account for the 15px + 15px margins on .cardTags
+      cardTags.classList.add("overflowing");
+    } else {
+      cardTags.classList.remove("overflowing");
+    }
+  };
+  cardListItemsOnPrimary.forEach(function (cardListItem) {
+    var cardTags = cardListItem.querySelector(".cardTags");
+    toggleOverflowClass(cardTags, cardListItem);
+  });
+  cardListItems.forEach(function (cardListItem) {
+    var cardTags = cardListItem.querySelector(".flexBox .cardTags");
+    toggleOverflowClass(cardTags, cardListItem);
+  });
+}
+
+/***/ }),
+
 /***/ "./src/forum/helpers/compareTags.js":
 /*!******************************************!*\
   !*** ./src/forum/helpers/compareTags.js ***!
@@ -689,9 +724,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _components_CardItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CardItem */ "./src/forum/components/CardItem.js");
 /* harmony import */ var _components_ListItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ListItem */ "./src/forum/components/ListItem.js");
-/* harmony import */ var _compat__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./compat */ "./src/forum/compat.js");
-/* harmony import */ var _flarum_core_forum__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @flarum/core/forum */ "@flarum/core/forum");
-/* harmony import */ var _flarum_core_forum__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_flarum_core_forum__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _helpers_checkOverflowingTags__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helpers/checkOverflowingTags */ "./src/forum/helpers/checkOverflowingTags.js");
+/* harmony import */ var _compat__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./compat */ "./src/forum/compat.js");
+/* harmony import */ var _flarum_core_forum__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @flarum/core/forum */ "@flarum/core/forum");
+/* harmony import */ var _flarum_core_forum__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_flarum_core_forum__WEBPACK_IMPORTED_MODULE_12__);
+
 
 
 
@@ -703,6 +740,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/discussion/cards', function () {
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_forum_components_DiscussionList__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'oncreate', _helpers_checkOverflowingTags__WEBPACK_IMPORTED_MODULE_10__["default"]);
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_forum_components_DiscussionList__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'onupdate', _helpers_checkOverflowingTags__WEBPACK_IMPORTED_MODULE_10__["default"]);
   (0,flarum_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_forum_states_DiscussionListState__WEBPACK_IMPORTED_MODULE_3___default().prototype), 'requestParams', function (params) {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_0___default().current.matches((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default()))) {
       params.include.push(['firstPost', 'posts', 'posts.user']);
@@ -776,7 +815,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('walsgit/disc
 // Expose compat API
 
 
-Object.assign(_flarum_core_forum__WEBPACK_IMPORTED_MODULE_11__.compat, _compat__WEBPACK_IMPORTED_MODULE_10__["default"]);
+Object.assign(_flarum_core_forum__WEBPACK_IMPORTED_MODULE_12__.compat, _compat__WEBPACK_IMPORTED_MODULE_11__["default"]);
 
 /***/ }),
 
