@@ -54,7 +54,6 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       name: 'Repost',
       url: 'https://flarum.org/extension/shebaoting/repost'
     };
-    console.log((0,_helpers_isExtensionInstalled__WEBPACK_IMPORTED_MODULE_4__["default"])(repostExtension.id));
     var warningIcon = flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()("fas fa-exclamation-triangle");
     return m("div", {
       className: "DiscussionCardsSettings"

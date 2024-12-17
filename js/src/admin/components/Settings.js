@@ -23,7 +23,6 @@ export default class Settings extends ExtensionPage {
 			name: 'Repost',
 			url: 'https://flarum.org/extension/shebaoting/repost',
 		}
-		console.log(isExtensionInstalled(repostExtension.id));
 
 		const warningIcon = icon("fas fa-exclamation-triangle");
 
