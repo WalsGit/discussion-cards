@@ -23,6 +23,7 @@ export default class Settings extends ExtensionPage {
 			name: 'Repost',
 			url: 'https://flarum.org/extension/shebaoting/repost',
 		}
+		console.log(isExtensionInstalled(repostExtension.id));
 
 		const warningIcon = icon("fas fa-exclamation-triangle");
 
@@ -128,14 +129,12 @@ export default class Settings extends ExtensionPage {
 								setting: "walsgit_discussion_cards_showRepliesOnRight",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_help"),
-								disabled: isExtensionActive(viewsExtension.id) ? false : true,
 							})}
 							{this.buildSettingComponent({
 								type: "switch",
 								setting: "walsgit_discussion_cards_showLastPostInfo",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_help"),
-								disabled: isExtensionActive(viewsExtension.id) ? false : true,
 							})}
 							{this.buildSettingComponent({
 								type: "switch",

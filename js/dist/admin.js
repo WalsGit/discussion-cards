@@ -54,6 +54,7 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       name: 'Repost',
       url: 'https://flarum.org/extension/shebaoting/repost'
     };
+    console.log((0,_helpers_isExtensionInstalled__WEBPACK_IMPORTED_MODULE_4__["default"])(repostExtension.id));
     var warningIcon = flarum_common_helpers_icon__WEBPACK_IMPORTED_MODULE_6___default()("fas fa-exclamation-triangle");
     return m("div", {
       className: "DiscussionCardsSettings"
@@ -146,14 +147,12 @@ var Settings = /*#__PURE__*/function (_ExtensionPage) {
       type: "switch",
       setting: "walsgit_discussion_cards_showRepliesOnRight",
       label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_label"),
-      help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_help"),
-      disabled: (0,_helpers_isExtensionActive__WEBPACK_IMPORTED_MODULE_5__["default"])(viewsExtension.id) ? false : true
+      help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_help")
     }), this.buildSettingComponent({
       type: "switch",
       setting: "walsgit_discussion_cards_showLastPostInfo",
       label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_label"),
-      help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_help"),
-      disabled: (0,_helpers_isExtensionActive__WEBPACK_IMPORTED_MODULE_5__["default"])(viewsExtension.id) ? false : true
+      help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_1___default().translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_help")
     }), this.buildSettingComponent({
       type: "switch",
       setting: "walsgit_discussion_cards_showBadges",
