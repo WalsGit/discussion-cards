@@ -6,7 +6,32 @@
   position: relative;
 
   &.read {
-    filter: grayscale(100%);
+    h2, .Repcount {
+      color: var(--discussion-title-color);
+      font-weight: 400;
+    }
+    .previewPost {
+      color: var(--discussion-title-color);
+      font-weight: 300;
+    }
+    .Repcount {
+      font-weight: 500;
+    }
+
+    .DiscussionListItem-count {
+      color: var(--discussion-title-color);
+      font-weight: 400;
+
+      &:before {
+        .far();
+        content: @fa-var-comment;
+      }
+
+      @media phone {
+        display: none;
+      }
+    }
+    
   }
 
   .imageLabel {
@@ -133,10 +158,20 @@
 .cardLink {
   display: block;
   height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .cardTitle {
   padding: 0 1rem 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+
+  h2.title a {
+    all: unset;
+  }
 }
 
 .previewPost {
@@ -155,6 +190,17 @@
   word-break: normal;
   margin-bottom: 25px;
   margin-top: -5px;
+}
+
+.terminalPost {
+  padding: 0 1rem 0 1rem;
+  margin-top: 0.3rem;
+  font-size: 11px;
+  color: var(--muted-more-color);
+
+  .username {
+    font-weight: bold;
+  }
 }
 
 .flexCard {
@@ -195,6 +241,34 @@
   width: calc(~'100% - 30px');
   white-space: nowrap;
   overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, #000 90%, rgba(0,0,0,0) 100%);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media tablet {
+    overflow-x:unset;
+  }
+
+  &.overflowing {
+    &:hover {
+      -webkit-mask-image: none;
+      min-width: max-content;
+      animation: scroll 10s linear infinite;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 }
 
 .cardTag {
@@ -370,14 +444,36 @@
     h2.title {
       font-size: 19px;
       margin: 10px 0 0 0;
+      flex: 1 1 auto;
+      min-width: 0;
+      word-wrap: break-word;
+      white-space: normal;
     }
 
     .cardTags {
       margin: 5px 15px 15px;
       display: block;
       width: calc(~'100% - 30px');
-      white-space: nowrap;
-      overflow: hidden;
+      font-size: 12px;
+      -webkit-mask-image: linear-gradient(to right, #000 90%, rgba(0,0,0,0) 100%);
+
+      &.overflowing {
+        &:hover {
+          -webkit-mask-image: none;
+          min-width: max-content;
+          animation: scroll 10s linear infinite;
+        }
+      }
+
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
     .previewPost {
@@ -429,6 +525,21 @@
     .DiscussionListItem-controls.open {
       z-index: 3;
     }
+
+    .DiscussionListItem-count {
+      color: var(--heading-color);
+      font-weight: bold;
+      margin-right: 0;
+      cursor: pointer;
+      flex-shrink: 0;
+      align-self: self-start;
+      padding-top: 3px;
+
+      &:before {
+        .fas();
+        content: @fa-var-comment;
+      }
+    }
   }
 }
 
@@ -448,6 +559,8 @@
 
 .flexBox {
   display: flex;
+  overflow: hidden;
+  position: relative;
 }
 
 .rowSpan {

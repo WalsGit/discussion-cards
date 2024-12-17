@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0] - 2024-12-17
+### Added
+- NEW option to show the number of replies on the right side of a card's title (like the default Flarum design) instead of on the image.
+- NEW option to show the last post informations on the cards (like the default Flarum design): username & date of last post.
+- NEW FEATURE: support for `shebaoting/repost` extension.
+- New migration file for the aforementioned new options & features.
+- Post image search function now detects images in posts set via inline styles property `background: url(...)` or `background-image: url()`, like for the thumbnails in YouTube video embeds.
+
+### Changed
+- The way read cards are marked (removed B&W filter): now read cards' title and text have a lighter font weight (like the default Flarum discussion list behavior)
+- When there are too many tags, not all of them where visible: now they will scroll horizontally when you hover on the cards' tag list on desktop and you can manually scroll them on mobile.
+
 ## [1.1.1] - 2024-11-25
 ### Fixed
 - French translation bug

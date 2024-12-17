@@ -12,9 +12,12 @@ On the ``index page`` (all discussions), if a discussion has multiple tags with 
 3. The image of the secondary tag with the lowest id
 4. The general default image
 ```
-Also it changes how the setting to distinguish between read & unread discussion cards work: now the read discussions are filtred with a grayscale instead of the unread ones.
+Also it changes how the setting to distinguish between read & unread discussion cards work: now the read discussions are filtred with a grayscale instead of the unread ones. As of `1.2.0` read discussion cards a no longer filtered with a grayscale but have just a lighter title and text.
 
-As of version `1.1.0` added support for `v17development/flarum-blog` extension. If activated, you can set to use the blog's extension images for blog posts' cards and/or their article summary as preview text on the cards.
+### 3rd party extension support
+- `flarumite/simple-discussion-views` : show discussion view count on cards
+- As of version `1.1.0` added support for the `v17development/flarum-blog` extension. If activated, you can set to use the blog's extension images for blog posts' cards and/or their article summary as preview text on the cards.
+- As of version `1.2.0` added support for the `shebaoting/repost` extension. If activated, you can set it so that when you click on the card `title` of a discussion starting with a url, it will open that url, and clicking anywhere else on the card will open the discussion as usual.
 
 ![Discussion Cards](https://i.postimg.cc/FsxNPWYk/flarum-ext-discussioncards-1.png)
 

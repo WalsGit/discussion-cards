@@ -18,6 +18,11 @@ export default class Settings extends ExtensionPage {
 			name: 'Flarum Blog',
 			url: 'https://flarum.org/extension/v17development/flarum-blog',
 		};
+		const repostExtension = {
+			id: 'shebaoting-repost',
+			name: 'Repost',
+			url: 'https://flarum.org/extension/shebaoting/repost',
+		}
 
 		const warningIcon = icon("fas fa-exclamation-triangle");
 
@@ -120,6 +125,20 @@ export default class Settings extends ExtensionPage {
 							})}
 							{this.buildSettingComponent({
 								type: "switch",
+								setting: "walsgit_discussion_cards_showRepliesOnRight",
+								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_label"),
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showRepliesOnRight_help"),
+								disabled: isExtensionActive(viewsExtension.id) ? false : true,
+							})}
+							{this.buildSettingComponent({
+								type: "switch",
+								setting: "walsgit_discussion_cards_showLastPostInfo",
+								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_label"),
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showLastPostInfo_help"),
+								disabled: isExtensionActive(viewsExtension.id) ? false : true,
+							})}
+							{this.buildSettingComponent({
+								type: "switch",
 								setting: "walsgit_discussion_cards_showBadges",
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.showBadges_help"),
@@ -131,10 +150,12 @@ export default class Settings extends ExtensionPage {
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.markReadCards_help"),
 							})}							
 						</div>
+						{/* 3rd party extensions options */}
 						<h3>{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_title")}</h3>
 						<p className="helpText">
 							{app.translator.trans("walsgit_discussion_cards.admin.settings.general.otherOptions_info")}
 						</p>
+						{/* flarumite/simple-discussion-views */}
 						<div className="Section">
 							<h4>
 								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.showViews_title_start")}
@@ -158,6 +179,7 @@ export default class Settings extends ExtensionPage {
 								disabled: isExtensionActive(viewsExtension.id) ? false : true,
 							})}
 							<hr></hr>
+							{/* v17development/flarum-blog */}
 							<h4>
 								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.blogExtension_title_start")}
 								<a href={blogExtension.url} target="_blank" rel="noopener noreferrer">{blogExtension.name}</a>
@@ -185,6 +207,29 @@ export default class Settings extends ExtensionPage {
 								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogSummary_label"),
 								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.useBlogSummary_help"),
 								disabled: isExtensionActive(blogExtension.id) ? false : true,
+							})}
+							<hr></hr>
+							{/* shebaoting/repost */}
+							<h4>
+								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_title_start")}
+								<a href={repostExtension.url} target="_blank" rel="noopener noreferrer">{repostExtension.name}</a>
+								{app.translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_title_end")}
+							</h4>
+							<div className="helpText">
+								<em>
+									{!isExtensionInstalled(repostExtension.id) 
+									? + app.translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_notInstalled", {icon: warningIcon}) : 
+									!isExtensionActive(repostExtension.id) 
+									? app.translator.trans("walsgit_discussion_cards.admin.settings.general.repostExtension_notActivated", {icon: warningIcon}) :
+									''}
+								</em>
+							</div>
+							{this.buildSettingComponent({
+								type: "switch",
+								setting: "walsgit_discussion_cards_allowRepostLinks",
+								label: app.translator.trans("walsgit_discussion_cards.admin.settings.general.allowRepostLinks_label"),
+								help: app.translator.trans("walsgit_discussion_cards.admin.settings.general.allowRepostLinks_help"),
+								disabled: isExtensionActive(repostExtension.id) ? false : true,
 							})}
 						</div>
 						{this.submitButton()}
